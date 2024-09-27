@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnmm0kxknd4pw"]
+
+[ext_resource type="PackedScene" uid="uid://3u862rxcxh83" path="res://entities/world/Desk.tscn" id="1_kua1b"]
+[ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="2_1h6nk"]
+
+[node name="Main" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.555886, 0.600345, 0.637864, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_1h6nk")]
+position = Vector2(760, 177)
+
+[node name="Desk" parent="." instance=ExtResource("1_kua1b")]
+position = Vector2(366, 46)
+
+[node name="Desk2" parent="." instance=ExtResource("1_kua1b")]
+position = Vector2(757, 46)
+
+[node name="Desk3" parent="." instance=ExtResource("1_kua1b")]
+position = Vector2(757, 602)
+
+[node name="Desk4" parent="." instance=ExtResource("1_kua1b")]
+position = Vector2(366, 602)
+
+[node name="Desk5" parent="." instance=ExtResource("1_kua1b")]
+position = Vector2(48, 328)
+rotation = 1.5708

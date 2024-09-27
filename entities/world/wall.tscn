@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://qn8namcvoofr"]
+
+[ext_resource type="Texture2D" uid="uid://dox1ww7mxojeq" path="res://assets/brick.png" id="1_qc5qe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bggds"]
+size = Vector2(225, 225)
+
+[node name="Wall" type="StaticBody2D"]
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(112.5, 112.5)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_bggds")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 225.0
+offset_bottom = 225.0
+texture = ExtResource("1_qc5qe")
+stretch_mode = 1

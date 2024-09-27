@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b03m6mbug7ngg"]
+
+[ext_resource type="Script" path="res://entities/Player/player.gd" id="1_4in8l"]
+[ext_resource type="Texture2D" uid="uid://c5dhd8n3m7ckc" path="res://assets/Nico.jpg" id="1_v1hny"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ho8iq"]
+radius = 740.0
+height = 1600.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.06, 0.06)
+script = ExtResource("1_4in8l")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_v1hny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ho8iq")

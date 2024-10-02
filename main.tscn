@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnmm0kxknd4pw"]
+[gd_scene load_steps=4 format=3 uid="uid://bnmm0kxknd4pw"]
 
 [ext_resource type="PackedScene" uid="uid://3u862rxcxh83" path="res://entities/world/Desk.tscn" id="1_kua1b"]
 [ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="2_1h6nk"]
+[ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/enemies/Zombie.tscn" id="3_gv0og"]
 
 [node name="Main" type="Node"]
 
@@ -14,7 +15,7 @@ grow_vertical = 2
 color = Color(0.555886, 0.600345, 0.637864, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_1h6nk")]
-position = Vector2(760, 177)
+position = Vector2(626, 183)
 
 [node name="Desk" parent="." instance=ExtResource("1_kua1b")]
 position = Vector2(366, 46)
@@ -23,7 +24,7 @@ position = Vector2(366, 46)
 position = Vector2(757, 46)
 
 [node name="Desk3" parent="." instance=ExtResource("1_kua1b")]
-position = Vector2(757, 602)
+position = Vector2(635, 365)
 
 [node name="Desk4" parent="." instance=ExtResource("1_kua1b")]
 position = Vector2(366, 602)
@@ -31,3 +32,6 @@ position = Vector2(366, 602)
 [node name="Desk5" parent="." instance=ExtResource("1_kua1b")]
 position = Vector2(48, 328)
 rotation = 1.5708
+
+[node name="Zombie" parent="." instance=ExtResource("3_gv0og")]
+position = Vector2(628, 469)

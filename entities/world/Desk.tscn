@@ -10,7 +10,6 @@ scale = Vector2(0.3, 0.17)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8.33328, 5.88235)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_bggds")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

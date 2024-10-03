@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://djba5um6gbc7k"]
+[gd_scene load_steps=6 format=3 uid="uid://djba5um6gbc7k"]
 
 [ext_resource type="Texture2D" uid="uid://ctlppq3e6ixwp" path="res://icon.svg" id="1_n1eks"]
 [ext_resource type="Script" path="res://entities/enemies/zombie.gd" id="1_wyi4p"]
@@ -9,9 +9,11 @@ size = Vector2(64, 64)
 [sub_resource type="CircleShape2D" id="CircleShape2D_acmul"]
 radius = 221.226
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ras5"]
+radius = 111.018
+
 [node name="Zombie" type="CharacterBody2D"]
 script = ExtResource("1_wyi4p")
-SPEED = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -30,5 +32,14 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_acmul")
 
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_8ras5")
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

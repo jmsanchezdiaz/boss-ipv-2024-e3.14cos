@@ -12,6 +12,7 @@ var attack_damage: float = 25.0
 var inventory = ["Crowbar"]
 var current_target: Node2D = null
 
+var smoothed_mouse_pos = Vector2.ZERO
 
 func attack():
 	if current_target and "Crowbar" in inventory:
@@ -55,6 +56,8 @@ func use_item(item):
 
 
 func _physics_process(delta: float) -> void:
+	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
+	rotation = position.angle_to_point(smoothed_mouse_pos)
 	move(delta)
 
 
@@ -83,6 +86,8 @@ func take_damage(amount):
 	if health > 0:
 		health -= amount
 		print("Nico health:", health)
+	else: 
+		queue_free()
 
 
 func _on_crowbar_area_body_entered(body: Node2D) -> void:

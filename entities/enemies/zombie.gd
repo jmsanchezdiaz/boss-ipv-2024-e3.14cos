@@ -6,13 +6,12 @@ class_name Zombie
 @export var ATTACK_DAMAGE = 25
 @export var attack_interval: float = 1.0
 
-var raycast: RayCast2D
+@onready var raycast: RayCast2D = $RayCast2D
 var target: Node2D
 var target_in_attack_area: bool = false
 var attack_timer: Timer
 
 func _ready() -> void:
-	raycast = $RayCast2D
 	attack_timer = Timer.new()
 	attack_timer.one_shot = true
 	attack_timer.wait_time = attack_interval
@@ -25,12 +24,17 @@ func _physics_process(delta: float) -> void:
 		raycast.target_position = raycast.to_local(target.global_transform.origin)
 		raycast.force_raycast_update()
 		
+		var distance = (target.global_position - global_position).length()
+		
 		if raycast.is_colliding() && raycast.get_collider() == target:
-			position += (target.position - position).normalized() * SPEED * delta
-			move_and_collide(Vector2(0,0))
+			look_at(target.global_position)
+			
+			if distance > 100:
+				position += (target.global_position - global_position).normalized() * SPEED * delta
+				move_and_collide(Vector2.ZERO.rotated(0.0))
 
 			if target_in_attack_area and attack_timer.is_stopped():
-				attack_timer.start()  # Comienza el ataque si no está atacando
+				attack_timer.start()  # Comienza los ataques si no está atacando
 
 
 func take_damage(amount: float) -> void:
@@ -39,11 +43,9 @@ func take_damage(amount: float) -> void:
 		queue_free()
 
 
-func attack(target):
-	if target is Player:
-		target.take_damage(ATTACK_DAMAGE)
-		# print("Zombie attacked! Player remaining HP: ", target.HEALTH_POINTS)
-
+func attack(enemy):
+	if enemy is Player:
+		enemy.take_damage(ATTACK_DAMAGE)
 
 func _on_attack_timeout() -> void:
 	if target_in_attack_area:
@@ -55,7 +57,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	target = body;
 
 
-func _on_detection_area_body_exited(body: Node2D) -> void:
+func _on_detection_area_body_exited(_body: Node2D) -> void:
 	target = null
 
 

@@ -29,4 +29,4 @@ position = Vector2(48, 328)
 rotation = 1.5708
 
 [node name="Zombie" parent="." instance=ExtResource("3_gv0og")]
-position = Vector2(628, 469)
+position = Vector2(255, 496)

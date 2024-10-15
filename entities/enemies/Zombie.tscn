@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://ctlppq3e6ixwp" path="res://icon.svg" id="1_n1eks"]
 [ext_resource type="Script" path="res://entities/enemies/zombie.gd" id="1_wyi4p"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ex538"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_k0xce"]
+radius = 31.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_acmul"]
-radius = 221.226
+radius = 364.549
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ras5"]
 radius = 61.0
@@ -16,16 +16,25 @@ radius = 61.0
 script = ExtResource("1_wyi4p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.57079
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_n1eks")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ex538")
+shape = SubResource("CircleShape2D_k0xce")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="LeftEye" type="RayCast2D" parent="."]
+position = Vector2(0, 15)
+target_position = Vector2(52, 0)
+collision_mask = 3
+
+[node name="RightEye" type="RayCast2D" parent="."]
+position = Vector2(0, -16)
+target_position = Vector2(53, 0)
 collision_mask = 3
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -33,6 +42,7 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_acmul")
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 

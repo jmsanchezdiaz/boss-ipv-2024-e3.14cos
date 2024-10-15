@@ -6,10 +6,12 @@ class_name Zombie
 @export var ATTACK_DAMAGE = 25
 @export var attack_interval: float = 1.0
 
-@onready var raycast: RayCast2D = $RayCast2D
+@onready var leftEye: RayCast2D = $LeftEye
+@onready var rightEye: RayCast2D = $RightEye
 var target: Node2D
 var target_in_attack_area: bool = false
 var attack_timer: Timer
+var lastPositionKnown: Vector2
 
 func _ready() -> void:
 	attack_timer = Timer.new()
@@ -21,20 +23,41 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if target:
-		raycast.target_position = raycast.to_local(target.global_transform.origin)
-		raycast.force_raycast_update()
+		leftEye.target_position = leftEye.to_local(target.global_transform.origin)
+		rightEye.target_position = rightEye.to_local(target.global_transform.origin)
+		leftEye.force_raycast_update()
+		rightEye.force_raycast_update()
 		
 		var distance = (target.global_position - global_position).length()
 		
-		if raycast.is_colliding() && raycast.get_collider() == target:
+		var sawByLeftEye: bool = leftEye.is_colliding() && leftEye.get_collider() == target
+		var sawByRightEye: bool = rightEye.is_colliding() && rightEye.get_collider() == target
+		
+		if sawByLeftEye || sawByRightEye:
+			print("Sí, lo veo, lo sigo hacia ", lastPositionKnown)
+			var targetPosition: Vector2 = (target.global_position - global_position).normalized() * SPEED * delta
 			look_at(target.global_position)
+			lastPositionKnown = target.global_position
+			position += targetPosition
 			
 			if distance > 100:
-				position += (target.global_position - global_position).normalized() * SPEED * delta
 				move_and_collide(Vector2.ZERO.rotated(0.0))
 
 			if target_in_attack_area and attack_timer.is_stopped():
 				attack_timer.start()  # Comienza los ataques si no está atacando
+	
+		elif lastPositionKnown != Vector2.ZERO:
+			print("Se escondió detras de algo, voy hacia ", lastPositionKnown)
+			look_at(lastPositionKnown)
+			position += (lastPositionKnown - global_position).normalized() * SPEED * delta
+			move_and_collide(Vector2.ZERO.rotated(0.0))
+	
+	elif lastPositionKnown != Vector2.ZERO and position != lastPositionKnown:
+		print("Se alejó, voy hacia ", lastPositionKnown)
+		print("My position: ", position)
+		look_at(lastPositionKnown)
+		position += (lastPositionKnown - global_position).normalized() * SPEED * delta
+		move_and_collide(Vector2.ZERO.rotated(0.0))
 
 
 func take_damage(amount: float) -> void:
@@ -54,10 +77,14 @@ func _on_attack_timeout() -> void:
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
+	#if body is Player:
+		#lastPositionKnown = (body.global_position - global_position).normalized()
 	target = body;
 
 
 func _on_detection_area_body_exited(_body: Node2D) -> void:
+	#if _body is Player:
+		#lastPositionKnown = (target.global_position - global_position).normalized()
 	target = null
 
 

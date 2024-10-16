@@ -22,6 +22,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	var distanceToLastPosition = (position - lastPositionKnown).length()
+	
 	if target:
 		leftEye.target_position = leftEye.to_local(target.global_transform.origin)
 		rightEye.target_position = rightEye.to_local(target.global_transform.origin)
@@ -45,20 +47,17 @@ func _physics_process(delta: float) -> void:
 
 			if target_in_attack_area and attack_timer.is_stopped():
 				attack_timer.start()  # Comienza los ataques si no está atacando
-	
-		elif lastPositionKnown != Vector2.ZERO:
-			print("Se escondió detras de algo, voy hacia ", lastPositionKnown)
-			look_at(lastPositionKnown)
-			position += (lastPositionKnown - global_position).normalized() * SPEED * delta
-			move_and_collide(Vector2.ZERO.rotated(0.0))
-	
-	elif lastPositionKnown != Vector2.ZERO and position != lastPositionKnown:
-		print("Se alejó, voy hacia ", lastPositionKnown)
-		print("My position: ", position)
-		look_at(lastPositionKnown)
-		position += (lastPositionKnown - global_position).normalized() * SPEED * delta
-		move_and_collide(Vector2.ZERO.rotated(0.0))
+		
+		elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
+			move_to_last_position_known(delta)
+	elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
+		move_to_last_position_known(delta)
 
+
+func move_to_last_position_known(delta) -> void:
+	position += (lastPositionKnown - global_position).normalized() * SPEED * delta
+	move_and_collide(Vector2.ZERO.rotated(0.0))
+	
 
 func take_damage(amount: float) -> void:
 	HEALTH_POINTS -= amount

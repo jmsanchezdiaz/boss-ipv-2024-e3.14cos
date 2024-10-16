@@ -5,6 +5,12 @@ class_name Player
 @export var ACCELERATION = 1500
 @export var FRICTION = 1500
 @export var MAX_SPEED = 450
+@export var MAX_STAMINA = 100.0
+@export var STAMINA_REGEN = 10.0 # La cantidad de estamina que se regenera por segundo.
+@export var RUNNING_STAMINA_COST = 25.0 # La cantidad de estamina que se consume por segundo al correr.
+
+var current_stamina = MAX_STAMINA
+var running_multiplier = 1
 
 var health = 100
 var attack_range: float = 150.0
@@ -58,15 +64,29 @@ func use_item(item):
 func _physics_process(delta: float) -> void:
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
+	print("Current Stamina: ", current_stamina)
+	handle_running(delta)
 	move(delta)
+	regenerate_stamina(delta)
 
+
+func handle_running(delta: float) -> void:
+	if Input.is_action_pressed("run") and current_stamina > 0:
+		running_multiplier = 2
+		current_stamina = max(current_stamina - RUNNING_STAMINA_COST * delta, 0)
+	else:
+		running_multiplier = 1
+
+func regenerate_stamina(delta: float) -> void:
+	if current_stamina < MAX_STAMINA and running_multiplier == 1: # Regenera estamina sólo si no estás corriendo
+		current_stamina = min(current_stamina + STAMINA_REGEN * delta, MAX_STAMINA)
 
 func move(delta):
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_vector == Vector2.ZERO:
 		apply_friction(FRICTION * delta)
 	else:
-		apply_movement(input_vector * ACCELERATION * delta)
+		apply_movement((input_vector * ACCELERATION * delta))
 	move_and_slide()
 
 
@@ -78,8 +98,8 @@ func apply_friction(amount):
 
 
 func apply_movement(accel):
-	velocity += accel
-	velocity = velocity.limit_length(MAX_SPEED)
+	velocity += accel * running_multiplier
+	velocity = velocity.limit_length(MAX_SPEED*running_multiplier)
 
 
 func take_damage(amount):

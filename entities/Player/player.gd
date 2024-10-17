@@ -9,7 +9,8 @@ class_name Player
 @export var STAMINA_REGEN = 10.0 # La cantidad de estamina que se regenera por segundo.
 @export var RUNNING_STAMINA_COST = 25.0 # La cantidad de estamina que se consume por segundo al correr.
 
-@onready var animation = $BloodAnimation
+@onready var bloodAnimation = $BloodAnimation
+@onready var bodyAnimation = $BodyAnimation
 
 var current_stamina = MAX_STAMINA
 var running_multiplier = 1
@@ -74,7 +75,7 @@ func _physics_process(delta: float) -> void:
 
 func handle_running(delta: float) -> void:
 	if Input.is_action_pressed("run") and current_stamina > 0:
-		running_multiplier = 1.5
+		running_multiplier = 2
 		current_stamina = max(current_stamina - RUNNING_STAMINA_COST * delta, 0)
 	else:
 		running_multiplier = 1
@@ -87,8 +88,10 @@ func move(delta):
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_vector == Vector2.ZERO:
 		apply_friction(FRICTION * delta)
+		bodyAnimation.play("RESET")
 	else:
 		apply_movement((input_vector * ACCELERATION * delta))
+		bodyAnimation.play("Walk")
 	move_and_slide()
 
 
@@ -108,7 +111,7 @@ func take_damage(amount):
 	if health > 0:
 		health -= amount
 		print("Nico health:", health)
-		animation.play("ReceiveDamage")
+		bloodAnimation.play("ReceiveDamage")
 	else: 
 		queue_free()
 
@@ -116,10 +119,8 @@ func take_damage(amount):
 func _on_crowbar_area_body_entered(body: Node2D) -> void:
 	if body is Zombie:
 		current_target = body
-		# print("Zombie in range!")
 
 
 func _on_crowbar_area_body_exited(body: Node2D) -> void:
 	if body == current_target:
 		current_target = null
-		# print("Zombie out of range!")

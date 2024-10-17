@@ -1,31 +1,58 @@
-[gd_scene load_steps=9 format=3 uid="uid://b03m6mbug7ngg"]
+[gd_scene load_steps=13 format=3 uid="uid://b03m6mbug7ngg"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_4in8l"]
-[ext_resource type="Texture2D" uid="uid://c5dhd8n3m7ckc" path="res://assets/Nico.jpg" id="1_v1hny"]
+[ext_resource type="Texture2D" uid="uid://b4tsjbj5rvgoy" path="res://assets/player-spritesheet.png" id="2_byyay"]
 [ext_resource type="Texture2D" uid="uid://cmcsh50axvbfm" path="res://assets/blood-spritesheet2.png" id="3_ld6fc"]
 
+[sub_resource type="Animation" id="Animation_vrris"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ui2ls"]
+resource_name = "Walk"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_y28d7"]
+resource_name = "ReceiveDamage"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6yx8f"]
+_data = {
+"RESET": SubResource("Animation_vrris"),
+"ReceiveDamage": SubResource("Animation_y28d7"),
+"Walk": SubResource("Animation_ui2ls")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_j84la"]
-radius = 750.74
+radius = 434.613
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0rk6p"]
 radius = 1634.1
 
-[sub_resource type="Animation" id="Animation_y28d7"]
-resource_name = "ReceiveDamage"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Blood:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-
-[sub_resource type="Animation" id="Animation_vrris"]
+[sub_resource type="Animation" id="Animation_x211c"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -40,21 +67,46 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6yx8f"]
+[sub_resource type="Animation" id="Animation_myc8f"]
+resource_name = "ReceiveDamage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blood:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mnr3j"]
 _data = {
-"RESET": SubResource("Animation_vrris"),
-"ReceiveDamage": SubResource("Animation_y28d7")
+"RESET": SubResource("Animation_x211c"),
+"ReceiveDamage": SubResource("Animation_myc8f")
 }
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.06, 0.06)
 collision_layer = 2
 script = ExtResource("1_4in8l")
+MAX_SPEED = 150
 
 [node name="Body" type="Sprite2D" parent="."]
-texture = ExtResource("1_v1hny")
+position = Vector2(166.667, 49.9999)
+scale = Vector2(19.4444, 20)
+texture = ExtResource("2_byyay")
+hframes = 12
+
+[node name="BodyAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6yx8f")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.90735e-06)
 shape = SubResource("CircleShape2D_j84la")
 
 [node name="AttackArea" type="Area2D" parent="."]
@@ -64,15 +116,15 @@ visible = false
 shape = SubResource("CircleShape2D_0rk6p")
 
 [node name="Blood" type="Sprite2D" parent="."]
-position = Vector2(-733.333, 0)
+position = Vector2(-255.612, -0.229689)
 rotation = 3.14159
-scale = Vector2(15, 16)
+scale = Vector2(10.1593, 10.5501)
 texture = ExtResource("3_ld6fc")
 hframes = 10
 
 [node name="BloodAnimation" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6yx8f")
+"": SubResource("AnimationLibrary_mnr3j")
 }
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_crowbar_area_body_entered"]

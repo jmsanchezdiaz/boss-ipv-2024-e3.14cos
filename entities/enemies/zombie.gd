@@ -37,15 +37,12 @@ func _physics_process(delta: float) -> void:
 		var sawByRightEye: bool = rightEye.is_colliding() && rightEye.get_collider() == target
 		
 		if sawByLeftEye || sawByRightEye:
-			# print("Sí, lo veo, lo sigo hacia ", lastPositionKnown)
 			var targetPosition: Vector2 = (target.global_position - global_position).normalized() * SPEED * delta
 			look_at(target.global_position)
 			lastPositionKnown = target.global_position
 			
-			print("distance fuera: ", distance)
-			if distance > 79:
+			if distance > 59:
 				position += targetPosition
-				print("distance dentro: ", distance)
 				move_and_collide(Vector2.ZERO.rotated(0.0))
 
 			if target_in_attack_area and attack_timer.is_stopped():
@@ -53,10 +50,8 @@ func _physics_process(delta: float) -> void:
 		
 		elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
 			move_to_last_position_known(delta)
-			print("No debería estar acá 1")
 	elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
 		move_to_last_position_known(delta)
-		print("No debería estar acá 2")
 
 
 func move_to_last_position_known(delta) -> void:
@@ -75,6 +70,7 @@ func attack(enemy):
 	if enemy is Player:
 		enemy.take_damage(ATTACK_DAMAGE)
 
+
 func _on_attack_timeout() -> void:
 	if target_in_attack_area:
 		attack(target)
@@ -82,14 +78,10 @@ func _on_attack_timeout() -> void:
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	#if body is Player:
-		#lastPositionKnown = (body.global_position - global_position).normalized()
 	target = body;
 
 
 func _on_detection_area_body_exited(_body: Node2D) -> void:
-	#if _body is Player:
-		#lastPositionKnown = (target.global_position - global_position).normalized()
 	target = null
 
 

@@ -9,6 +9,8 @@ class_name Player
 @export var STAMINA_REGEN = 10.0 # La cantidad de estamina que se regenera por segundo.
 @export var RUNNING_STAMINA_COST = 25.0 # La cantidad de estamina que se consume por segundo al correr.
 
+@onready var animation = $BloodAnimation
+
 var current_stamina = MAX_STAMINA
 var running_multiplier = 1
 
@@ -72,7 +74,7 @@ func _physics_process(delta: float) -> void:
 
 func handle_running(delta: float) -> void:
 	if Input.is_action_pressed("run") and current_stamina > 0:
-		running_multiplier = 2
+		running_multiplier = 1.5
 		current_stamina = max(current_stamina - RUNNING_STAMINA_COST * delta, 0)
 	else:
 		running_multiplier = 1
@@ -106,6 +108,7 @@ func take_damage(amount):
 	if health > 0:
 		health -= amount
 		print("Nico health:", health)
+		animation.play("ReceiveDamage")
 	else: 
 		queue_free()
 

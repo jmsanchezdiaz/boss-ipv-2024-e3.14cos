@@ -8,6 +8,7 @@ class_name Zombie
 
 @onready var leftEye: RayCast2D = $LeftEye
 @onready var rightEye: RayCast2D = $RightEye
+@onready var animation = $BloodAnimation
 var target: Node2D
 var target_in_attack_area: bool = false
 var attack_timer: Timer
@@ -36,13 +37,15 @@ func _physics_process(delta: float) -> void:
 		var sawByRightEye: bool = rightEye.is_colliding() && rightEye.get_collider() == target
 		
 		if sawByLeftEye || sawByRightEye:
-			print("Sí, lo veo, lo sigo hacia ", lastPositionKnown)
+			# print("Sí, lo veo, lo sigo hacia ", lastPositionKnown)
 			var targetPosition: Vector2 = (target.global_position - global_position).normalized() * SPEED * delta
 			look_at(target.global_position)
 			lastPositionKnown = target.global_position
-			position += targetPosition
 			
-			if distance > 100:
+			print("distance fuera: ", distance)
+			if distance > 79:
+				position += targetPosition
+				print("distance dentro: ", distance)
 				move_and_collide(Vector2.ZERO.rotated(0.0))
 
 			if target_in_attack_area and attack_timer.is_stopped():
@@ -50,8 +53,10 @@ func _physics_process(delta: float) -> void:
 		
 		elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
 			move_to_last_position_known(delta)
+			print("No debería estar acá 1")
 	elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
 		move_to_last_position_known(delta)
+		print("No debería estar acá 2")
 
 
 func move_to_last_position_known(delta) -> void:
@@ -61,6 +66,7 @@ func move_to_last_position_known(delta) -> void:
 
 func take_damage(amount: float) -> void:
 	HEALTH_POINTS -= amount
+	animation.play("ReceiveDamage")
 	if HEALTH_POINTS <= 0:
 		queue_free()
 

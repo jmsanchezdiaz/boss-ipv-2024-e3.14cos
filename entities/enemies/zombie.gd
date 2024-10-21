@@ -57,13 +57,15 @@ func _physics_process(delta: float) -> void:
 func move_to_last_position_known(delta) -> void:
 	position += (lastPositionKnown - global_position).normalized() * SPEED * delta
 	move_and_collide(Vector2.ZERO.rotated(0.0))
-	
 
-func take_damage(amount: float) -> void:
+
+func take_damage(amount: float, attacker: Node2D) -> void:
 	HEALTH_POINTS -= amount
 	animation.play("ReceiveDamage")
 	if HEALTH_POINTS <= 0:
 		queue_free()
+	if target == null:
+		target = attacker
 
 
 func attack(enemy):

@@ -27,7 +27,7 @@ func attack():
 	if current_target and "Crowbar" in inventory:
 		var distance = position.distance_to(current_target.position)
 		if distance <= attack_range:
-			current_target.take_damage(attack_damage)
+			current_target.take_damage(attack_damage, self)
 			print("Attacked zombi! Remaining HP: ", current_target.HEALTH_POINTS)
 		else:
 			print("Target too far!")

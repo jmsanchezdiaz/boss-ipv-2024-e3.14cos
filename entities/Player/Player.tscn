@@ -19,6 +19,9 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_y28d7"]
+resource_name = "ReceiveDamage"
+
 [sub_resource type="Animation" id="Animation_ui2ls"]
 resource_name = "Walk"
 length = 1.2
@@ -36,9 +39,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
 
-[sub_resource type="Animation" id="Animation_y28d7"]
-resource_name = "ReceiveDamage"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6yx8f"]
 _data = {
 "RESET": SubResource("Animation_vrris"),
@@ -46,11 +46,12 @@ _data = {
 "Walk": SubResource("Animation_ui2ls")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_j84la"]
-radius = 434.613
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w6qcd"]
+radius = 283.333
+height = 900.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0rk6p"]
-radius = 1634.1
+radius = 933.333
 
 [sub_resource type="Animation" id="Animation_x211c"]
 length = 0.001
@@ -106,8 +107,9 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.90735e-06)
-shape = SubResource("CircleShape2D_j84la")
+visible = false
+position = Vector2(16.6667, -1.90735e-06)
+shape = SubResource("CapsuleShape2D_w6qcd")
 
 [node name="AttackArea" type="Area2D" parent="."]
 visible = false

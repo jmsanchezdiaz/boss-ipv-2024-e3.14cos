@@ -1,8 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://djba5um6gbc7k"]
+[gd_scene load_steps=12 format=3 uid="uid://djba5um6gbc7k"]
 
 [ext_resource type="Texture2D" uid="uid://ctlppq3e6ixwp" path="res://icon.svg" id="1_n1eks"]
 [ext_resource type="Script" path="res://entities/enemies/zombie.gd" id="1_wyi4p"]
 [ext_resource type="Texture2D" uid="uid://cmcsh50axvbfm" path="res://assets/blood-spritesheet2.png" id="3_a0iq2"]
+
+[sub_resource type="Animation" id="Animation_0uw0c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_235ey"]
 resource_name = "Walk"
@@ -20,21 +35,6 @@ tracks/0/keys = {
 "values": []
 }
 
-[sub_resource type="Animation" id="Animation_0uw0c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o0w8e"]
 _data = {
 "RESET": SubResource("Animation_0uw0c"),
@@ -43,9 +43,6 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0xce"]
 radius = 31.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_acmul"]
-radius = 364.549
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ras5"]
 radius = 61.0
@@ -100,6 +97,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_k0xce")
 
 [node name="LeftEye" type="RayCast2D" parent="."]
@@ -117,8 +115,9 @@ visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource("CircleShape2D_acmul")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="DetectionArea"]
+position = Vector2(50, 8)
+polygon = PackedVector2Array(-151, 203, -50, 259, 104, 254, 239, 150, 274, -9, 240, -166, 111, -250, -52, -255, -142, -230, -99, -7)
 
 [node name="AttackArea" type="Area2D" parent="."]
 visible = false

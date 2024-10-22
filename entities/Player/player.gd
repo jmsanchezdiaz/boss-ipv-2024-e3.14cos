@@ -8,7 +8,6 @@ class_name Player
 @export var MAX_STAMINA = 100.0
 @export var STAMINA_REGEN = 10.0 # La cantidad de estamina que se regenera por segundo.
 @export var RUNNING_STAMINA_COST = 25.0 # La cantidad de estamina que se consume por segundo al correr.
-
 @onready var bloodAnimation = $BloodAnimation
 @onready var bodyAnimation = $BodyAnimation
 

@@ -9,12 +9,14 @@ class_name Zombie
 @onready var leftEye: RayCast2D = $LeftEye
 @onready var rightEye: RayCast2D = $RightEye
 @onready var animation = $BloodAnimation
+@onready var bodyAnimation = $BodyAnimation
 var target: Node2D
 var target_in_attack_area: bool = false
 var attack_timer: Timer
 var lastPositionKnown: Vector2
 
 func _ready() -> void:
+	bodyAnimation.play("idle")
 	attack_timer = Timer.new()
 	attack_timer.one_shot = true
 	attack_timer.wait_time = attack_interval
@@ -43,15 +45,24 @@ func _physics_process(delta: float) -> void:
 			
 			if distance > 59:
 				position += targetPosition
+				bodyAnimation.play("walk")
 				move_and_collide(Vector2.ZERO.rotated(0.0))
-
+			else:
+				bodyAnimation.play("idle")
+				
 			if target_in_attack_area and attack_timer.is_stopped():
 				attack_timer.start()  # Comienza los ataques si no está atacando
 		
 		elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
+			bodyAnimation.play("walk")
 			move_to_last_position_known(delta)
+		else:
+			bodyAnimation.play("idle")
 	elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
+		bodyAnimation.play("walk")
 		move_to_last_position_known(delta)
+	else:
+		bodyAnimation.play("idle")
 
 
 func move_to_last_position_known(delta) -> void:
@@ -75,9 +86,12 @@ func attack(enemy):
 
 func _on_attack_timeout() -> void:
 	if target_in_attack_area:
+		bodyAnimation.stop()
+		bodyAnimation.play("attack")
 		attack(target)
 		attack_timer.start()
-
+	else:
+		bodyAnimation.play("idle")
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	target = body;
@@ -97,3 +111,4 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		target_in_attack_area = false
 		attack_timer.stop()
+		bodyAnimation.play("idle")

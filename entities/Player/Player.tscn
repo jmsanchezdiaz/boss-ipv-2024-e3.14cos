@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b03m6mbug7ngg"]
+[gd_scene load_steps=15 format=3 uid="uid://b03m6mbug7ngg"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_4in8l"]
 [ext_resource type="Texture2D" uid="uid://b4tsjbj5rvgoy" path="res://assets/player-spritesheet.png" id="2_byyay"]
 [ext_resource type="Texture2D" uid="uid://cmcsh50axvbfm" path="res://assets/blood-spritesheet2.png" id="3_ld6fc"]
+[ext_resource type="Texture2D" uid="uid://vs0fhw8tfb4x" path="res://assets/player-running.png" id="3_pnqcy"]
 
 [sub_resource type="Animation" id="Animation_vrris"]
 length = 0.001
@@ -13,6 +14,18 @@ tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyRunning:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -39,10 +52,28 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
 
+[sub_resource type="Animation" id="Animation_8bjak"]
+resource_name = "Run"
+loop_mode = 1
+step = 0.0189
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyRunning:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0566038, 0.113208, 0.169811, 0.226415, 0.283019, 0.339623, 0.396226, 0.45283, 0.509434, 0.566038, 0.622642, 0.679245, 0.735849, 0.792453, 0.849057, 0.90566, 0.962264),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6yx8f"]
 _data = {
 "RESET": SubResource("Animation_vrris"),
 "ReceiveDamage": SubResource("Animation_y28d7"),
+"Run": SubResource("Animation_8bjak"),
 "Walk": SubResource("Animation_ui2ls")
 }
 
@@ -77,10 +108,10 @@ tracks/0/path = NodePath("Blood:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mnr3j"]
@@ -100,6 +131,12 @@ position = Vector2(166.667, 49.9999)
 scale = Vector2(19.4444, 20)
 texture = ExtResource("2_byyay")
 hframes = 12
+
+[node name="BodyRunning" type="Sprite2D" parent="."]
+position = Vector2(-300, -83.3333)
+scale = Vector2(19.6262, 18.4167)
+texture = ExtResource("3_pnqcy")
+hframes = 19
 
 [node name="BodyAnimation" type="AnimationPlayer" parent="."]
 libraries = {

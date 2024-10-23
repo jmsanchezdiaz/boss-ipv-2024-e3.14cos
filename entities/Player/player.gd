@@ -19,8 +19,56 @@ var attack_range: float = 150.0
 var attack_damage: float = 25.0
 var inventory = ["Crowbar"]
 var current_target: Node2D = null
-
 var smoothed_mouse_pos = Vector2.ZERO
+var current_state:STATE = STATE.IDLE
+
+enum STATE {
+	IDLE,
+	WALKING,
+	RUNNING,
+	ATTAKING
+}
+
+
+func _physics_process(delta: float) -> void:
+	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
+	rotation = position.angle_to_point(smoothed_mouse_pos)
+	print("Estado: ", current_state)
+	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	match current_state:
+		STATE.IDLE:
+			$Body.show()
+			$BodyRunning.hide()
+			bodyAnimation.play("RESET")
+			regenerate_stamina(1, delta)
+			if input_vector != Vector2.ZERO:
+				current_state = STATE.WALKING
+			if Input.is_action_pressed("run") and current_stamina > 10:
+				current_state = STATE.RUNNING
+		STATE.WALKING:
+			$Body.show()
+			$BodyRunning.hide()
+			bodyAnimation.play("Walk")
+			regenerate_stamina(0.5, delta)
+			handle_move(delta)
+			if input_vector == Vector2.ZERO:
+				current_state = STATE.IDLE
+			if Input.is_action_pressed("run") and current_stamina > 10:
+				current_state = STATE.RUNNING
+		STATE.RUNNING:
+			$Body.hide()
+			$BodyRunning.show()
+			bodyAnimation.play("Run")
+			handle_move(delta)
+			handle_run(delta)
+			if input_vector == Vector2.ZERO:
+				current_state = STATE.IDLE
+				running_multiplier = 1
+			if current_stamina == 0 or (!Input.is_action_pressed("run") and input_vector != Vector2.ZERO):
+				current_state = STATE.WALKING
+				running_multiplier = 1
+		STATE.ATTAKING:
+			pass
 
 func attack():
 	if current_target and "Crowbar" in inventory:
@@ -63,35 +111,27 @@ func use_item(item):
 		print("Item not in inventory!")
 
 
-func _physics_process(delta: float) -> void:
-	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
-	rotation = position.angle_to_point(smoothed_mouse_pos)
-	print("Current Stamina: ", current_stamina)
-	handle_running(delta)
-	move(delta)
-	regenerate_stamina(delta)
+func handle_move(delta):
+	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if input_vector == Vector2.ZERO:
+		apply_friction(FRICTION * delta)
+	else:
+		apply_movement((input_vector * ACCELERATION * delta))
+	move_and_slide()
 
 
-func handle_running(delta: float) -> void:
+func handle_run(delta: float) -> void:
 	if Input.is_action_pressed("run") and current_stamina > 0:
+		current_state = STATE.RUNNING
 		running_multiplier = 2
 		current_stamina = max(current_stamina - RUNNING_STAMINA_COST * delta, 0)
 	else:
 		running_multiplier = 1
 
-func regenerate_stamina(delta: float) -> void:
-	if current_stamina < MAX_STAMINA and running_multiplier == 1: # Regenera estamina sólo si no estás corriendo
-		current_stamina = min(current_stamina + STAMINA_REGEN * delta, MAX_STAMINA)
 
-func move(delta):
-	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if input_vector == Vector2.ZERO:
-		apply_friction(FRICTION * delta)
-		bodyAnimation.play("RESET")
-	else:
-		apply_movement((input_vector * ACCELERATION * delta))
-		bodyAnimation.play("Walk")
-	move_and_slide()
+func regenerate_stamina(regen_speed: float, delta: float) -> void:
+	if current_stamina < MAX_STAMINA:
+		current_stamina = min(current_stamina + STAMINA_REGEN * regen_speed * delta, MAX_STAMINA)
 
 
 func apply_friction(amount):
@@ -111,7 +151,7 @@ func take_damage(amount):
 		health -= amount
 		print("Nico health:", health)
 		bloodAnimation.play("ReceiveDamage")
-	else: 
+	else:
 		queue_free()
 
 

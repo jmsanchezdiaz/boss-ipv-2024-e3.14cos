@@ -10,6 +10,7 @@ class_name Zombie
 @onready var rightEye: RayCast2D = $RightEye
 @onready var animation = $BloodAnimation
 @onready var bodyAnimation = $BodyAnimation
+
 var target: Node2D
 var target_in_attack_area: bool = false
 var attack_timer: Timer
@@ -25,45 +26,40 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	move_or_pursue(delta)
+
+func look_for_player() -> void:
+	if target == null: return;
+	
+	leftEye.target_position = leftEye.to_local(target.global_transform.origin)
+	rightEye.target_position = rightEye.to_local(target.global_transform.origin)
+	leftEye.force_raycast_update()
+	rightEye.force_raycast_update()
+			
+	var sawByLeftEye: bool = leftEye.is_colliding() && leftEye.get_collider() == target
+	var sawByRightEye: bool = rightEye.is_colliding() && rightEye.get_collider() == target
+			
+	if sawByLeftEye || sawByRightEye:
+		lastPositionKnown = target.global_position
+
+func move_or_pursue(delta: float) -> void:
+	look_for_player()
+	
 	var distanceToLastPosition = (position - lastPositionKnown).length()
 	
-	if target:
-		leftEye.target_position = leftEye.to_local(target.global_transform.origin)
-		rightEye.target_position = rightEye.to_local(target.global_transform.origin)
-		leftEye.force_raycast_update()
-		rightEye.force_raycast_update()
-		
-		var distance = (target.global_position - global_position).length()
-		
-		var sawByLeftEye: bool = leftEye.is_colliding() && leftEye.get_collider() == target
-		var sawByRightEye: bool = rightEye.is_colliding() && rightEye.get_collider() == target
-		
-		if sawByLeftEye || sawByRightEye:
-			var targetPosition: Vector2 = (target.global_position - global_position).normalized() * SPEED * delta
-			look_at(target.global_position)
-			lastPositionKnown = target.global_position
+	if lastPositionKnown and distanceToLastPosition > 35:
+		var targetPosition: Vector2 = (lastPositionKnown - global_position).normalized() * SPEED * delta
+		look_at(lastPositionKnown)
 			
-			if distance > 59:
-				position += targetPosition
-				bodyAnimation.play("walk")
-				move_and_collide(Vector2.ZERO.rotated(0.0))
-			else:
-				bodyAnimation.play("idle")
-				
-			if target_in_attack_area and attack_timer.is_stopped():
-				attack_timer.start()  # Comienza los ataques si no está atacando
-		
-		elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
-			bodyAnimation.play("walk")
-			move_to_last_position_known(delta)
-		else:
-			bodyAnimation.play("idle")
-	elif lastPositionKnown != Vector2.ZERO and distanceToLastPosition > 1:
+		position += targetPosition
 		bodyAnimation.play("walk")
-		move_to_last_position_known(delta)
+				
+		move_and_collide(Vector2.ZERO.rotated(0.0))	
+				
+		if target_in_attack_area and attack_timer.is_stopped():
+			attack_timer.start()  # Comienza los ataques si no está atacando
 	else:
 		bodyAnimation.play("idle")
-
 
 func move_to_last_position_known(delta) -> void:
 	position += (lastPositionKnown - global_position).normalized() * SPEED * delta
@@ -87,7 +83,6 @@ func attack(enemy):
 func _on_attack_timeout() -> void:
 	if target_in_attack_area:
 		bodyAnimation.stop()
-		bodyAnimation.play("attack")
 		attack(target)
 		attack_timer.start()
 	else:

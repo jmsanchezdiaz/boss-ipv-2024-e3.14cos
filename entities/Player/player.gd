@@ -33,7 +33,7 @@ enum STATE {
 func _physics_process(delta: float) -> void:
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
-	print("Estado: ", current_state)
+	#print("Estado: ", current_state)
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	match current_state:
 		STATE.IDLE:

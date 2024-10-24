@@ -124,6 +124,10 @@ _data = {
 
 [node name="Zombie" type="CharacterBody2D"]
 script = ExtResource("1_wyi4p")
+HEALTH_POINTS = null
+SPEED = null
+ATTACK_DAMAGE = null
+attack_interval = null
 
 [node name="Body" type="Sprite2D" parent="."]
 scale = Vector2(0.484375, 0.508294)

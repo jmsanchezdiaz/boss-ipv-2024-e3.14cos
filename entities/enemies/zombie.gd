@@ -5,6 +5,7 @@ class_name Zombie
 @export var SPEED: float = 50.0
 @export var ATTACK_DAMAGE = 25
 @export var attack_interval: float = 1.0
+@export var direction_change_interval := 2.0  # Intervalo en segundos para cambiar de dirección
 
 @onready var left_eye: RayCast2D = $LeftEye
 @onready var right_eye: RayCast2D = $RightEye
@@ -18,7 +19,6 @@ var target_in_attack_area: bool = false
 var attack_timer: Timer
 var last_position_known: Vector2
 
-@export var direction_change_interval := 1.0  # Intervalo en segundos para cambiar de dirección
 var direction := Vector2.ZERO
 var time_since_last_change := 0.0
 
@@ -31,7 +31,11 @@ enum PLAYER_STATE {
 
 var current_state: PLAYER_STATE = PLAYER_STATE.IDLE 
 
+func _init():
+	randomize()
+
 func _ready() -> void:
+	change_direction()
 	attack_timer = Timer.new()
 	attack_timer.one_shot = true
 	attack_timer.wait_time = attack_interval
@@ -42,14 +46,23 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	attack_near_enemies()
 	look_for_player()
+	
+	time_since_last_change += delta
+	if time_since_last_change >= direction_change_interval:
+		change_direction()
+		time_since_last_change = 0.0
+	
 	match current_state:
 		PLAYER_STATE.IDLE:
-			if last_position_known != Vector2.ZERO and get_distance_to_last_position() > MIN_DISTANCE_TO_MOVE:
+			if randf() < 0.3: 
 				current_state = PLAYER_STATE.WALKING
+			#if last_position_known != Vector2.ZERO and get_distance_to_last_position() > MIN_DISTANCE_TO_MOVE:
+			#	current_state = PLAYER_STATE.WALKING
 			else: 
 				body_animation.play("idle")
 		PLAYER_STATE.WALKING:
 			move_or_pursue(delta)
+			
 			body_animation.play("walk")
 		PLAYER_STATE.ATTACKING:
 			body_animation.play("attack")
@@ -67,6 +80,18 @@ func change_direction():
 			direction = Vector2.LEFT
 		3:
 			direction = Vector2.RIGHT
+			
+func invert_direction() -> void:
+	#Temporal Averiguar si agregando pathfinding se soluciona!
+	match direction:
+		0:
+			direction = Vector2.DOWN
+		1:
+			direction = Vector2.UP
+		2:
+			direction = Vector2.RIGHT
+		3:
+			direction = Vector2.LEFT
 
 func look_for_player() -> void:
 	if target == null: return;
@@ -93,7 +118,10 @@ func move_or_pursue(delta: float) -> void:
 		position += target_position
 		move_and_collide(Vector2.ZERO.rotated(0.0))	
 	else:
-		current_state = PLAYER_STATE.IDLE
+		last_position_known = Vector2.ZERO
+		position += direction * SPEED * delta
+		move_and_collide(velocity * delta)
+		look_at(position + direction)
 
 func attack_near_enemies() -> void:
 	if target_in_attack_area and attack_timer.is_stopped():
@@ -127,12 +155,22 @@ func _on_detection_area_body_exited(_body: Node2D) -> void:
 	target = null
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	print(body)
+	print(direction)
 	if body is Player:
 		target_in_attack_area = true
 		attack_timer.start()
+	else: # Cambiar cuando se diseñe el esceneraio! Porque colisiona con el mundo es decir Layer 1.
+		# Cambiar a grupos o otra cosa.
+		invert_direction()
+		
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		target_in_attack_area = false
 		attack_timer.stop()
 		current_state = PLAYER_STATE.IDLE
+	
+		
+		
+		

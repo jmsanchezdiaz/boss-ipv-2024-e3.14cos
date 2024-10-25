@@ -7,6 +7,11 @@ class_name Zombie
 @export var attack_interval: float = 1.0
 @export var direction_change_interval := 2.0  # Intervalo en segundos para cambiar de dirección
 
+@export var idle_duration_min: float = 5.0
+@export var idle_duration_max: float = 10.0
+@export var walk_duration_min: float = 2.5
+@export var walk_duration_max: float = 5.0
+
 @onready var left_eye: RayCast2D = $LeftEye
 @onready var right_eye: RayCast2D = $RightEye
 @onready var animation = $BloodAnimation
@@ -17,6 +22,7 @@ var MIN_DISTANCE_TO_MOVE = 38
 var target: Node2D
 var target_in_attack_area: bool = false
 var attack_timer: Timer
+var state_timer: Timer
 var last_position_known: Vector2
 
 var direction := Vector2.ZERO
@@ -36,12 +42,8 @@ func _init():
 
 func _ready() -> void:
 	change_direction()
-	attack_timer = Timer.new()
-	attack_timer.one_shot = true
-	attack_timer.wait_time = attack_interval
-	attack_timer.connect("timeout", Callable(self, "_on_attack_timeout"))
-	add_child(attack_timer)
-
+	_setup_attack_timer()
+	_setup_state_timer()
 
 func _physics_process(delta: float) -> void:
 	attack_near_enemies()
@@ -54,23 +56,31 @@ func _physics_process(delta: float) -> void:
 	
 	match current_state:
 		PLAYER_STATE.IDLE:
-			if randf() < 0.3: 
-				current_state = PLAYER_STATE.WALKING
-			#if last_position_known != Vector2.ZERO and get_distance_to_last_position() > MIN_DISTANCE_TO_MOVE:
-			#	current_state = PLAYER_STATE.WALKING
-			else: 
-				body_animation.play("idle")
+			body_animation.play("idle")
 		PLAYER_STATE.WALKING:
 			move_or_pursue(delta)
-			
 			body_animation.play("walk")
 		PLAYER_STATE.ATTACKING:
 			body_animation.play("attack")
 		
+	
+func _setup_state_timer() -> void:
+	state_timer = Timer.new()
+	state_timer.one_shot = true
+	state_timer.connect("timeout", Callable(self, "_on_state_timeout"))
+	add_child(state_timer)
+	state_timer.start()
+
+func _setup_attack_timer() -> void:
+	attack_timer = Timer.new()
+	attack_timer.one_shot = true
+	attack_timer.wait_time = attack_interval
+	attack_timer.connect("timeout", Callable(self, "_on_attack_timeout"))
+	add_child(attack_timer)
 
 
 func change_direction():
-	var random_dir := randi() % 4
+	var random_dir := randi() % 8
 	match random_dir:
 		0:
 			direction = Vector2.UP
@@ -80,18 +90,15 @@ func change_direction():
 			direction = Vector2.LEFT
 		3:
 			direction = Vector2.RIGHT
+		4:
+			direction = Vector2.UP + Vector2.RIGHT
+		5:
+			direction = Vector2.UP + Vector2.LEFT
+		6:
+			direction = Vector2.DOWN + Vector2.RIGHT
+		7:
+			direction = Vector2.DOWN + Vector2.LEFT
 			
-func invert_direction() -> void:
-	#Temporal Averiguar si agregando pathfinding se soluciona!
-	match direction:
-		0:
-			direction = Vector2.DOWN
-		1:
-			direction = Vector2.UP
-		2:
-			direction = Vector2.RIGHT
-		3:
-			direction = Vector2.LEFT
 
 func look_for_player() -> void:
 	if target == null: return;
@@ -140,6 +147,11 @@ func attack(enemy):
 		enemy.take_damage(ATTACK_DAMAGE)
 
 
+func reset_state_timer(duration_min: float, duration_max: float):
+	if state_timer.is_stopped():
+		state_timer.wait_time = randf_range(duration_min, duration_max)
+		state_timer.start()
+
 func _on_attack_timeout() -> void:
 	if target_in_attack_area:
 		current_state = PLAYER_STATE.ATTACKING
@@ -148,6 +160,19 @@ func _on_attack_timeout() -> void:
 	else:
 		current_state = PLAYER_STATE.IDLE
 
+func _on_state_timeout() -> void:
+	match current_state:
+		PLAYER_STATE.IDLE:
+			current_state = PLAYER_STATE.WALKING
+			reset_state_timer(walk_duration_min, walk_duration_max)
+		PLAYER_STATE.WALKING:
+			if last_position_known == Vector2.ZERO:
+				current_state = PLAYER_STATE.IDLE
+				direction = Vector2.ZERO
+				reset_state_timer(idle_duration_min, idle_duration_max)
+			else:
+				reset_state_timer(walk_duration_min, walk_duration_max)
+
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	target = body;
 
@@ -155,14 +180,12 @@ func _on_detection_area_body_exited(_body: Node2D) -> void:
 	target = null
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	print(body)
-	print(direction)
 	if body is Player:
 		target_in_attack_area = true
 		attack_timer.start()
 	else: # Cambiar cuando se diseñe el esceneraio! Porque colisiona con el mundo es decir Layer 1.
 		# Cambiar a grupos o otra cosa.
-		invert_direction()
+		direction *= -1
 		
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
@@ -171,6 +194,5 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 		attack_timer.stop()
 		current_state = PLAYER_STATE.IDLE
 	
-		
 		
 		

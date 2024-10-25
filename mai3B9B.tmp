@@ -19,18 +19,23 @@ position = Vector2(366, 46)
 position = Vector2(757, 46)
 
 [node name="Desk3" parent="." instance=ExtResource("1_kua1b")]
-position = Vector2(347, 358)
+position = Vector2(355, 397)
 
 [node name="Desk4" parent="." instance=ExtResource("1_kua1b")]
-position = Vector2(331, 829)
+position = Vector2(366, 602)
 
 [node name="Desk5" parent="." instance=ExtResource("1_kua1b")]
-position = Vector2(49, 616)
+position = Vector2(210, 510)
 rotation = 1.5708
 
 [node name="Desk6" parent="." instance=ExtResource("1_kua1b")]
-position = Vector2(594, 553)
+position = Vector2(505, 504)
 rotation = 1.5708
 
 [node name="Zombie" parent="." instance=ExtResource("3_gv0og")]
-position = Vector2(304, 607)
+position = Vector2(348, 512)
+HEALTH_POINTS = null
+SPEED = null
+ATTACK_DAMAGE = null
+attack_interval = null
+direction_change_interval = null

@@ -83,8 +83,8 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0xce"]
 radius = 18.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8ras5"]
-radius = 30.0666
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5j0p"]
+size = Vector2(25, 37)
 
 [sub_resource type="Animation" id="Animation_x211c"]
 length = 0.001
@@ -164,8 +164,8 @@ collision_layer = 2
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(12, 0)
-shape = SubResource("CircleShape2D_8ras5")
+position = Vector2(6.5, -0.5)
+shape = SubResource("RectangleShape2D_y5j0p")
 
 [node name="Blood" type="Sprite2D" parent="."]
 position = Vector2(-35.113, -0.229781)

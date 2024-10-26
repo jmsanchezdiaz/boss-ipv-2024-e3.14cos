@@ -147,12 +147,13 @@ func apply_movement(accel):
 
 
 func take_damage(amount):
-	if health > 0:
-		health -= amount
-		print("Nico health:", health)
+	if health-amount > 0:
 		bloodAnimation.play("ReceiveDamage")
 	else:
+		# bloodAnimation.play("Die")
 		queue_free()
+	health = max(0, health - amount) 
+	print("Nico health:", health)
 
 
 func _on_crowbar_area_body_entered(body: Node2D) -> void:

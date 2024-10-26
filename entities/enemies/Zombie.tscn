@@ -81,10 +81,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0xce"]
-radius = 31.0
+radius = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ras5"]
-radius = 28.0
+radius = 30.0666
 
 [sub_resource type="Animation" id="Animation_x211c"]
 length = 0.001
@@ -137,6 +137,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 0)
 shape = SubResource("CircleShape2D_k0xce")
 
 [node name="LeftEye" type="RayCast2D" parent="."]
@@ -150,6 +151,7 @@ target_position = Vector2(53, 0)
 collision_mask = 3
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -162,7 +164,7 @@ collision_layer = 2
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(10, 0)
+position = Vector2(12, 0)
 shape = SubResource("CircleShape2D_8ras5")
 
 [node name="Blood" type="Sprite2D" parent="."]

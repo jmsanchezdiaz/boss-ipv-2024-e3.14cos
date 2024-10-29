@@ -33,6 +33,7 @@ enum STATE {
 
 
 func _physics_process(delta: float) -> void:
+	if inventory.ui_open: return;
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
 	#print("Estado: ", current_state)

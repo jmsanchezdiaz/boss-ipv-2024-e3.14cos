@@ -26,8 +26,10 @@ func update_slots():
 func close():
 	visible = false;
 	is_open = false;
+	inv.ui_open = false;
 	
 	
 func open():
 	visible = true
 	is_open = true
+	inv.ui_open = true;

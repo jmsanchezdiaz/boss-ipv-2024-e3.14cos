@@ -8,6 +8,9 @@ class_name Player
 @export var MAX_STAMINA = 100.0
 @export var STAMINA_REGEN = 10.0 # La cantidad de estamina que se regenera por segundo.
 @export var RUNNING_STAMINA_COST = 25.0 # La cantidad de estamina que se consume por segundo al correr.
+@export var ATTACKING_STAMINA_COST = 25.0
+@export var inventory: Inventory
+
 @onready var bloodAnimation = $BloodAnimation
 @onready var bodyAnimation = $BodyAnimation
 
@@ -17,7 +20,6 @@ var running_multiplier = 1
 var health = 100
 var attack_range: float = 150.0
 var attack_damage: float = 25.0
-var inventory = ["Crowbar"]
 var current_target: Node2D = null
 var smoothed_mouse_pos = Vector2.ZERO
 var current_state:STATE = STATE.IDLE
@@ -71,45 +73,24 @@ func _physics_process(delta: float) -> void:
 			pass
 
 func attack():
-	if current_target and "Crowbar" in inventory:
+	if current_target and inventory.has("crowbar") and current_stamina > 0:
 		var distance = position.distance_to(current_target.position)
 		if distance <= attack_range:
 			current_target.take_damage(attack_damage, self)
 			print("Attacked zombi! Remaining HP: ", current_target.HEALTH_POINTS)
-		else:
-			print("Target too far!")
-	else:
-		print("No target in range or no Crowbar in inventory!")
+		#else:
+			#print("Target too far!")
+		current_stamina -= max(current_stamina - ATTACKING_STAMINA_COST, 0)
+	#else:
+		#print("No target in range or no Crowbar in inventory!")
 
+
+func collect(item):
+	inventory.insert(item)
 
 func _input(event):
 	if event.is_action_pressed("attack"):
 		attack()
-
-
-func add_to_inventory(item):
-	if inventory.size() < 12:
-		inventory.append(item)
-		print("Added to inventory: ", item)
-	else:
-		print("Inventory full!")
-
-
-func remove_from_inventory(item):
-	if item in inventory:
-		inventory.erase(item)
-		print("Removed from inventory: ", item)
-	else:
-		print("Item not in inventory!")
-
-
-func use_item(item):
-	if item in inventory:
-		print("Using item: ", item)
-		inventory.erase(item)
-	else:
-		print("Item not in inventory!")
-
 
 func handle_move(delta):
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")

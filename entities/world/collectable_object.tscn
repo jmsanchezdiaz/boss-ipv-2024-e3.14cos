@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsftjcrk265at"]
+
+[ext_resource type="Script" path="res://entities/world/collectable_object.gd" id="1_jlpkj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4o8m"]
+radius = 45.0444
+
+[node name="CollectableObject" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_jlpkj")
+
+[node name="InteractableArea" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q4o8m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.296875, 0.296875)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

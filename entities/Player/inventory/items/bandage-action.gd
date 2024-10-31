@@ -1,5 +1,5 @@
 extends Node
 
-static func heal_player(player: Player):
+static func select(player: Player):
 	if player:
-		player.health += 10.0
+		player.recover_health(25.0)

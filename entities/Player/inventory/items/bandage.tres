@@ -9,3 +9,4 @@ script = ExtResource("1_oe2ww")
 name = "bandage"
 texture = ExtResource("2_7xfrn")
 action = ExtResource("1_ldjkf")
+one_time = true

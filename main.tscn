@@ -43,20 +43,20 @@ rotation = 1.5708
 [node name="Zombie" parent="." instance=ExtResource("3_gv0og")]
 position = Vector2(304, 607)
 
+[node name="Zombie2" parent="." instance=ExtResource("3_gv0og")]
+position = Vector2(979, 671)
+
+[node name="Zombie3" parent="." instance=ExtResource("3_gv0og")]
+position = Vector2(1075, 114)
+
 [node name="Crowbar" parent="." instance=ExtResource("5_hnx83")]
 position = Vector2(872, 202)
 
-[node name="Crowbar2" parent="." instance=ExtResource("5_hnx83")]
-position = Vector2(1005, 125)
+[node name="Bandage" parent="." instance=ExtResource("6_ojqr0")]
+position = Vector2(1302, 265)
 
-[node name="Crowbar3" parent="." instance=ExtResource("5_hnx83")]
-position = Vector2(1130, 209)
+[node name="Bandage2" parent="." instance=ExtResource("6_ojqr0")]
+position = Vector2(1428, 154)
 
-[node name="CollectableObject" parent="." instance=ExtResource("6_ojqr0")]
-position = Vector2(1264, 97)
-
-[node name="CollectableObject2" parent="." instance=ExtResource("6_ojqr0")]
-position = Vector2(1426, 104)
-
-[node name="CollectableObject3" parent="." instance=ExtResource("6_ojqr0")]
-position = Vector2(1370, 188)
+[node name="Bandage3" parent="." instance=ExtResource("6_ojqr0")]
+position = Vector2(1488, 287)

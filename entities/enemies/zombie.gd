@@ -16,6 +16,7 @@ class_name Zombie
 @onready var right_eye: RayCast2D = $RightEye
 @onready var animation = $BloodAnimation
 @onready var body_animation = $BodyAnimation
+@onready var audio = $AudioStreamPlayer
 
 var MIN_DISTANCE_TO_MOVE = 35
 
@@ -27,6 +28,8 @@ var last_position_known: Vector2
 
 var direction := Vector2.ZERO
 var time_since_last_change := 0.0
+
+var idle_sound = preload("res://sounds/zombie/zombie-idle.ogg")
 
 # State Machine
 enum PLAYER_STATE {
@@ -53,11 +56,17 @@ func _physics_process(delta: float) -> void:
 		change_direction()
 		time_since_last_change = 0.0
 	
+	print("zombie health", HEALTH_POINTS)
+	
 	match current_state:
 		PLAYER_STATE.IDLE:
+			audio.stream = idle_sound
 			body_animation.play("idle")
+			if last_position_known != Vector2.ZERO:
+				current_state = PLAYER_STATE.WALKING
 			reset_state_timer(idle_duration_min, idle_duration_min)
 		PLAYER_STATE.WALKING:
+			audio.stream = idle_sound
 			move_or_pursue(delta)
 			body_animation.play("walk")
 		PLAYER_STATE.ATTACKING:
@@ -170,14 +179,10 @@ func _on_state_timeout() -> void:
 	match current_state:
 		PLAYER_STATE.IDLE:
 			current_state = PLAYER_STATE.WALKING
-			#reset_state_timer(idle_duration_min, idle_duration_min)
 		PLAYER_STATE.WALKING:
 			if last_position_known == Vector2.ZERO:
 				current_state = PLAYER_STATE.IDLE
 				direction = Vector2.ZERO
-			else:
-				pass
-				#reset_state_timer(walk_duration_min, walk_duration_max)
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	target = body;

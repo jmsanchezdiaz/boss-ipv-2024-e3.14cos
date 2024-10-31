@@ -6,8 +6,7 @@ signal spawn
 
 @export var slots : Array[InventorySlot]
 
-var ui_open: bool = false
-var player: Node2D;
+var player: Player;
 
 func insert(item: InventoryItem):
 	var item_slots = slots.filter(func(slot): return slot.item == item)
@@ -22,7 +21,7 @@ func insert(item: InventoryItem):
 		
 	update.emit()
 	
-func drop(item: InventoryItem, should_spawn: bool = true):
+func drop(item: InventoryItem):
 	var item_slots = slots.filter(func(slot): return slot.item == item)
 	
 	if item_slots[0].amount == 1:
@@ -30,7 +29,18 @@ func drop(item: InventoryItem, should_spawn: bool = true):
 		item_slots[0].amount = 0
 	else:
 		item_slots[0].amount -= 1
-	if should_spawn: spawn.emit(item)
+	spawn.emit(item)
+	update.emit()
+	
+func use(item: InventoryItem, one_time: bool = true):
+	var item_slots = slots.filter(func(slot): return slot.item == item)
+	
+	if item_slots[0].amount == 1:
+		item_slots[0].item = null if one_time else item_slots[0].item
+		item_slots[0].amount = 0
+	else:
+		item_slots[0].amount -= 1
+	
 	update.emit()
 	
 func drop_all(item: InventoryItem):

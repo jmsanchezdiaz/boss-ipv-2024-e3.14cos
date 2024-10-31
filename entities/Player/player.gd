@@ -10,19 +10,27 @@ class_name Player
 @export var RUNNING_STAMINA_COST = 25.0 # La cantidad de estamina que se consume por segundo al correr.
 @export var ATTACKING_STAMINA_COST = 25.0
 @export var inventory: Inventory
+@export var MAX_HEALTH: float = 100.0
 
 @onready var bloodAnimation = $BloodAnimation
 @onready var bodyAnimation = $BodyAnimation
+@onready var audio = $AudioStreamPlayer
+
+var walking_sound = preload("res://sounds/player/player-walking.ogg")
 
 var current_stamina = MAX_STAMINA
 var running_multiplier = 1
 
 var health = 100
 var attack_range: float = 150.0
-var attack_damage: float = 25.0
 var current_target: Node2D = null
 var smoothed_mouse_pos = Vector2.ZERO
 var current_state:STATE = STATE.IDLE
+var selected_weapon = null
+var selected_weapon_damage = null
+var FIST_DAMAGE = 10.0
+var attacking = false;
+var paused = false;
 
 enum STATE {
 	IDLE,
@@ -34,25 +42,28 @@ enum STATE {
 func _ready():
 	inventory.set_player(self)
 
+func pause():
+	set_physics_process(false)
+	paused=true;
+	
+func unpause():
+	set_physics_process(true)
+	paused=false
+
 func _physics_process(delta: float) -> void:
-	if inventory.ui_open: return;
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
-	print("Salud: ", health)
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	match current_state:
 		STATE.IDLE:
-			#$Body.show()
-			#$BodyRunning.hide()
 			bodyAnimation.play("RESET")
 			regenerate_stamina(1, delta)
 			if input_vector != Vector2.ZERO:
-				current_state = STATE.WALKING
-			if Input.is_action_pressed("run") and current_stamina > 10:
-				current_state = STATE.RUNNING
+				if Input.is_action_pressed("run") and current_stamina > 10:
+					current_state = STATE.RUNNING
+				else: current_state = STATE.WALKING
+			
 		STATE.WALKING:
-			#$Body.show()
-			#$BodyRunning.hide()
 			bodyAnimation.play("Walk")
 			regenerate_stamina(0.5, delta)
 			handle_move(delta)
@@ -61,8 +72,6 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("run") and current_stamina > 10:
 				current_state = STATE.RUNNING
 		STATE.RUNNING:
-			#$Body.hide()
-			#$BodyRunning.show()
 			bodyAnimation.play("Run")
 			handle_move(delta)
 			handle_run(delta)
@@ -73,30 +82,41 @@ func _physics_process(delta: float) -> void:
 				current_state = STATE.WALKING
 				running_multiplier = 1
 		STATE.ATTAKING:
-			pass
+			attack()
 
 func attack():
-	if current_stamina > 0:
-		print("Atacando a puño limpio!")
+	if !attacking and current_stamina > 0:
+		attacking = true;
 		bodyAnimation.play("Punch")
-		if current_target and inventory.has("crowbar"):
+		if current_target:
+			var damage = selected_weapon_damage if selected_weapon else FIST_DAMAGE
 			var distance = position.distance_to(current_target.position)
 			if distance <= attack_range:
-				current_target.take_damage(attack_damage, self)
+				current_target.take_damage(damage, self)
 				print("Attacked zombi! Remaining HP: ", current_target.HEALTH_POINTS)
-			#else:
-				#print("Target too far!")
+		
 			current_stamina -= max(current_stamina - ATTACKING_STAMINA_COST, 0)
-		# else:
-			# print("No target in range or no Crowbar in inventory!")
+			
+		await get_tree().create_timer(1).timeout
+		if Input.get_vector("move_left", "move_right", "move_up", "move_down") != Vector2.ZERO:
+			current_state = STATE.WALKING
+			attacking=false
+		else:
+			current_state = STATE.IDLE
+			attacking=false
 
 
 func collect(item):
 	inventory.insert(item)
 
 func _input(event):
-	if event.is_action_pressed("attack"):
-		attack()
+	if !paused and event.is_action_pressed("attack"):
+		current_state = STATE.ATTAKING
+	
+
+func recover_health(hp: float):
+	health = min(MAX_HEALTH, health + hp)
+	bloodAnimation.stop()
 
 func handle_move(delta):
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -140,7 +160,6 @@ func take_damage(amount):
 		# bloodAnimation.play("Die")
 		queue_free()
 	health = max(0, health - amount) 
-	print("Nico health:", health)
 
 
 func _on_crowbar_area_body_entered(body: Node2D) -> void:

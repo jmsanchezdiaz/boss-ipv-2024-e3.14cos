@@ -48,6 +48,22 @@ _data = {
 "ReceiveDamage": SubResource("Animation_myc8f")
 }
 
+[sub_resource type="Animation" id="Animation_x8equ"]
+resource_name = "Punch"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
+}
+
 [sub_resource type="Animation" id="Animation_vrris"]
 length = 0.001
 tracks/0/type = "value"
@@ -100,22 +116,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 }
 
-[sub_resource type="Animation" id="Animation_x8equ"]
-resource_name = "Punch"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6yx8f"]
 _data = {
 "Punch": SubResource("Animation_x8equ"),
@@ -164,6 +164,8 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_6yx8f")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_crowbar_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_crowbar_area_body_exited"]

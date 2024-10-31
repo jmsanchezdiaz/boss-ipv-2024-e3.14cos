@@ -15,7 +15,6 @@ func _ready():
 func spawn_item(item: InventoryItem):
 	var scene: PackedScene = load("res://entities/Player/inventory/items/"+ item.name +".tscn")
 	var object = scene.instantiate()
-	print(object)
 	var spr: Sprite2D = object.get_node("Sprite2D")
 	object.item = item
 	spr.texture = item.texture
@@ -37,8 +36,8 @@ func _drop_items(inv_item: InventoryItem):
 	inv.drop_all(inv_item)
 
 func _use_item(inv_item: InventoryItem):
-	inv.drop(inv_item, false)
-	inv_item.action.call("heal_player", inv.player)
+	inv.use(inv_item, inv_item.one_time)
+	inv_item.action.call("select", inv.player)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("inventory"):
@@ -57,10 +56,10 @@ func update_slots():
 func close():
 	visible = false;
 	is_open = false;
-	inv.ui_open = false;
+	if inv.player: inv.player.unpause()
 	
 	
 func open():
 	visible = true
 	is_open = true
-	inv.ui_open = true;
+	if inv.player: inv.player.pause()

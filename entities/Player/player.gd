@@ -76,16 +76,19 @@ func _physics_process(delta: float) -> void:
 			pass
 
 func attack():
-	if current_target and inventory.has("crowbar") and current_stamina > 0:
-		var distance = position.distance_to(current_target.position)
-		if distance <= attack_range:
-			current_target.take_damage(attack_damage, self)
-			print("Attacked zombi! Remaining HP: ", current_target.HEALTH_POINTS)
-		#else:
-			#print("Target too far!")
-		current_stamina -= max(current_stamina - ATTACKING_STAMINA_COST, 0)
-	#else:
-		#print("No target in range or no Crowbar in inventory!")
+	if current_stamina > 0:
+		print("Atacando a puño limpio!")
+		bodyAnimation.play("Punch")
+		if current_target and inventory.has("crowbar"):
+			var distance = position.distance_to(current_target.position)
+			if distance <= attack_range:
+				current_target.take_damage(attack_damage, self)
+				print("Attacked zombi! Remaining HP: ", current_target.HEALTH_POINTS)
+			#else:
+				#print("Target too far!")
+			current_stamina -= max(current_stamina - ATTACKING_STAMINA_COST, 0)
+		# else:
+			# print("No target in range or no Crowbar in inventory!")
 
 
 func collect(item):

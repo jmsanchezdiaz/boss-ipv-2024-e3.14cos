@@ -40,8 +40,8 @@ func _physics_process(delta: float) -> void:
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	match current_state:
 		STATE.IDLE:
-			$Body.show()
-			$BodyRunning.hide()
+			#$Body.show()
+			#$BodyRunning.hide()
 			bodyAnimation.play("RESET")
 			regenerate_stamina(1, delta)
 			if input_vector != Vector2.ZERO:
@@ -49,8 +49,8 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("run") and current_stamina > 10:
 				current_state = STATE.RUNNING
 		STATE.WALKING:
-			$Body.show()
-			$BodyRunning.hide()
+			#$Body.show()
+			#$BodyRunning.hide()
 			bodyAnimation.play("Walk")
 			regenerate_stamina(0.5, delta)
 			handle_move(delta)
@@ -59,8 +59,8 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("run") and current_stamina > 10:
 				current_state = STATE.RUNNING
 		STATE.RUNNING:
-			$Body.hide()
-			$BodyRunning.show()
+			#$Body.hide()
+			#$BodyRunning.show()
 			bodyAnimation.play("Run")
 			handle_move(delta)
 			handle_run(delta)

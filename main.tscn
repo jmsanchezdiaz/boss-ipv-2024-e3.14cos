@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnmm0kxknd4pw"]
+[gd_scene load_steps=7 format=3 uid="uid://bnmm0kxknd4pw"]
 
 [ext_resource type="PackedScene" uid="uid://3u862rxcxh83" path="res://entities/world/Desk.tscn" id="1_kua1b"]
 [ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="2_1h6nk"]
 [ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/enemies/Zombie.tscn" id="3_gv0og"]
 [ext_resource type="PackedScene" uid="uid://b6ynng6353xjr" path="res://entities/Player/inventory/inventory_ui.tscn" id="4_eea6n"]
-[ext_resource type="PackedScene" uid="uid://c4p08je7fayh7" path="res://entities/world/crowbar.tscn" id="5_0jeox"]
+[ext_resource type="PackedScene" uid="uid://dp8dyaaojoki6" path="res://entities/Player/inventory/items/crowbar.tscn" id="5_hnx83"]
+[ext_resource type="PackedScene" uid="uid://c2o0kr8xieldc" path="res://entities/Player/inventory/items/bandage.tscn" id="6_ojqr0"]
 
 [node name="Main" type="Node"]
 
@@ -42,5 +43,20 @@ rotation = 1.5708
 [node name="Zombie" parent="." instance=ExtResource("3_gv0og")]
 position = Vector2(304, 607)
 
-[node name="CollectableObject" parent="." instance=ExtResource("5_0jeox")]
-position = Vector2(1092, 73)
+[node name="Crowbar" parent="." instance=ExtResource("5_hnx83")]
+position = Vector2(872, 202)
+
+[node name="Crowbar2" parent="." instance=ExtResource("5_hnx83")]
+position = Vector2(1005, 125)
+
+[node name="Crowbar3" parent="." instance=ExtResource("5_hnx83")]
+position = Vector2(1130, 209)
+
+[node name="CollectableObject" parent="." instance=ExtResource("6_ojqr0")]
+position = Vector2(1264, 97)
+
+[node name="CollectableObject2" parent="." instance=ExtResource("6_ojqr0")]
+position = Vector2(1426, 104)
+
+[node name="CollectableObject3" parent="." instance=ExtResource("6_ojqr0")]
+position = Vector2(1370, 188)

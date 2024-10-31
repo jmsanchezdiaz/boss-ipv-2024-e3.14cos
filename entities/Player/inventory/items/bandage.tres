@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://b33xsxo17nhdr"]
+
+[ext_resource type="Script" path="res://entities/Player/inventory/items/bandage-action.gd" id="1_ldjkf"]
+[ext_resource type="Script" path="res://entities/Player/inventory/inventory_item.gd" id="1_oe2ww"]
+[ext_resource type="Texture2D" uid="uid://byhk4wgq53rm4" path="res://assets/bandage.png" id="2_7xfrn"]
+
+[resource]
+script = ExtResource("1_oe2ww")
+name = "bandage"
+texture = ExtResource("2_7xfrn")
+action = ExtResource("1_ldjkf")

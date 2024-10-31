@@ -31,12 +31,14 @@ enum STATE {
 	ATTAKING
 }
 
+func _ready():
+	inventory.set_player(self)
 
 func _physics_process(delta: float) -> void:
 	if inventory.ui_open: return;
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
-	#print("Estado: ", current_state)
+	print("Salud: ", health)
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	match current_state:
 		STATE.IDLE:

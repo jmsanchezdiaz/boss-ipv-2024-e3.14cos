@@ -3,13 +3,42 @@ extends Control
 @onready var inv: Inventory = preload("res://entities/Player/inventory/inventory.tres")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 
-
 var is_open: bool = false
 
 func _ready():
 	inv.update.connect(update_slots)
+	inv.spawn.connect(spawn_item)
+	connect_slots()
 	update_slots()
 	close()
+
+func spawn_item(item: InventoryItem):
+	var scene: PackedScene = load("res://entities/Player/inventory/items/"+ item.name +".tscn")
+	var object = scene.instantiate()
+	print(object)
+	var spr: Sprite2D = object.get_node("Sprite2D")
+	object.item = item
+	spr.texture = item.texture
+	if inv.player != null:
+		object.position = inv.player.global_position
+	get_tree().root.get_child(0).add_child(object)
+
+
+func connect_slots():
+	for i in range(slots.size()):
+		slots[i].drop.connect(_drop_item)
+		slots[i].drop_all.connect(_drop_items)
+		slots[i].use.connect(_use_item)
+		
+func _drop_item(inv_item: InventoryItem):
+	inv.drop(inv_item)
+	
+func _drop_items(inv_item: InventoryItem):
+	inv.drop_all(inv_item)
+
+func _use_item(inv_item: InventoryItem):
+	inv.drop(inv_item, false)
+	inv_item.action.call("heal_player", inv.player)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("inventory"):
@@ -17,6 +46,8 @@ func _process(_delta):
 			close()
 		else:
 			open()
+	if Input.is_action_just_pressed("escape"):
+		close()
 
 func update_slots():
 	for i in range(min(inv.slots.size(), slots.size())):

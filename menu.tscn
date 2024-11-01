@@ -1,0 +1,276 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmyaegou28jxp"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_c6840"]
+[ext_resource type="Texture2D" uid="uid://cxn5u312uyfay" path="res://bsas-noche-eterna.webp" id="1_yxe7r"]
+[ext_resource type="Texture2D" uid="uid://budt0fg4tvw73" path="res://assets/Keyboard Letters and Symbols.png" id="3_05d8a"]
+[ext_resource type="FontFile" uid="uid://gxmbr3xcsrre" path="res://assets/Deadfall-Regular.ttf" id="3_vj7u7"]
+[ext_resource type="Texture2D" uid="uid://tta5jdsirrg5" path="res://assets/Keyboard Extras.png" id="4_tn41y"]
+[ext_resource type="Texture2D" uid="uid://bor5stunx12a2" path="res://assets/mouise.png" id="5_vh1ot"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_c6840")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -50.0
+offset_right = 184.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_yxe7r")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.509804)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -355.0
+offset_top = -265.0
+offset_right = 355.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 66
+text = "BUENOS AIRES:
+NOCHE ETERNA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartBtn" type="Button" parent="CanvasLayer"]
+offset_left = 325.0
+offset_top = 314.0
+offset_right = 521.0
+offset_bottom = 403.0
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 38
+text = "Start"
+
+[node name="ControlsBtn" type="Button" parent="CanvasLayer"]
+offset_left = 329.0
+offset_top = 434.0
+offset_right = 525.0
+offset_bottom = 523.0
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 38
+text = "Controls"
+
+[node name="Controls" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -397.5
+offset_top = -321.0
+offset_right = 397.5
+offset_bottom = 321.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.5
+offset_top = 38.0
+offset_right = -39.5
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.811765)
+
+[node name="Label2" type="Label" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 105.392
+offset_top = -247.0
+offset_right = 278.392
+offset_bottom = -193.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 28
+text = "Caminar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 105.392
+offset_top = -177.0
+offset_right = 278.392
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 28
+text = "Correr"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 34.0
+offset_top = -111.0
+offset_right = 338.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 28
+text = "Alternar inventario"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 60.392
+offset_top = -41.0
+offset_right = 312.392
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 28
+text = "Agarrar Items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 39.0
+offset_top = 38.0
+offset_right = 334.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 28
+text = "Golpear/Usar Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="a" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(185.588, 98)
+scale = Vector2(5.087, 4)
+texture = ExtResource("3_05d8a")
+hframes = 8
+vframes = 14
+frame = 16
+
+[node name="s" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(339.588, 99)
+scale = Vector2(5.087, 4)
+texture = ExtResource("3_05d8a")
+hframes = 8
+vframes = 14
+frame = 34
+
+[node name="d" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(419.588, 100)
+scale = Vector2(5.087, 4)
+texture = ExtResource("3_05d8a")
+hframes = 8
+vframes = 14
+frame = 19
+
+[node name="d3" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(183.5, 315)
+scale = Vector2(5.087, 4)
+texture = ExtResource("3_05d8a")
+hframes = 8
+vframes = 14
+frame = 20
+
+[node name="d2" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(339.892, 245)
+scale = Vector2(5.087, 4)
+texture = ExtResource("3_05d8a")
+hframes = 8
+vframes = 14
+frame = 24
+
+[node name="w" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(263.588, 100)
+scale = Vector2(5.087, 4)
+texture = ExtResource("3_05d8a")
+hframes = 8
+vframes = 14
+frame = 38
+
+[node name="shift" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(223.892, 176)
+scale = Vector2(5.087, 4)
+texture = ExtResource("4_tn41y")
+hframes = 4
+vframes = 8
+frame = 4
+
+[node name="shift2" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(211.5, 245)
+scale = Vector2(5.087, 4)
+texture = ExtResource("4_tn41y")
+hframes = 4
+vframes = 8
+
+[node name="Button" type="Button" parent="CanvasLayer/Controls"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 502.0
+offset_right = 486.0
+offset_bottom = 563.0
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 24
+text = "Cerrar"
+
+[node name="Mouise" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(179.5, 419)
+scale = Vector2(3.07813, 3.07813)
+texture = ExtResource("5_vh1ot")
+
+[connection signal="pressed" from="CanvasLayer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/ControlsBtn" to="." method="_on_controls_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controls/Button" to="." method="_on_close_controls_button_pressed"]

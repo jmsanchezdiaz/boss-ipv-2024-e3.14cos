@@ -1,16 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpmtbbduioxrq"]
+[gd_scene load_steps=3 format=3 uid="uid://dpmtbbduioxrq"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_s7av8"]
+[ext_resource type="FontFile" uid="uid://gxmbr3xcsrre" path="res://assets/Deadfall-Regular.ttf" id="2_akpgk"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_s7av8")
 
 [node name="ResetButton" type="Button" parent="."]
-offset_left = 244.0
-offset_top = 263.0
-offset_right = 532.0
-offset_bottom = 373.0
-theme_override_font_sizes/font_size = 74
+offset_left = 182.0
+offset_top = 329.0
+offset_right = 375.0
+offset_bottom = 415.0
+theme_override_fonts/font = ExtResource("2_akpgk")
+theme_override_font_sizes/font_size = 50
 text = "Reset"
 
+[node name="BackToMenu" type="Button" parent="."]
+offset_left = 432.0
+offset_top = 328.0
+offset_right = 627.0
+offset_bottom = 417.0
+theme_override_fonts/font = ExtResource("2_akpgk")
+theme_override_font_sizes/font_size = 50
+text = "Menu"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -136.0
+offset_right = 212.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_akpgk")
+theme_override_font_sizes/font_size = 62
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="BackToMenu" to="." method="_on_back_to_menu_pressed"]

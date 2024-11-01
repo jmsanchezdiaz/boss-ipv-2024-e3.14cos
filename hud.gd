@@ -21,3 +21,7 @@ func _on_reset_button_pressed() -> void:
 
 	# Cambia la escena a sí misma
 	get_tree().reload_current_scene()
+
+
+func _on_back_to_menu_pressed():
+	get_tree().change_scene_to_file("res://menu.tscn")

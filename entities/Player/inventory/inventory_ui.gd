@@ -56,10 +56,10 @@ func update_slots():
 func close():
 	visible = false;
 	is_open = false;
-	if inv.player: inv.player.unpause()
+	if is_instance_valid(inv.player) and  inv.player: inv.player.unpause()
 	
 	
 func open():
 	visible = true
 	is_open = true
-	if inv.player: inv.player.pause()
+	if is_instance_valid(inv.player) and inv.player : inv.player.pause()

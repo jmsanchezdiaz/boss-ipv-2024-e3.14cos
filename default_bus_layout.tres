@@ -1,4 +1,7 @@
-[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://b7eeowm2qtap4"]
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://b7eeowm2qtap4"]
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_yqyqd"]
+resource_name = "Compressor"
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_5px0w"]
 resource_name = "Reverb"
@@ -16,13 +19,15 @@ resource_name = "EQ"
 resource_name = "PitchShift"
 
 [resource]
-bus/0/volume_db = 1.65599
+bus/0/volume_db = 0.662756
 bus/1/name = &"Zombie"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -21.8348
+bus/1/volume_db = -21.8264
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectCompressor_yqyqd")
+bus/1/effect/0/enabled = false
 bus/2/name = &"Foley"
 bus/2/solo = false
 bus/2/mute = false

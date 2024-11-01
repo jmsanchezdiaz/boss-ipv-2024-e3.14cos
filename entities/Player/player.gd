@@ -41,12 +41,14 @@ var selected_weapon_damage = null
 var FIST_DAMAGE = 10.0
 var attacking = false;
 var paused = false;
+var lastFistUsed = 0;
 
 enum STATE {
 	IDLE,
 	WALKING,
 	RUNNING,
-	ATTAKING
+	ATTAKING,
+	HEALING
 }
 
 func _ready():
@@ -95,6 +97,7 @@ func _physics_process(delta: float) -> void:
 				current_state = STATE.IDLE
 			if Input.is_action_pressed("run") and current_stamina > 10:
 				current_state = STATE.RUNNING
+		
 		STATE.RUNNING:
 			bodyAnimation.play("Run")
 			_play_stream(running_sound)
@@ -107,20 +110,31 @@ func _physics_process(delta: float) -> void:
 			if current_stamina == 0 or (!Input.is_action_pressed("run") and input_vector != Vector2.ZERO):
 				current_state = STATE.WALKING
 				running_multiplier = 1
+		
 		STATE.ATTAKING:
 			running_multiplier = 1
 			handle_move(delta)
 			attack(input_vector)
+		
+		STATE.HEALING:
+			bodyAnimation.play("Heal")
+			await get_tree().create_timer(0.9).timeout
+			current_state = STATE.WALKING if input_vector != Vector2.ZERO else STATE.IDLE
 
 
 func _play_stream(stream):
 	if stream != audio.stream: audio.stream = stream
 	if !audio.playing: audio.play()
 
+
 func attack(inputs):
 	if !attacking and current_stamina > 0:
-		attacking = true;
-		bodyAnimation.play("Punch")
+		attacking = true
+		if selected_weapon == null:
+			punch()
+		else:
+			bodyAnimation.play("Melee")
+		
 		if current_target:
 			var damage = selected_weapon_damage if selected_weapon else FIST_DAMAGE
 			var distance = position.distance_to(current_target.position)
@@ -132,27 +146,35 @@ func attack(inputs):
 		else:
 			_play_stream(player_missed_punch)
 		
-			
 		await get_tree().create_timer(1).timeout
 		
 		audio.stop()
 		current_state = STATE.WALKING if inputs != Vector2.ZERO else STATE.IDLE
 		attacking=false
-	
+
+
+func punch() -> void:
+	if (lastFistUsed+1)%2 == 0:
+		bodyAnimation.play("Punch")
+	else:
+		bodyAnimation.play("Punch2")
+	lastFistUsed += 1
 
 
 func collect(item):
 	inventory.insert(item)
 
+
 func _input(event):
 	if !paused and event.is_action_pressed("attack"):
 		current_state = STATE.ATTAKING
-	
+
 
 func recover_health(hp: float):
+	current_state = STATE.HEALING
 	health = min(MAX_HEALTH, health + hp)
 	bloodAnimation.stop()
-	bodyAnimation.play("Heal") # Falta aplicar
+
 
 func handle_move(delta):
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")

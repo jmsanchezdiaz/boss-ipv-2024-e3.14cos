@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://mdmcd48tcv30" path="res://assets/deks.webp" id="1_4b1dk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bggds"]
-size = Vector2(800, 529.412)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdehe"]
+size = Vector2(529.412, 800)
 
 [node name="StaticBody2D" type="StaticBody2D"]
 scale = Vector2(0.3, 0.17)
@@ -15,4 +15,6 @@ texture = ExtResource("1_4b1dk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3.33786e-05, -4.37568e-06)
-shape = SubResource("RectangleShape2D_bggds")
+rotation = -1.57079
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_gdehe")

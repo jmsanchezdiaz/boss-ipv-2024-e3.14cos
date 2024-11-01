@@ -108,6 +108,7 @@ func _physics_process(delta: float) -> void:
 				current_state = STATE.WALKING
 				running_multiplier = 1
 		STATE.ATTAKING:
+			running_multiplier = 1
 			handle_move(delta)
 			attack(input_vector)
 

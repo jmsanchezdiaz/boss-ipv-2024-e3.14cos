@@ -30,7 +30,7 @@ var direction := Vector2.ZERO
 var time_since_last_change := 0.0
 
 var idle_sound = preload("res://sounds/zombie/zombie-idle.ogg")
-
+var attack_sound = preload("res://sounds/zombie/zombie-attack.ogg")
 # State Machine
 enum PLAYER_STATE {
 	IDLE,
@@ -44,6 +44,7 @@ func _init():
 	randomize()
 
 func _ready() -> void:
+	audio.stream = idle_sound
 	change_direction()
 	_setup_attack_timer()
 	_setup_state_timer()
@@ -56,23 +57,26 @@ func _physics_process(delta: float) -> void:
 		change_direction()
 		time_since_last_change = 0.0
 	
-	print("zombie health", HEALTH_POINTS)
 	
 	match current_state:
 		PLAYER_STATE.IDLE:
-			audio.stream = idle_sound
+			_play_stream(idle_sound)
 			body_animation.play("idle")
 			if last_position_known != Vector2.ZERO:
 				current_state = PLAYER_STATE.WALKING
 			reset_state_timer(idle_duration_min, idle_duration_min)
 		PLAYER_STATE.WALKING:
-			audio.stream = idle_sound
+			_play_stream(idle_sound)
 			move_or_pursue(delta)
 			body_animation.play("walk")
 		PLAYER_STATE.ATTACKING:
+			_play_stream(attack_sound)
 			body_animation.play("attack")
 			attack_near_enemies()
 
+func _play_stream(stream):
+	if stream != audio.stream: audio.stream = stream
+	if !audio.playing: audio.play()
 
 func _setup_state_timer() -> void:
 	state_timer = Timer.new()
@@ -145,7 +149,7 @@ func move_or_pursue(delta: float) -> void:
 
 func attack_near_enemies() -> void:
 	if target_in_attack_area and attack_timer.is_stopped():
-		attack_timer.start()  # Comienza los ataques si no está atacando
+		attack_timer.start() 
 
 
 func take_damage(amount: float, attacker: Node2D) -> void:
@@ -170,7 +174,6 @@ func reset_state_timer(duration_min: float, duration_max: float):
 
 func _on_attack_timeout() -> void:
 	if target_in_attack_area:
-		
 		attack(target)
 		attack_timer.start()
 

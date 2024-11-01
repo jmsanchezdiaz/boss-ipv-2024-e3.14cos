@@ -15,8 +15,18 @@ class_name Player
 @onready var bloodAnimation = $BloodAnimation
 @onready var bodyAnimation = $BodyAnimation
 @onready var audio = $AudioStreamPlayer
+@onready var heart_audio = $Heartbeat
 
+var idle_sound = preload("res://sounds/player/player-idle.ogg")
+var tired_idle_sound = preload("res://sounds/player/player-tired-idle.ogg")
 var walking_sound = preload("res://sounds/player/player-walking.ogg")
+var running_sound = preload("res://sounds/player/player-running.ogg")
+
+var heartbeat_calm = preload("res://sounds/player/player-heartbeat-calm.ogg")
+var heartbeat_fast = preload("res://sounds/player/player-heartbeat-fast.ogg")
+
+var player_attack_sound = preload("res://sounds/player/player-attack.ogg")
+var player_missed_punch = preload("res://sounds/player/player-missed_punch.ogg")
 
 var current_stamina = MAX_STAMINA
 var running_multiplier = 1
@@ -50,13 +60,25 @@ func unpause():
 	set_physics_process(true)
 	paused=false
 
+func handle_heartbeat():
+	if health < 60:
+		if heart_audio.stream != heartbeat_fast:
+			heart_audio.stream = heartbeat_fast
+	elif heart_audio.stream != heartbeat_calm:
+		heart_audio.stream = heartbeat_calm
+	if !heart_audio.playing : heart_audio.play()
+
 func _physics_process(delta: float) -> void:
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
+	handle_heartbeat()
+		
 	match current_state:
 		STATE.IDLE:
 			bodyAnimation.play("RESET")
+			_play_stream(idle_sound)
 			regenerate_stamina(1, delta)
 			if input_vector != Vector2.ZERO:
 				if Input.is_action_pressed("run") and current_stamina > 10:
@@ -65,26 +87,36 @@ func _physics_process(delta: float) -> void:
 			
 		STATE.WALKING:
 			bodyAnimation.play("Walk")
+			_play_stream(walking_sound)
 			regenerate_stamina(0.5, delta)
 			handle_move(delta)
 			if input_vector == Vector2.ZERO:
+				audio.stop()
 				current_state = STATE.IDLE
 			if Input.is_action_pressed("run") and current_stamina > 10:
 				current_state = STATE.RUNNING
 		STATE.RUNNING:
 			bodyAnimation.play("Run")
+			_play_stream(running_sound)
 			handle_move(delta)
 			handle_run(delta)
 			if input_vector == Vector2.ZERO:
+				audio.stop()
 				current_state = STATE.IDLE
 				running_multiplier = 1
 			if current_stamina == 0 or (!Input.is_action_pressed("run") and input_vector != Vector2.ZERO):
 				current_state = STATE.WALKING
 				running_multiplier = 1
 		STATE.ATTAKING:
-			attack()
+			handle_move(delta)
+			attack(input_vector)
 
-func attack():
+
+func _play_stream(stream):
+	if stream != audio.stream: audio.stream = stream
+	if !audio.playing: audio.play()
+
+func attack(inputs):
 	if !attacking and current_stamina > 0:
 		attacking = true;
 		bodyAnimation.play("Punch")
@@ -92,18 +124,21 @@ func attack():
 			var damage = selected_weapon_damage if selected_weapon else FIST_DAMAGE
 			var distance = position.distance_to(current_target.position)
 			if distance <= attack_range:
+				_play_stream(player_attack_sound)
 				current_target.take_damage(damage, self)
 				print("Attacked zombi! Remaining HP: ", current_target.HEALTH_POINTS)
 		
 			current_stamina -= max(current_stamina - ATTACKING_STAMINA_COST, 0)
+		else:
+			_play_stream(player_missed_punch)
+		
 			
 		await get_tree().create_timer(1).timeout
-		if Input.get_vector("move_left", "move_right", "move_up", "move_down") != Vector2.ZERO:
-			current_state = STATE.WALKING
-			attacking=false
-		else:
-			current_state = STATE.IDLE
-			attacking=false
+		
+		audio.stop()
+		current_state = STATE.WALKING if inputs != Vector2.ZERO else STATE.IDLE
+		attacking=false
+	
 
 
 func collect(item):

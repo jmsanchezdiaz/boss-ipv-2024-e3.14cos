@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnmm0kxknd4pw"]
+[gd_scene load_steps=8 format=3 uid="uid://bnmm0kxknd4pw"]
 
 [ext_resource type="PackedScene" uid="uid://3u862rxcxh83" path="res://entities/world/Desk.tscn" id="1_kua1b"]
 [ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="2_1h6nk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6ynng6353xjr" path="res://entities/Player/inventory/inventory_ui.tscn" id="4_eea6n"]
 [ext_resource type="PackedScene" uid="uid://dp8dyaaojoki6" path="res://entities/Player/inventory/items/crowbar.tscn" id="5_hnx83"]
 [ext_resource type="PackedScene" uid="uid://c2o0kr8xieldc" path="res://entities/Player/inventory/items/bandage.tscn" id="6_ojqr0"]
+[ext_resource type="AudioStream" uid="uid://mrj310bj2vei" path="res://sounds/foley.ogg" id="7_ww00u"]
 
 [node name="Main" type="Node"]
 
@@ -43,12 +44,6 @@ rotation = 1.5708
 [node name="Zombie" parent="." instance=ExtResource("3_gv0og")]
 position = Vector2(304, 607)
 
-[node name="Zombie2" parent="." instance=ExtResource("3_gv0og")]
-position = Vector2(979, 671)
-
-[node name="Zombie3" parent="." instance=ExtResource("3_gv0og")]
-position = Vector2(1075, 114)
-
 [node name="Crowbar" parent="." instance=ExtResource("5_hnx83")]
 position = Vector2(872, 202)
 
@@ -60,3 +55,9 @@ position = Vector2(1428, 154)
 
 [node name="Bandage3" parent="." instance=ExtResource("6_ojqr0")]
 position = Vector2(1488, 287)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ww00u")
+autoplay = true
+bus = &"Foley"
+parameters/looping = false

@@ -1,4 +1,19 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://b7eeowm2qtap4"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://b7eeowm2qtap4"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_5px0w"]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_pa1nf"]
+resource_name = "Distortion"
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_luydb"]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_b71ri"]
+resource_name = "EQ"
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_gi2ay"]
+resource_name = "PitchShift"
 
 [resource]
 bus/0/volume_db = 1.65599
@@ -6,5 +21,33 @@ bus/1/name = &"Zombie"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -50.3433
+bus/1/volume_db = -21.8348
 bus/1/send = &"Master"
+bus/2/name = &"Foley"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -18.9844
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_5px0w")
+bus/2/effect/0/enabled = false
+bus/2/effect/1/effect = SubResource("AudioEffectDistortion_pa1nf")
+bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource("AudioEffectDelay_luydb")
+bus/2/effect/2/enabled = false
+bus/2/effect/3/effect = SubResource("AudioEffectEQ_b71ri")
+bus/2/effect/3/enabled = false
+bus/2/effect/4/effect = SubResource("AudioEffectPitchShift_gi2ay")
+bus/2/effect/4/enabled = false
+bus/3/name = &"Player"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -11.4624
+bus/3/send = &"Master"
+bus/4/name = &"Heart"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -12.4611
+bus/4/send = &"Player"

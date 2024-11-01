@@ -55,24 +55,39 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StartBtn" type="Button" parent="CanvasLayer"]
-offset_left = 325.0
-offset_top = 314.0
-offset_right = 521.0
-offset_bottom = 403.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -44.5
+offset_right = 98.0
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
 theme_override_font_sizes/font_size = 38
 text = "Start"
 
 [node name="ControlsBtn" type="Button" parent="CanvasLayer"]
-offset_left = 329.0
-offset_top = 434.0
-offset_right = 525.0
-offset_bottom = 523.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 76.0
+offset_right = 101.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
 theme_override_font_sizes/font_size = 38
 text = "Controls"
 
 [node name="Controls" type="Panel" parent="CanvasLayer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

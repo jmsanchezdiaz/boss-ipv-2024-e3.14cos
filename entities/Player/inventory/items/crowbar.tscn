@@ -7,5 +7,8 @@
 [node name="Crowbar" instance=ExtResource("1_1gk35")]
 item = ExtResource("2_jw6nh")
 
+[node name="InteractableArea" parent="." index="0"]
+visible = false
+
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_3fm2c")

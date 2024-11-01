@@ -6,7 +6,7 @@
 size = Vector2(225, 225)
 
 [node name="Wall" type="StaticBody2D"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.01, 0.01)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(112.5, 112.5)
@@ -17,4 +17,6 @@ shape = SubResource("RectangleShape2D_bggds")
 offset_right = 225.0
 offset_bottom = 225.0
 texture = ExtResource("1_qc5qe")
+expand_mode = 1
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true

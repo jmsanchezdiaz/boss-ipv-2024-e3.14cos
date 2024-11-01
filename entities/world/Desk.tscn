@@ -17,5 +17,4 @@ texture = ExtResource("1_8wjdf")
 visible = false
 position = Vector2(-3.33786e-05, -4.37568e-06)
 rotation = -1.57079
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_gdehe")

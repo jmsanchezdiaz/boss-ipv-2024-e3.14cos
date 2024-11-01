@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+signal hit
 
 @export var ACCELERATION = 1500
 @export var FRICTION = 1500
@@ -217,6 +218,7 @@ func take_damage(amount):
 	else:
 		# bloodAnimation.play("Die")
 		queue_free()
+		hit.emit()
 	health = max(0, health - amount) 
 
 

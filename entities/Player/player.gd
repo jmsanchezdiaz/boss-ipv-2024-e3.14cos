@@ -153,6 +153,7 @@ func _input(event):
 func recover_health(hp: float):
 	health = min(MAX_HEALTH, health + hp)
 	bloodAnimation.stop()
+	bodyAnimation.play("Heal") # Falta aplicar
 
 func handle_move(delta):
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")

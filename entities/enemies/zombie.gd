@@ -194,7 +194,6 @@ func _on_detection_area_body_exited(_body: Node2D) -> void:
 	target = null
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	print("Entre en zona de ataquewwwwwwwwwwwwwwwwwwwww", body)
 	if body is Player:
 		target_in_attack_area = true
 		current_state = PLAYER_STATE.ATTACKING

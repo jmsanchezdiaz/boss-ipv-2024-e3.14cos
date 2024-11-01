@@ -127,7 +127,6 @@ func attack(inputs):
 			if distance <= attack_range:
 				_play_stream(player_attack_sound)
 				current_target.take_damage(damage, self)
-				print("Attacked zombi! Remaining HP: ", current_target.HEALTH_POINTS)
 		
 			current_stamina -= max(current_stamina - ATTACKING_STAMINA_COST, 0)
 		else:

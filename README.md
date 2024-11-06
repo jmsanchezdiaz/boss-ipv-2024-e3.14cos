@@ -4,7 +4,7 @@
 
 [Trello Board](https://trello.com/b/BER336kD/e%CF%80cos-buenos-aires-noche-eterna)
 
-[Entrega 1](https://jmsanchezdiaz.github.io/boss-ipv-2024-e3.14cos/export-boss/index.html)
+[Export: Entrega 2](https://jmsanchezdiaz.github.io/boss-ipv-2024-e3.14cos/export-boss/index.html)
 
 Integrantes:
 - Abregú Santiago

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/Player/inventory/items/crowbar-action.gd" id="1_7lb81"]
 [ext_resource type="Script" path="res://entities/Player/inventory/inventory_item.gd" id="1_h72uo"]
-[ext_resource type="Texture2D" uid="uid://dhrkp7nq5u451" path="res://assets/crowbar.png" id="2_40go0"]
+[ext_resource type="Texture2D" uid="uid://dhrkp7nq5u451" path="res://assets/items/crowbar.png" id="2_40go0"]
 
 [resource]
 script = ExtResource("1_h72uo")

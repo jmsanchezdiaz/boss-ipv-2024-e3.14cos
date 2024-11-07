@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/Player/inventory/items/bandage-action.gd" id="1_ldjkf"]
 [ext_resource type="Script" path="res://entities/Player/inventory/inventory_item.gd" id="1_oe2ww"]
-[ext_resource type="Texture2D" uid="uid://byhk4wgq53rm4" path="res://assets/bandage.png" id="2_7xfrn"]
+[ext_resource type="Texture2D" uid="uid://byhk4wgq53rm4" path="res://assets/items/bandage.png" id="2_7xfrn"]
 
 [resource]
 script = ExtResource("1_oe2ww")

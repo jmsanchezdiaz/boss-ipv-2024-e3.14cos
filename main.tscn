@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://3u862rxcxh83" path="res://entities/world/Desk.tscn" id="1_kua1b"]
 [ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="2_1h6nk"]
-[ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/enemies/Zombie.tscn" id="3_gv0og"]
+[ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/Zombie/Zombie.tscn" id="3_gv0og"]
 [ext_resource type="PackedScene" uid="uid://b6ynng6353xjr" path="res://entities/Player/inventory/inventory_ui.tscn" id="4_eea6n"]
 [ext_resource type="PackedScene" uid="uid://dp8dyaaojoki6" path="res://entities/Player/inventory/items/crowbar.tscn" id="5_hnx83"]
 [ext_resource type="PackedScene" uid="uid://c2o0kr8xieldc" path="res://entities/Player/inventory/items/bandage.tscn" id="6_ojqr0"]

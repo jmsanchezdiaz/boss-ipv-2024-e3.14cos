@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b6ynng6353xjr"]
 
 [ext_resource type="Script" path="res://entities/Player/inventory/inventory_ui.gd" id="1_75lmr"]
-[ext_resource type="Texture2D" uid="uid://0xpgnobup5o2" path="res://assets/inventory.png" id="2_jtdlh"]
+[ext_resource type="Texture2D" uid="uid://0xpgnobup5o2" path="res://assets/player/inventory.png" id="2_jtdlh"]
 [ext_resource type="PackedScene" uid="uid://dqesdiox1ur6t" path="res://entities/Player/inventory/inventory_ui_slot.tscn" id="3_eh8no"]
 
 [node name="InventoryUI" type="Control"]

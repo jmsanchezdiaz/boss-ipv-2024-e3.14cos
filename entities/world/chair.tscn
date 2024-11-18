@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b522bpucjpi5c"]
+
+[ext_resource type="Texture2D" uid="uid://xaoe1pe1rwng" path="res://assets/office/chair.png" id="1_qd66o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h73lv"]
+radius = 15.0
+height = 32.0
+
+[node name="Chair" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.625, 1.625)
+texture = ExtResource("1_qd66o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_h73lv")

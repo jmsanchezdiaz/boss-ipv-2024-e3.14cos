@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://diefev7dg3hms"]
+
+[ext_resource type="Texture2D" uid="uid://dhrs6kabev4rm" path="res://assets/office/plant1.png" id="1_mcrly"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ot3b"]
+radius = 21.0
+
+[node name="Plant_1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.522556, 0.522556)
+texture = ExtResource("1_mcrly")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1, 4)
+shape = SubResource("CircleShape2D_1ot3b")

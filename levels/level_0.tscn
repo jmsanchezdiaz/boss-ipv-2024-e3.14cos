@@ -1,20 +1,20 @@
 [gd_scene load_steps=22 format=3 uid="uid://co7ybm0ubahbq"]
 
 [ext_resource type="Script" path="res://levels/level_0.gd" id="1_sebl3"]
-[ext_resource type="Texture2D" uid="uid://xaoe1pe1rwng" path="res://assets/office/chair.png" id="2_0wci4"]
 [ext_resource type="Texture2D" uid="uid://le82j60fbkgi" path="res://assets/floor/floor-v7.png" id="2_nmvk6"]
 [ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="3_6sdbt"]
-[ext_resource type="Texture2D" uid="uid://d3hu42g8sjkm7" path="res://assets/office/bin.png" id="4_0h5ao"]
+[ext_resource type="PackedScene" uid="uid://q4bps4wckf57" path="res://entities/world/bin.tscn" id="3_nxipw"]
 [ext_resource type="PackedScene" uid="uid://b6ynng6353xjr" path="res://entities/Player/inventory/inventory_ui.tscn" id="4_40sv7"]
 [ext_resource type="PackedScene" uid="uid://3u862rxcxh83" path="res://entities/world/Desk.tscn" id="4_vtmsm"]
-[ext_resource type="Texture2D" uid="uid://calbcuwf37oj7" path="res://assets/office/dispenser.png" id="5_63b0m"]
 [ext_resource type="Texture2D" uid="uid://dtx2uese6y77r" path="res://assets/brick-v2.png" id="6_f0qly"]
+[ext_resource type="PackedScene" uid="uid://diefev7dg3hms" path="res://entities/world/plant_1.tscn" id="6_fu057"]
 [ext_resource type="PackedScene" uid="uid://dp8dyaaojoki6" path="res://entities/Player/inventory/items/crowbar.tscn" id="7_dtxje"]
-[ext_resource type="Texture2D" uid="uid://dhrs6kabev4rm" path="res://assets/office/plant1.png" id="7_pxpbi"]
+[ext_resource type="PackedScene" uid="uid://goqaftbbtbnv" path="res://entities/world/dispenser.tscn" id="7_l3lbp"]
+[ext_resource type="PackedScene" uid="uid://b522bpucjpi5c" path="res://entities/world/chair.tscn" id="7_wxei5"]
+[ext_resource type="PackedScene" uid="uid://dwgtu8i4iwlkb" path="res://entities/world/plant_2.tscn" id="8_a62fr"]
 [ext_resource type="PackedScene" uid="uid://c2o0kr8xieldc" path="res://entities/Player/inventory/items/bandage.tscn" id="8_jrvjv"]
 [ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/Zombie/Zombie.tscn" id="8_o2v3o"]
-[ext_resource type="Texture2D" uid="uid://bkcd8r1mlyyj3" path="res://assets/office/plant2.png" id="8_r7wes"]
-[ext_resource type="Texture2D" uid="uid://d3emwo7l3p8li" path="res://assets/office/plnt3.png" id="9_sbfkk"]
+[ext_resource type="PackedScene" uid="uid://c5h3m2t0l57qt" path="res://entities/world/plant_3.tscn" id="9_de35t"]
 [ext_resource type="Texture2D" uid="uid://8ulx2k2lajms" path="res://assets/bloostain-v1.png" id="10_mv8n1"]
 [ext_resource type="PackedScene" uid="uid://dpmtbbduioxrq" path="res://hud.tscn" id="12_jydqv"]
 
@@ -65,6 +65,8 @@ offset_right = 800.0
 offset_bottom = 648.0
 texture = ExtResource("2_nmvk6")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Floor2" type="TextureRect" parent="Floor6"]
 offset_left = 800.0
@@ -72,6 +74,8 @@ offset_right = 1120.0
 offset_bottom = 648.0
 texture = ExtResource("2_nmvk6")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Floor3" type="TextureRect" parent="Floor6"]
 offset_left = 800.0
@@ -79,6 +83,8 @@ offset_top = -648.0
 offset_right = 1120.0
 texture = ExtResource("2_nmvk6")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Floor5" type="TextureRect" parent="Floor6"]
 offset_left = 800.0
@@ -88,6 +94,8 @@ offset_bottom = -1296.0
 texture = ExtResource("2_nmvk6")
 expand_mode = 1
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Floor4" type="TextureRect" parent="Floor6"]
 offset_left = 800.0
@@ -96,177 +104,159 @@ offset_right = 1120.0
 offset_bottom = -648.0
 texture = ExtResource("2_nmvk6")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Office" type="Node" parent="."]
 
-[node name="Chair" type="TextureRect" parent="Office"]
-offset_left = 167.0
-offset_top = 145.0
-offset_right = 273.0
-offset_bottom = 251.0
-texture = ExtResource("2_0wci4")
+[node name="Bin" parent="Office" instance=ExtResource("3_nxipw")]
+position = Vector2(130, 159)
+metadata/_edit_lock_ = true
 
-[node name="Chair2" type="TextureRect" parent="Office"]
-offset_left = 424.0
-offset_top = 141.0
-offset_right = 530.0
-offset_bottom = 247.0
-texture = ExtResource("2_0wci4")
+[node name="Bin2" parent="Office" instance=ExtResource("3_nxipw")]
+position = Vector2(371, 495)
+metadata/_edit_lock_ = true
 
-[node name="Chair3" type="TextureRect" parent="Office"]
-offset_left = 603.0
-offset_top = 504.0
-offset_right = 709.0
-offset_bottom = 610.0
+[node name="Chair" parent="Office" instance=ExtResource("7_wxei5")]
+position = Vector2(205, 232)
+rotation = 0.785397
+metadata/_edit_lock_ = true
+
+[node name="Chair2" parent="Office" instance=ExtResource("7_wxei5")]
+position = Vector2(471, 211)
+rotation = -0.261799
+metadata/_edit_lock_ = true
+
+[node name="Chair3" parent="Office" instance=ExtResource("7_wxei5")]
+position = Vector2(548, 441)
 rotation = -3.14159
-texture = ExtResource("2_0wci4")
+metadata/_edit_lock_ = true
 
-[node name="Chair4" type="TextureRect" parent="Office"]
-offset_left = 338.0
-offset_top = 502.0
-offset_right = 444.0
-offset_bottom = 608.0
-rotation = -3.14159
-texture = ExtResource("2_0wci4")
-
-[node name="Bin" type="TextureRect" parent="Office"]
-offset_left = 107.0
-offset_top = 105.0
-offset_right = 154.0
-offset_bottom = 151.0
-texture = ExtResource("4_0h5ao")
-expand_mode = 1
-
-[node name="Bin2" type="TextureRect" parent="Office"]
-offset_left = 361.0
-offset_top = 495.0
-offset_right = 408.0
-offset_bottom = 541.0
-texture = ExtResource("4_0h5ao")
-expand_mode = 1
-
-[node name="Dispenser" type="TextureRect" parent="Office"]
-offset_left = -17.0
-offset_top = 489.0
-offset_right = 101.0
-offset_bottom = 604.0
-rotation = -1.57079
-texture = ExtResource("5_63b0m")
-expand_mode = 1
+[node name="Chair4" parent="Office" instance=ExtResource("7_wxei5")]
+position = Vector2(264, 449)
+rotation = 2.8798
+metadata/_edit_lock_ = true
 
 [node name="Desktop1" parent="Office" instance=ExtResource("4_vtmsm")]
-position = Vector2(253, 113)
+position = Vector2(253, 134)
+metadata/_edit_lock_ = true
 
 [node name="Desktop2" parent="Office" instance=ExtResource("4_vtmsm")]
-position = Vector2(508, 114)
+position = Vector2(508, 135)
+metadata/_edit_lock_ = true
 
 [node name="Desktop3" parent="Office" instance=ExtResource("4_vtmsm")]
-position = Vector2(519, 529)
+position = Vector2(520, 516)
 rotation = 3.14159
+metadata/_edit_lock_ = true
 
 [node name="Desktop4" parent="Office" instance=ExtResource("4_vtmsm")]
-position = Vector2(247, 528)
+position = Vector2(248, 515)
 rotation = 3.14159
-
-[node name="Plant" type="TextureRect" parent="Office"]
-offset_left = 605.0
-offset_top = 160.0
-offset_right = 671.0
-offset_bottom = 227.0
-rotation = -1.57079
-texture = ExtResource("7_pxpbi")
-expand_mode = 1
-
-[node name="Plant2" type="TextureRect" parent="Office"]
-offset_left = 19.0
-offset_top = 406.0
-offset_right = 81.0
-offset_bottom = 467.0
-rotation = -1.57079
-texture = ExtResource("8_r7wes")
-expand_mode = 1
-
-[node name="Plant3" type="TextureRect" parent="Office"]
-offset_left = 266.0
-offset_top = 138.0
-offset_right = 369.0
-offset_bottom = 230.0
-rotation = -1.57079
-texture = ExtResource("9_sbfkk")
-expand_mode = 1
-
-[node name="Plant4" type="TextureRect" parent="Office"]
-offset_left = 718.0
-offset_top = 494.0
-offset_right = 821.0
-offset_bottom = 586.0
-rotation = -1.57079
-texture = ExtResource("9_sbfkk")
-expand_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Office"]
 position = Vector2(400, 324)
 scale = Vector2(12.5, 10.125)
 texture = SubResource("GradientTexture2D_uv2qe")
+metadata/_edit_lock_ = true
+
+[node name="Plant_1" parent="Office" instance=ExtResource("6_fu057")]
+position = Vector2(381, 132)
+metadata/_edit_lock_ = true
+
+[node name="Dispenser2" parent="Office" instance=ExtResource("7_l3lbp")]
+position = Vector2(38, 419)
+rotation = -1.57079
+metadata/_edit_lock_ = true
+
+[node name="Plant_2" parent="Office" instance=ExtResource("8_a62fr")]
+position = Vector2(41, 475)
+metadata/_edit_lock_ = true
+
+[node name="Plant_4" parent="Office" instance=ExtResource("8_a62fr")]
+position = Vector2(451, 538)
+metadata/_edit_lock_ = true
+
+[node name="Plant_3" parent="Office" instance=ExtResource("9_de35t")]
+position = Vector2(761, 454)
+rotation = -0.261799
+metadata/_edit_lock_ = true
+
+[node name="Dispenser3" parent="." instance=ExtResource("7_l3lbp")]
+position = Vector2(839, -526)
+rotation = -1.57079
+metadata/_edit_lock_ = true
 
 [node name="Bloostain-v1" type="Sprite2D" parent="."]
 position = Vector2(707, 342)
 scale = Vector2(1.66, 1.54)
 texture = ExtResource("10_mv8n1")
+metadata/_edit_lock_ = true
 
 [node name="Bloostain-v2" type="Sprite2D" parent="."]
 position = Vector2(957, 173)
 scale = Vector2(3.74, 3.46)
 texture = ExtResource("10_mv8n1")
+metadata/_edit_lock_ = true
 
 [node name="Bloostain-v3" type="Sprite2D" parent="."]
 position = Vector2(837, 312)
 rotation = 1.309
 texture = ExtResource("10_mv8n1")
+metadata/_edit_lock_ = true
 
 [node name="Bloostain-v4" type="Sprite2D" parent="."]
 position = Vector2(1015, -182)
 rotation = 2.0944
 scale = Vector2(2.76, 2.98)
 texture = ExtResource("10_mv8n1")
+metadata/_edit_lock_ = true
 
 [node name="Bloostain-v5" type="Sprite2D" parent="."]
 position = Vector2(950, -1314)
 rotation = 0.785398
 scale = Vector2(3.18851, 3.76225)
 texture = ExtResource("10_mv8n1")
+metadata/_edit_lock_ = true
 
 [node name="Bloostain-v7" type="Sprite2D" parent="."]
 position = Vector2(984, -1727)
 rotation = -0.523599
 scale = Vector2(3.18851, 3.02432)
 texture = ExtResource("10_mv8n1")
+metadata/_edit_lock_ = true
 
 [node name="Bloostain-v6" type="Sprite2D" parent="."]
 position = Vector2(988, -574)
 rotation = -0.837645
 scale = Vector2(2.83412, 2.59051)
 texture = ExtResource("10_mv8n1")
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(960.5, 324)
 scale = Vector2(5.01563, 10.125)
 texture = SubResource("GradientTexture2D_uv2qe")
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D3" type="PointLight2D" parent="."]
 position = Vector2(961, -323.5)
 scale = Vector2(5.03125, 10.1094)
 texture = SubResource("GradientTexture2D_uv2qe")
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D4" type="PointLight2D" parent="."]
-position = Vector2(960, -991)
-scale = Vector2(5, 10.75)
+position = Vector2(960, -980)
+scale = Vector2(5, 10.4063)
 texture = SubResource("GradientTexture2D_uv2qe")
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D5" type="PointLight2D" parent="."]
-position = Vector2(960, -1609)
-scale = Vector2(4.9375, 9.5625)
+position = Vector2(960, -1614)
+scale = Vector2(5, 9.40625)
 texture = SubResource("GradientTexture2D_uv2qe")
+metadata/_edit_lock_ = true
 
 [node name="Crowbar" parent="." instance=ExtResource("7_dtxje")]
 position = Vector2(963, 338)
@@ -276,11 +266,13 @@ position = Vector2(957, -988)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.125911, 0.125911, 0.125911, 1)
+metadata/_edit_lock_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2qh5w")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1, 0, 26, 1, 0, 27, 1, 0, 28, 1, 0, 29, 1, 0, 30, 1, 0, 31, 1, 0, 32, 1, 0, 33, 1, 0, 34, 1, 0, 35, 1, 0, 36, 1, 0, 37, 1, 0, 38, 1, 0, 39, 1, 0, 40, 1, 0, 41, 1, 0, 42, 1, 0, 43, 1, 0, 44, 1, 0, 45, 1, 0, 46, 1, 0, 47, 1, 0, 48, 1, 0, 49, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1114112, 1, 0, 1179648, 1, 0, 1245184, 1, 0, 1310720, 1, 0, 1376256, 1, 0, 1441792, 1, 0, 1507328, 1, 0, 1572864, 1, 0, 1638400, 1, 0, 1703936, 1, 0, 1769472, 1, 0, 1835008, 1, 0, 1900544, 1, 0, 1966080, 1, 0, 2031616, 1, 0, 2097152, 1, 0, 2162688, 1, 0, 2228224, 1, 0, 2293760, 1, 0, 2359296, 1, 0, 2424832, 1, 0, 2490368, 1, 0, 2555904, 1, 0, 2621440, 1, 0, 2621441, 1, 0, 2621442, 1, 0, 2621443, 1, 0, 2621444, 1, 0, 2621445, 1, 0, 2621446, 1, 0, 2621447, 1, 0, 2621448, 1, 0, 2621449, 1, 0, 2621450, 1, 0, 2621451, 1, 0, 2621452, 1, 0, 2621453, 1, 0, 2621454, 1, 0, 2621455, 1, 0, 2621456, 1, 0, 2621457, 1, 0, 2621458, 1, 0, 2621459, 1, 0, 2621460, 1, 0, 2621461, 1, 0, 2621462, 1, 0, 2621463, 1, 0, 2621464, 1, 0, 2621465, 1, 0, 2621466, 1, 0, 2621467, 1, 0, 2621468, 1, 0, 2621469, 1, 0, 2621470, 1, 0, 2621471, 1, 0, 2621472, 1, 0, 2621473, 1, 0, 2621474, 1, 0, 2621475, 1, 0, 2621476, 1, 0, 2621477, 1, 0, 2621478, 1, 0, 2621479, 1, 0, 2621480, 1, 0, 2621481, 1, 0, 2621482, 1, 0, 2621483, 1, 0, 2621484, 1, 0, 2621485, 1, 0, 2621486, 1, 0, 2621487, 1, 0, 2621488, 1, 0, 2621489, 1, 0, 2621490, 1, 0, 2555954, 1, 0, 2490418, 1, 0, 2424882, 1, 0, 2359346, 1, 0, 2293810, 1, 0, 2228274, 1, 0, 2162738, 1, 0, 2097202, 1, 0, 2031666, 1, 0, 1966130, 1, 0, 1900594, 1, 0, 1835058, 1, 0, 1769522, 1, 0, 1703986, 1, 0, 1638450, 1, 0, 983090, 1, 0, 917554, 1, 0, 852018, 1, 0, 786482, 1, 0, 720946, 1, 0, 655410, 1, 0, 589874, 1, 0, 524338, 1, 0, 458802, 1, 0, 393266, 1, 0, 327730, 1, 0, 262194, 1, 0, 196658, 1, 0, 131122, 1, 0, 65586, 1, 0, 50, 1, 0, 2621491, 1, 0, 2621492, 1, 0, 2621493, 1, 0, 2621494, 1, 0, 2621495, 1, 0, 2621496, 1, 0, 2621497, 1, 0, 2621498, 1, 0, 2621499, 1, 0, 2621500, 1, 0, 2621501, 1, 0, 2621502, 1, 0, 2621503, 1, 0, 2621504, 1, 0, 2621505, 1, 0, 2621506, 1, 0, 2621507, 1, 0, 2621508, 1, 0, 2621509, 1, 0, 2555973, 1, 0, 2490437, 1, 0, 2424901, 1, 0, 2359365, 1, 0, 2293829, 1, 0, 2228293, 1, 0, 2162757, 1, 0, 2097221, 1, 0, 2031685, 1, 0, 1966149, 1, 0, 1900613, 1, 0, 1835077, 1, 0, 1769541, 1, 0, 1704005, 1, 0, 1638469, 1, 0, 1572933, 1, 0, 1507397, 1, 0, 1441861, 1, 0, 1376325, 1, 0, 1310789, 1, 0, 1245253, 1, 0, 1179717, 1, 0, 1114181, 1, 0, 1048645, 1, 0, 983109, 1, 0, 917573, 1, 0, 852037, 1, 0, 786501, 1, 0, 720965, 1, 0, 655429, 1, 0, 589893, 1, 0, 524357, 1, 0, 458821, 1, 0, 393285, 1, 0, 327749, 1, 0, 262213, 1, 0, 196677, 1, 0, 131141, 1, 0, 65605, 1, 0, 69, 1, 0, -65486, 1, 0, -131022, 1, 0, -196558, 1, 0, -262094, 1, 0, -327630, 1, 0, -393166, 1, 0, -458702, 1, 0, -524238, 1, 0, -589774, 1, 0, -655310, 1, 0, -720846, 1, 0, -786382, 1, 0, -851918, 1, 0, -917454, 1, 0, -982990, 1, 0, -1048526, 1, 0, -1114062, 1, 0, -1179598, 1, 0, -1245134, 1, 0, -1310670, 1, 0, -1376206, 1, 0, -1441742, 1, 0, -1507278, 1, 0, -1572814, 1, 0, -1638350, 1, 0, -1703886, 1, 0, -1769422, 1, 0, -1834958, 1, 0, -1900494, 1, 0, -1966030, 1, 0, -2031566, 1, 0, -2097102, 1, 0, -2162638, 1, 0, -2228174, 1, 0, -2293710, 1, 0, -2359246, 1, 0, -2424782, 1, 0, -2490318, 1, 0, -2555854, 1, 0, -2621390, 1, 0, -2686926, 1, 0, -2686925, 1, 0, -2686924, 1, 0, -2686923, 1, 0, -2686922, 1, 0, -2686910, 1, 0, -2686909, 1, 0, -2686908, 1, 0, -2686907, 1, 0, -65467, 1, 0, -131003, 1, 0, -196539, 1, 0, -262075, 1, 0, -327611, 1, 0, -393147, 1, 0, -458683, 1, 0, -524219, 1, 0, -589755, 1, 0, -655291, 1, 0, -720827, 1, 0, -786363, 1, 0, -851899, 1, 0, -917435, 1, 0, -982971, 1, 0, -1048507, 1, 0, -1114043, 1, 0, -1179579, 1, 0, -1245115, 1, 0, -1310651, 1, 0, -1376187, 1, 0, -1441723, 1, 0, -1507259, 1, 0, -1572795, 1, 0, -1638331, 1, 0, -1703867, 1, 0, -1769403, 1, 0, -1834939, 1, 0, -1900475, 1, 0, -1966011, 1, 0, -2031547, 1, 0, -2097083, 1, 0, -2162619, 1, 0, -2228155, 1, 0, -2293691, 1, 0, -2359227, 1, 0, -2424763, 1, 0, -2490299, 1, 0, -2555835, 1, 0, -2621371, 1, 0, -2686911, 1, 0, -2752462, 1, 0, -2817998, 1, 0, -2883534, 1, 0, -2949070, 1, 0, -3014606, 1, 0, -3080142, 1, 0, -3145678, 1, 0, -3211214, 1, 0, -3276750, 1, 0, -3342286, 1, 0, -3407822, 1, 0, -3473358, 1, 0, -3538894, 1, 0, -3604430, 1, 0, -3669966, 1, 0, -3735502, 1, 0, -3801038, 1, 0, -3866574, 1, 0, -3932110, 1, 0, -3997646, 1, 0, -4063182, 1, 0, -4128718, 1, 0, -4194254, 1, 0, -4259790, 1, 0, -4325326, 1, 0, -4390862, 1, 0, -4456398, 1, 0, -4521934, 1, 0, -4587470, 1, 0, -4653006, 1, 0, -4718542, 1, 0, -4784078, 1, 0, -4849614, 1, 0, -4915150, 1, 0, -4980686, 1, 0, -5046222, 1, 0, -5111758, 1, 0, -5177294, 1, 0, -5242830, 1, 0, -5308366, 1, 0, -5373902, 1, 0, -5439438, 1, 0, -5504974, 1, 0, -5570510, 1, 0, -5636046, 1, 0, -5701582, 1, 0, -5767118, 1, 0, -5832654, 1, 0, -5898190, 1, 0, -5963726, 1, 0, -6029262, 1, 0, -6094798, 1, 0, -6160334, 1, 0, -6225870, 1, 0, -6291406, 1, 0, -6356942, 1, 0, -6422478, 1, 0, -6488014, 1, 0, -6553550, 1, 0, -6619086, 1, 0, -6684622, 1, 0, -6750158, 1, 0, -6815694, 1, 0, -6881230, 1, 0, -6946766, 1, 0, -7012302, 1, 0, -7077838, 1, 0, -7143374, 1, 0, -7208910, 1, 0, -7274446, 1, 0, -7339982, 1, 0, -7405518, 1, 0, -7471054, 1, 0, -7536590, 1, 0, -7602126, 1, 0, -7667662, 1, 0, -7733198, 1, 0, -7798734, 1, 0, -7864270, 1, 0, -7929806, 1, 0, -7995342, 1, 0, -7995341, 1, 0, -7995340, 1, 0, -7995339, 1, 0, -7995338, 1, 0, -7995337, 1, 0, -7995336, 1, 0, -7995335, 1, 0, -7995334, 1, 0, -7995333, 1, 0, -7995332, 1, 0, -7995331, 1, 0, -7995330, 1, 0, -7995329, 1, 0, -7995328, 1, 0, -7995327, 1, 0, -7995326, 1, 0, -7995325, 1, 0, -7995324, 1, 0, -7995323, 1, 0, -7929787, 1, 0, -7864251, 1, 0, -7798715, 1, 0, -7733179, 1, 0, -7667643, 1, 0, -7602107, 1, 0, -7536571, 1, 0, -7471035, 1, 0, -7405499, 1, 0, -7339963, 1, 0, -7274427, 1, 0, -7208891, 1, 0, -7143355, 1, 0, -7077819, 1, 0, -7012283, 1, 0, -6946747, 1, 0, -6881211, 1, 0, -6815675, 1, 0, -6750139, 1, 0, -6684603, 1, 0, -6619067, 1, 0, -6553531, 1, 0, -6487995, 1, 0, -6422459, 1, 0, -6356923, 1, 0, -6291387, 1, 0, -6225851, 1, 0, -6160315, 1, 0, -6094779, 1, 0, -6029243, 1, 0, -5963707, 1, 0, -5898171, 1, 0, -5832635, 1, 0, -5767099, 1, 0, -5701563, 1, 0, -5636027, 1, 0, -5570491, 1, 0, -5504955, 1, 0, -5439419, 1, 0, -5373883, 1, 0, -5308347, 1, 0, -5242811, 1, 0, -5177275, 1, 0, -5111739, 1, 0, -5046203, 1, 0, -4980667, 1, 0, -4915131, 1, 0, -4849595, 1, 0, -4784059, 1, 0, -4718523, 1, 0, -4652987, 1, 0, -4587451, 1, 0, -4521915, 1, 0, -4456379, 1, 0, -4390843, 1, 0, -4325307, 1, 0, -4259771, 1, 0, -4194235, 1, 0, -4128699, 1, 0, -4063163, 1, 0, -3997627, 1, 0, -3932091, 1, 0, -3866555, 1, 0, -3801019, 1, 0, -3735483, 1, 0, -3669947, 1, 0, -3604411, 1, 0, -3538875, 1, 0, -3473339, 1, 0, -3407803, 1, 0, -3342267, 1, 0, -3276731, 1, 0, -3211195, 1, 0, -3145659, 1, 0, -3080123, 1, 0, -3014587, 1, 0, -2949051, 1, 0, -2883515, 1, 0, -2817979, 1, 0, -2752443, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node" parent="."]
 
@@ -306,8 +298,8 @@ position = Vector2(1030, -1420)
 position = Vector2(940, -1336)
 
 [node name="Player" parent="." instance=ExtResource("3_6sdbt")]
-position = Vector2(219, 183)
-rotation = -1.5708
+position = Vector2(254, 202)
+rotation = -2.09439
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 

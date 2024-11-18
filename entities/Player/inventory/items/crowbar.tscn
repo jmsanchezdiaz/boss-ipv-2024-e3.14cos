@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp8dyaaojoki6"]
+[gd_scene load_steps=6 format=3 uid="uid://dp8dyaaojoki6"]
 
 [ext_resource type="PackedScene" uid="uid://dsftjcrk265at" path="res://entities/world/collectable_object.tscn" id="1_1gk35"]
 [ext_resource type="Resource" uid="uid://do34evfmejwar" path="res://entities/Player/inventory/items/crowbar.tres" id="2_jw6nh"]
 [ext_resource type="Texture2D" uid="uid://dhrkp7nq5u451" path="res://assets/items/crowbar.png" id="3_3fm2c"]
+[ext_resource type="Shader" path="res://entities/Player/inventory/items/crowbar.gdshader" id="3_ogxky"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqma0"]
+shader = ExtResource("3_ogxky")
+shader_parameter/line_color = Color(0.871547, 0.871546, 1.54018e-06, 1)
+shader_parameter/line_thickness = 1.659
 
 [node name="Crowbar" instance=ExtResource("1_1gk35")]
 item = ExtResource("2_jw6nh")
@@ -11,4 +17,5 @@ item = ExtResource("2_jw6nh")
 visible = false
 
 [node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_fqma0")
 texture = ExtResource("3_3fm2c")

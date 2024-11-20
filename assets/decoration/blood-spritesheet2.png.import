@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl75ewu7n7gp2"
-path="res://.godot/imported/desk-v5.png-207d3d407b92e6468aaba039a23ab049.ctex"
+uid="uid://cmcsh50axvbfm"
+path="res://.godot/imported/blood-spritesheet2.png-8fc272b71414c61e4ca91300a956e755.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/office/desk-v5.png"
-dest_files=["res://.godot/imported/desk-v5.png-207d3d407b92e6468aaba039a23ab049.ctex"]
+source_file="res://assets/decoration/blood-spritesheet2.png"
+dest_files=["res://.godot/imported/blood-spritesheet2.png-8fc272b71414c61e4ca91300a956e755.ctex"]
 
 [params]
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bubfguoanpxgs"]
+
+[ext_resource type="Texture2D" uid="uid://c308i1hybrftx" path="res://assets/decoration/magazine.png" id="1_bgr8j"]
+
+[node name="Magazine" type="Sprite2D"]
+scale = Vector2(1.72093, 1.72093)
+texture = ExtResource("1_bgr8j")

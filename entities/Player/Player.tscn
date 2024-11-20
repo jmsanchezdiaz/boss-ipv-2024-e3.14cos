@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_4in8l"]
 [ext_resource type="Resource" uid="uid://wpifrwoc3fi1" path="res://entities/Player/inventory/inventory.tres" id="2_1lk3c"]
-[ext_resource type="Texture2D" uid="uid://cmcsh50axvbfm" path="res://assets/blood-spritesheet2.png" id="3_ld6fc"]
+[ext_resource type="Texture2D" uid="uid://cmcsh50axvbfm" path="res://assets/decoration/blood-spritesheet2.png" id="3_ld6fc"]
 [ext_resource type="Texture2D" uid="uid://dihpolxqe115j" path="res://assets/player/player-spritesheet-v4.png" id="3_mkkae"]
 [ext_resource type="AudioStream" uid="uid://smsrheqjx01d" path="res://sounds/player/player-heartbeat-calm.ogg" id="5_t2ecw"]
 

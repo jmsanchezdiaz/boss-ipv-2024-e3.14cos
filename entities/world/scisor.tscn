@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d22gjmfmytb4s"]
+
+[ext_resource type="Texture2D" uid="uid://p78pe4sgi8g6" path="res://assets/decoration/scisor.png" id="1_ad57s"]
+
+[node name="Scisor" type="Sprite2D"]
+position = Vector2(67, 30)
+scale = Vector2(1.92, 1.92)
+texture = ExtResource("1_ad57s")

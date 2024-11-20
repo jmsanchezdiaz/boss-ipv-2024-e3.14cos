@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://taujv4th8i57"]
+
+[ext_resource type="Texture2D" uid="uid://dgylsknsknmlw" path="res://assets/decoration/coffee.png" id="1_pcddk"]
+
+[node name="Coffee" type="Sprite2D"]
+position = Vector2(28, 2)
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("1_pcddk")

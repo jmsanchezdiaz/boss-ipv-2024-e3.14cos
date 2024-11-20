@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciq57i6p67b6g"]
+
+[ext_resource type="Texture2D" uid="uid://dts5ot58th0w8" path="res://assets/decoration/armchair.png" id="1_x6u5c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4d1n"]
+size = Vector2(56, 36)
+
+[node name="armchair" type="StaticBody2D"]
+
+[node name="Armchair" type="Sprite2D" parent="."]
+position = Vector2(32, 2)
+scale = Vector2(1.36, 1.36)
+texture = ExtResource("1_x6u5c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_x4d1n")

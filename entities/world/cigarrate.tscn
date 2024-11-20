@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://t6wmpkdnbksr"]
+
+[ext_resource type="Texture2D" uid="uid://brvyk488i8oeo" path="res://assets/decoration/cigarrate.png" id="1_6vput"]
+
+[node name="Cigarrate" type="Sprite2D"]
+position = Vector2(-24, 14)
+scale = Vector2(4.69767, 4.69767)
+texture = ExtResource("1_6vput")

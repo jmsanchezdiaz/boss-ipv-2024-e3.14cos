@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://n7gkprqwwy2g"]
+
+[ext_resource type="Texture2D" uid="uid://wm8wom5i613r" path="res://assets/decoration/table.png" id="1_ml5hc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2j5pa"]
+radius = 39.0
+
+[node name="table" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.37209, 2.37209)
+texture = ExtResource("1_ml5hc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_2j5pa")

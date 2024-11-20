@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbaf0gek0xxc"]
+
+[ext_resource type="Texture2D" uid="uid://b2cno844ggwhx" path="res://assets/decoration/sofa.png" id="1_hakbl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jan22"]
+size = Vector2(209, 68)
+
+[node name="Sofa" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("1_hakbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1.5, -4)
+shape = SubResource("RectangleShape2D_jan22")

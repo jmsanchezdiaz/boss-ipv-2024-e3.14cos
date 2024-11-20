@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8ulx2k2lajms"
-path="res://.godot/imported/bloostain-v1.png-4e008626a26caace80bc7c3462bfeaba.ctex"
+uid="uid://bkcd8r1mlyyj3"
+path="res://.godot/imported/plant2.png-e92b07d7d24850d199aba64265065693.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bloostain-v1.png"
-dest_files=["res://.godot/imported/bloostain-v1.png-4e008626a26caace80bc7c3462bfeaba.ctex"]
+source_file="res://assets/decoration/plant2.png"
+dest_files=["res://.godot/imported/plant2.png-e92b07d7d24850d199aba64265065693.ctex"]
 
 [params]
 

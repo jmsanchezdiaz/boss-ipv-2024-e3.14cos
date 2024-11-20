@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://qit2i2p81lwv"]
+
+[ext_resource type="Texture2D" uid="uid://soiciywf3to" path="res://assets/decoration/donut.png" id="1_l2n4q"]
+
+[node name="Donut" type="Sprite2D"]
+position = Vector2(54, 19)
+scale = Vector2(1.52, 1.52)
+texture = ExtResource("1_l2n4q")

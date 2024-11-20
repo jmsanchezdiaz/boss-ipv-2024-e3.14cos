@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b522bpucjpi5c"]
 
-[ext_resource type="Texture2D" uid="uid://xaoe1pe1rwng" path="res://assets/office/chair.png" id="1_qd66o"]
+[ext_resource type="Texture2D" uid="uid://xaoe1pe1rwng" path="res://assets/decoration/chair.png" id="1_qd66o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h73lv"]
 radius = 15.0

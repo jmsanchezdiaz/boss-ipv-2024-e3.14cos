@@ -6,6 +6,7 @@
 size = Vector2(42, 43)
 
 [node name="Dispenser" type="StaticBody2D"]
+collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.1, 1.1)

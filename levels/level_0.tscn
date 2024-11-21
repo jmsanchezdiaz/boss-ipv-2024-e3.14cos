@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" path="res://entities/world/coffee.tscn" id="13_rkwb8"]
 [ext_resource type="PackedScene" uid="uid://dt0p2miqc41kk" path="res://entities/world/sofa.tscn" id="14_8m676"]
 [ext_resource type="PackedScene" uid="uid://csr0sm5uliltb" path="res://entities/world/table.tscn" id="14_inmqt"]
-[ext_resource type="PackedScene" path="res://entities/world/locker.tscn" id="15_06e6n"]
+[ext_resource type="PackedScene" uid="uid://bw6pdqjur6oao" path="res://entities/world/locker.tscn" id="15_06e6n"]
 [ext_resource type="PackedScene" path="res://entities/world/cigarrate.tscn" id="15_wfji5"]
 [ext_resource type="PackedScene" uid="uid://cj6rhx8d4y7sq" path="res://entities/world/board.tscn" id="16_063hm"]
 [ext_resource type="PackedScene" uid="uid://33qy6cyruin7" path="res://entities/world/armchair.tscn" id="16_737fr"]
@@ -203,6 +203,10 @@ position = Vector2(1063, 335)
 rotation = 1.57079
 metadata/_edit_lock_ = true
 
+[node name="Sofa2" parent="Office" instance=ExtResource("14_8m676")]
+position = Vector2(854, -126)
+rotation = -1.57079
+
 [node name="Locker" parent="Office" instance=ExtResource("15_06e6n")]
 position = Vector2(962, 602)
 rotation = -3.14159
@@ -216,10 +220,6 @@ metadata/_edit_lock_ = true
 [node name="Crowbar" parent="." instance=ExtResource("7_dtxje")]
 material = null
 position = Vector2(963, 338)
-
-[node name="Bandage" parent="." instance=ExtResource("8_jrvjv")]
-material = null
-position = Vector2(957, -988)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.125911, 0.125911, 0.125911, 1)
@@ -309,6 +309,16 @@ metadata/_edit_lock_ = true
 position = Vector2(1058, -489)
 metadata/_edit_lock_ = true
 
+[node name="table3" parent="Hall" instance=ExtResource("14_inmqt")]
+position = Vector2(1066, -1897)
+
+[node name="table2" parent="Hall" instance=ExtResource("14_inmqt")]
+position = Vector2(1059, -980)
+
+[node name="Bandage" parent="Hall" instance=ExtResource("8_jrvjv")]
+material = null
+position = Vector2(1057, -977)
+
 [node name="Cigarrate" parent="Hall" instance=ExtResource("15_wfji5")]
 position = Vector2(1033, -504)
 rotation = 0.523598
@@ -333,6 +343,14 @@ rotation = -0.261799
 scale = Vector2(1.90525, 1.90525)
 metadata/_edit_lock_ = true
 
+[node name="Locker" parent="Hall" instance=ExtResource("15_06e6n")]
+position = Vector2(852, -910)
+rotation = -1.57079
+
+[node name="Sofa" parent="Hall" instance=ExtResource("14_8m676")]
+position = Vector2(924, -1893)
+rotation = 0.003653
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Zombie" parent="Enemies" instance=ExtResource("8_o2v3o")]
@@ -352,22 +370,13 @@ position = Vector2(940, -1336)
 metadata/_edit_lock_ = true
 
 [node name="FastZombie" parent="Enemies" instance=ExtResource("25_l7pgk")]
-position = Vector2(901, -771)
-rotation = 1.41142
-collision_layer = 1
-collision_mask = 1
+position = Vector2(551, 339)
 
 [node name="FastZombie2" parent="Enemies" instance=ExtResource("25_l7pgk")]
-position = Vector2(957, -635)
-rotation = 1.41142
-collision_layer = 1
-collision_mask = 1
+position = Vector2(955, 483)
 
 [node name="FastZombie3" parent="Enemies" instance=ExtResource("25_l7pgk")]
-position = Vector2(976, -882)
-rotation = 0.426704
-collision_layer = 1
-collision_mask = 1
+position = Vector2(941, 95)
 
 [node name="Player" parent="." instance=ExtResource("3_6sdbt")]
 position = Vector2(262, 212)

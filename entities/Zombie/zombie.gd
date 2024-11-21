@@ -128,7 +128,6 @@ func look_for_player() -> void:
 			
 	var saw_by_left_eye: bool = left_eye.is_colliding() && left_eye.get_collider() == target
 	var saw_by_right_eye: bool = right_eye.is_colliding() && right_eye.get_collider() == target
-	print(left_eye.get_collider(), right_eye.get_collider())
 	if saw_by_left_eye || saw_by_right_eye:
 		last_position_known = target.global_position
 

@@ -58,6 +58,8 @@ func _ready():
 	inventory.set_player(self)
 
 func pause():
+	moving_audio.stop()
+	attack_audio.stop()
 	set_physics_process(false)
 	paused=true;
 	

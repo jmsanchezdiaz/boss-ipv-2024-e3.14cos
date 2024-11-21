@@ -4,13 +4,7 @@
 
 [node name="FastZombie" instance=ExtResource("1_2o1ao")]
 modulate = Color(0.521174, 0.855904, 0.724423, 1)
-SPEED = 80.0
-
-[node name="CollisionShape2D" parent="." index="2"]
-visible = false
-
-[node name="DetectionArea" parent="." index="5"]
-visible = false
+SPEED = 150.0
 
 [node name="AttackArea" parent="." index="6"]
 visible = false

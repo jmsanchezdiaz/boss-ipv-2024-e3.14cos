@@ -185,8 +185,8 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 scale = Vector2(0.06, 0.06)
-collision_layer = 2
-collision_mask = 5
+collision_layer = 3
+collision_mask = 7
 script = ExtResource("1_4in8l")
 MAX_SPEED = 150
 inventory = ExtResource("2_1lk3c")
@@ -198,6 +198,8 @@ shape = SubResource("CapsuleShape2D_w6qcd")
 
 [node name="AttackArea" type="Area2D" parent="."]
 visible = false
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_0rk6p")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsftjcrk265at"]
+
+[ext_resource type="Shader" path="res://entities/Player/inventory/items/item.gdshader" id="1_22i7h"]
+[ext_resource type="Script" path="res://entities/Player/inventory/items/collectable_object.gd" id="1_jlpkj"]
+[ext_resource type="Shader" path="res://entities/Player/inventory/items/collectable_object.gdshader" id="2_x087o"]
+[ext_resource type="AudioStream" uid="uid://cvs61tboumtu2" path="res://sounds/grab_item.ogg" id="3_fjhaj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3nln"]
+shader = ExtResource("1_22i7h")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4o8m"]
+radius = 45.0444
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5c4xk"]
+shader = ExtResource("2_x087o")
+shader_parameter/line_color = Color(0.971263, 0.970336, 7.70092e-07, 1)
+shader_parameter/line_thickness = 2.0
+
+[node name="CollectableObject" type="Area2D"]
+material = SubResource("ShaderMaterial_l3nln")
+collision_mask = 2
+script = ExtResource("1_jlpkj")
+
+[node name="InteractableArea" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q4o8m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5c4xk")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fjhaj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

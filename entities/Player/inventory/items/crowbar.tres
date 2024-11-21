@@ -9,3 +9,4 @@ script = ExtResource("1_h72uo")
 name = "crowbar"
 texture = ExtResource("2_40go0")
 action = ExtResource("1_7lb81")
+one_time = false

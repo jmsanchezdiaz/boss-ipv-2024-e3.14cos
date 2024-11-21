@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dpmtbbduioxrq"]
 
-[ext_resource type="Script" path="res://hud.gd" id="1_s7av8"]
+[ext_resource type="Script" path="res://gamer_over_view.gd" id="1_s7av8"]
 [ext_resource type="FontFile" uid="uid://gxmbr3xcsrre" path="res://assets/Deadfall-Regular.ttf" id="2_akpgk"]
 
-[node name="Hud" type="CanvasLayer"]
+[node name="GameOverView" type="CanvasLayer"]
 script = ExtResource("1_s7av8")
 
 [node name="ResetButton" type="Button" parent="."]

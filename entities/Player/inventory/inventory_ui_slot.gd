@@ -3,6 +3,7 @@ extends Panel
 @onready var item_display: Sprite2D = $CenterContainer/Panel/item
 @onready var amount_text: Label = $CenterContainer/Panel/Label
 @onready var actions_menu: MenuButton = $CenterContainer/Panel/MenuButton
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var slot: InventorySlot
 
@@ -25,6 +26,7 @@ func _ready():
 
 func _on_item_selected(id: int):
 	if !slot.item: return;
+	audio.play()
 	match id:
 		OPTIONS.USE:
 			use.emit(slot.item)
@@ -52,3 +54,7 @@ func update(inv_slot: InventorySlot):
 		actions_menu.visible = false;
 		item_display.visible = false;
 		amount_text.visible = false;
+
+
+func _on_audio_stream_player_2d_finished():
+	pass # Replace with function body.

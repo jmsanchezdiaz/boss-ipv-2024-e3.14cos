@@ -179,7 +179,8 @@ libraries = {
 "": SubResource("AnimationLibrary_mnr3j")
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+max_distance = 1000.0
 bus = &"Zombie"
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

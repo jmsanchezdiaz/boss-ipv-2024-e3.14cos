@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/foley.ogg-0c3eb9e0d56fbcbcba124e6a5c65c52b.og
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

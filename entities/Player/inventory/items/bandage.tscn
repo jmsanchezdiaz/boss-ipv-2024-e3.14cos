@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2o0kr8xieldc"]
+[gd_scene load_steps=4 format=3 uid="uid://c2o0kr8xieldc"]
 
-[ext_resource type="PackedScene" uid="uid://dsftjcrk265at" path="res://entities/world/collectable_object.tscn" id="1_dilnn"]
+[ext_resource type="PackedScene" uid="uid://dsftjcrk265at" path="res://entities/Player/inventory/items/collectable_object.tscn" id="1_dilnn"]
 [ext_resource type="Resource" uid="uid://b33xsxo17nhdr" path="res://entities/Player/inventory/items/bandage.tres" id="2_cxnkt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ylydu"]
+load_path = "res://.godot/imported/bandage.png-de0c9dd9e6312a067d34a6770a3e3efa.ctex"
 
 [node name="Bandage" instance=ExtResource("1_dilnn")]
 item = ExtResource("2_cxnkt")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = SubResource("CompressedTexture2D_ylydu")

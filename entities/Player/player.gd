@@ -15,8 +15,10 @@ signal hit
 
 @onready var bloodAnimation = $BloodAnimation
 @onready var bodyAnimation = $BodyAnimation
-@onready var audio = $AudioStreamPlayer
+@onready var moving_audio = $MovingSound
 @onready var heart_audio = $Heartbeat
+@onready var attack_audio = $Attacking
+@onready var camera = $Camera2D
 
 var idle_sound = preload("res://sounds/player/player-idle.ogg")
 var tired_idle_sound = preload("res://sounds/player/player-tired-idle.ogg")
@@ -81,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	match current_state:
 		STATE.IDLE:
 			bodyAnimation.play("RESET")
-			_play_stream(idle_sound)
+			_play_stream(idle_sound, moving_audio)
 			regenerate_stamina(1, delta)
 			if input_vector != Vector2.ZERO:
 				if Input.is_action_pressed("run") and current_stamina > 10:
@@ -90,22 +92,22 @@ func _physics_process(delta: float) -> void:
 			
 		STATE.WALKING:
 			bodyAnimation.play("Walk")
-			_play_stream(walking_sound)
+			_play_stream(walking_sound, moving_audio)
 			regenerate_stamina(0.5, delta)
 			handle_move(delta)
 			if input_vector == Vector2.ZERO:
-				audio.stop()
+				moving_audio.stop()
 				current_state = STATE.IDLE
 			if Input.is_action_pressed("run") and current_stamina > 10:
 				current_state = STATE.RUNNING
 		
 		STATE.RUNNING:
 			bodyAnimation.play("Run")
-			_play_stream(running_sound)
+			_play_stream(running_sound, moving_audio)
 			handle_move(delta)
 			handle_run(delta)
 			if input_vector == Vector2.ZERO:
-				audio.stop()
+				moving_audio.stop()
 				current_state = STATE.IDLE
 				running_multiplier = 1
 			if current_stamina == 0 or (!Input.is_action_pressed("run") and input_vector != Vector2.ZERO):
@@ -123,7 +125,7 @@ func _physics_process(delta: float) -> void:
 			current_state = STATE.WALKING if input_vector != Vector2.ZERO else STATE.IDLE
 
 
-func _play_stream(stream):
+func _play_stream(stream, audio):
 	if stream != audio.stream: audio.stream = stream
 	if !audio.playing: audio.play()
 
@@ -140,16 +142,16 @@ func attack(inputs):
 			var damage = selected_weapon_damage if selected_weapon else FIST_DAMAGE
 			var distance = position.distance_to(current_target.position)
 			if distance <= attack_range:
-				_play_stream(player_attack_sound)
+				_play_stream(player_attack_sound,attack_audio)
 				current_target.take_damage(damage, self)
-		
+				camera.start_shake()
 			current_stamina -= max(current_stamina - ATTACKING_STAMINA_COST, 0)
 		else:
-			_play_stream(player_missed_punch)
+			_play_stream(player_missed_punch, attack_audio)
 		
 		await get_tree().create_timer(1).timeout
 		
-		audio.stop()
+		attack_audio.stop()
 		current_state = STATE.WALKING if inputs != Vector2.ZERO else STATE.IDLE
 		attacking=false
 

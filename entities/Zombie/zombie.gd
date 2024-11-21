@@ -156,7 +156,6 @@ func take_damage(amount: float, attacker: Node2D) -> void:
 	HEALTH_POINTS -= amount
 	animation.play("ReceiveDamage")
 	if HEALTH_POINTS <= 0:
-		await get_tree().create_timer(0.8).timeout
 		queue_free()
 	if target == null:
 		target = attacker

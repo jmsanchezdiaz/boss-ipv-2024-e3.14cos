@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://b7eeowm2qtap4"]
+[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://b7eeowm2qtap4"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_yqyqd"]
 resource_name = "Compressor"
@@ -17,6 +17,19 @@ resource_name = "EQ"
 
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_gi2ay"]
 resource_name = "PitchShift"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ctmb6"]
+resource_name = "Reverb"
+dry = 0.57
+wet = 0.62
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_rr4td"]
+resource_name = "Distortion"
+drive = 0.22
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_4ruhy"]
+resource_name = "LowPassFilter"
+resonance = 0.27
 
 [resource]
 bus/0/volume_db = 0.662756
@@ -48,7 +61,7 @@ bus/3/name = &"Player"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = -2.51248
+bus/3/volume_db = 0.662756
 bus/3/send = &"Master"
 bus/4/name = &"Heart"
 bus/4/solo = false
@@ -68,3 +81,15 @@ bus/6/mute = false
 bus/6/bypass_fx = false
 bus/6/volume_db = -9.2092
 bus/6/send = &"Player"
+bus/7/name = &"Musica"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = -14.0622
+bus/7/send = &"Master"
+bus/7/effect/0/effect = SubResource("AudioEffectReverb_ctmb6")
+bus/7/effect/0/enabled = true
+bus/7/effect/1/effect = SubResource("AudioEffectDistortion_rr4td")
+bus/7/effect/1/enabled = true
+bus/7/effect/2/effect = SubResource("AudioEffectLowPassFilter_4ruhy")
+bus/7/effect/2/enabled = true

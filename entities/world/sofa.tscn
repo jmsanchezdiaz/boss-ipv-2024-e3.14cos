@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvbaf0gek0xxc"]
+[gd_scene load_steps=3 format=3 uid="uid://dt0p2miqc41kk"]
 
 [ext_resource type="Texture2D" uid="uid://b2cno844ggwhx" path="res://assets/decoration/sofa.png" id="1_hakbl"]
 
@@ -6,6 +6,7 @@
 size = Vector2(209, 68)
 
 [node name="Sofa" type="StaticBody2D"]
+collision_layer = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.52, 2.52)

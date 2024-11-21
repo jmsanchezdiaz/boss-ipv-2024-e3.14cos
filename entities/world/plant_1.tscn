@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://diefev7dg3hms"]
+[gd_scene load_steps=3 format=3 uid="uid://cuieq56bfh1yb"]
 
 [ext_resource type="Texture2D" uid="uid://dhrs6kabev4rm" path="res://assets/decoration/plant1.png" id="1_mcrly"]
 
@@ -6,6 +6,7 @@
 radius = 21.0
 
 [node name="Plant_1" type="StaticBody2D"]
+collision_layer = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.522556, 0.522556)

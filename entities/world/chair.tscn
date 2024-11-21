@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b522bpucjpi5c"]
+[gd_scene load_steps=3 format=3 uid="uid://kwq6d2l0lyvr"]
 
 [ext_resource type="Texture2D" uid="uid://xaoe1pe1rwng" path="res://assets/decoration/chair.png" id="1_qd66o"]
 
@@ -7,6 +7,7 @@ radius = 15.0
 height = 32.0
 
 [node name="Chair" type="StaticBody2D"]
+collision_layer = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.625, 1.625)

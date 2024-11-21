@@ -16,7 +16,9 @@ class_name Zombie
 @onready var right_eye: RayCast2D = $RightEye
 @onready var animation = $BloodAnimation
 @onready var body_animation = $BodyAnimation
-@onready var audio = $AudioStreamPlayer
+@onready var body_audio = $BodyAudio
+@onready var attack_audio = $Attack
+
 
 var MIN_DISTANCE_TO_MOVE = 35
 
@@ -29,6 +31,7 @@ var last_position_known: Vector2
 var direction := Vector2.ZERO
 var time_since_last_change := 0.0
 
+#Parametrizarlo para distintos zombies / Si consigo mas sonidos
 var idle_sound = preload("res://sounds/zombie/zombie-idle.ogg")
 var attack_sound = preload("res://sounds/zombie/zombie-attack.ogg")
 # State Machine
@@ -44,7 +47,7 @@ func _init():
 	randomize()
 
 func _ready() -> void:
-	audio.stream = idle_sound
+	body_audio.stream = idle_sound
 	change_direction()
 	_setup_attack_timer()
 	_setup_state_timer()
@@ -60,21 +63,21 @@ func _physics_process(delta: float) -> void:
 	
 	match current_state:
 		PLAYER_STATE.IDLE:
-			_play_stream(idle_sound)
+			_play_stream(idle_sound, body_audio)
 			body_animation.play("idle")
 			if last_position_known != Vector2.ZERO:
 				current_state = PLAYER_STATE.WALKING
 			reset_state_timer(idle_duration_min, idle_duration_min)
 		PLAYER_STATE.WALKING:
-			_play_stream(idle_sound)
+			_play_stream(idle_sound, body_audio)
 			move_or_pursue(delta)
 			body_animation.play("walk")
 		PLAYER_STATE.ATTACKING:
-			_play_stream(attack_sound)
+			_play_stream(attack_sound, attack_audio)
 			body_animation.play("attack")
 			attack_near_enemies()
 
-func _play_stream(stream):
+func _play_stream(stream, audio):
 	if stream != audio.stream: audio.stream = stream
 	if !audio.playing: audio.play()
 
@@ -125,7 +128,7 @@ func look_for_player() -> void:
 			
 	var saw_by_left_eye: bool = left_eye.is_colliding() && left_eye.get_collider() == target
 	var saw_by_right_eye: bool = right_eye.is_colliding() && right_eye.get_collider() == target
-			
+	print(left_eye.get_collider(), right_eye.get_collider())
 	if saw_by_left_eye || saw_by_right_eye:
 		last_position_known = target.global_position
 

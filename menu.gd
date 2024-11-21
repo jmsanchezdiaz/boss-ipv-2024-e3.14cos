@@ -1,9 +1,11 @@
 extends Node2D
 
 @onready var controls = $CanvasLayer/Controls
+@onready var music = $Musica
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	music.play(10.0)
 	controls.hide()
 
 

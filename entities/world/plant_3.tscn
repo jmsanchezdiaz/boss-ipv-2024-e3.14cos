@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5h3m2t0l57qt"]
+[gd_scene load_steps=3 format=3 uid="uid://ohud0d3tbud3"]
 
 [ext_resource type="Texture2D" uid="uid://d3emwo7l3p8li" path="res://assets/decoration/plnt3.png" id="1_hps48"]
 
@@ -6,6 +6,7 @@
 radius = 19.0
 
 [node name="Plant_3" type="StaticBody2D"]
+collision_layer = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.690058, 0.690058)

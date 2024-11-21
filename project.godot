@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=800
 
+[global_group]
+
+walls=""
+
 [input]
 
 move_left={

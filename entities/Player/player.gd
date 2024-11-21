@@ -215,6 +215,7 @@ func apply_movement(accel):
 
 
 func take_damage(amount):
+	camera.start_shake()
 	if health-amount > 0:
 		bloodAnimation.play("ReceiveDamage")
 	else:

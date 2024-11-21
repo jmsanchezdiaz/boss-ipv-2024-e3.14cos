@@ -1,31 +1,32 @@
-[gd_scene load_steps=32 format=4 uid="uid://co7ybm0ubahbq"]
+[gd_scene load_steps=33 format=4 uid="uid://co7ybm0ubahbq"]
 
 [ext_resource type="Script" path="res://levels/level_0.gd" id="1_sebl3"]
 [ext_resource type="Texture2D" uid="uid://le82j60fbkgi" path="res://assets/floor/floor-v7.png" id="2_nmvk6"]
 [ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="3_6sdbt"]
-[ext_resource type="PackedScene" path="res://entities/world/bin.tscn" id="3_nxipw"]
+[ext_resource type="PackedScene" uid="uid://btnlj2im47hhk" path="res://entities/world/bin.tscn" id="3_nxipw"]
 [ext_resource type="PackedScene" uid="uid://3u862rxcxh83" path="res://entities/world/Desk.tscn" id="4_vtmsm"]
 [ext_resource type="Texture2D" uid="uid://dtx2uese6y77r" path="res://assets/brick-v2.png" id="6_f0qly"]
-[ext_resource type="PackedScene" path="res://entities/world/plant_1.tscn" id="6_fu057"]
+[ext_resource type="PackedScene" uid="uid://cuieq56bfh1yb" path="res://entities/world/plant_1.tscn" id="6_fu057"]
 [ext_resource type="PackedScene" uid="uid://dp8dyaaojoki6" path="res://entities/Player/inventory/items/crowbar.tscn" id="7_dtxje"]
-[ext_resource type="PackedScene" path="res://entities/world/dispenser.tscn" id="7_l3lbp"]
-[ext_resource type="PackedScene" path="res://entities/world/chair.tscn" id="7_wxei5"]
-[ext_resource type="PackedScene" path="res://entities/world/plant_2.tscn" id="8_a62fr"]
+[ext_resource type="PackedScene" uid="uid://clkvqutkac0r2" path="res://entities/world/dispenser.tscn" id="7_l3lbp"]
+[ext_resource type="PackedScene" uid="uid://kwq6d2l0lyvr" path="res://entities/world/chair.tscn" id="7_wxei5"]
+[ext_resource type="PackedScene" uid="uid://dtf3dg8tpl620" path="res://entities/world/plant_2.tscn" id="8_a62fr"]
 [ext_resource type="PackedScene" uid="uid://c2o0kr8xieldc" path="res://entities/Player/inventory/items/bandage.tscn" id="8_jrvjv"]
 [ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/Zombie/Zombie.tscn" id="8_o2v3o"]
-[ext_resource type="PackedScene" path="res://entities/world/plant_3.tscn" id="9_de35t"]
+[ext_resource type="PackedScene" uid="uid://ohud0d3tbud3" path="res://entities/world/plant_3.tscn" id="9_de35t"]
 [ext_resource type="Texture2D" uid="uid://8ulx2k2lajms" path="res://assets/decoration/bloostain-v1.png" id="10_mv8n1"]
 [ext_resource type="PackedScene" path="res://entities/world/donut.tscn" id="11_2n11v"]
 [ext_resource type="PackedScene" uid="uid://dpmtbbduioxrq" path="res://game_over_view.tscn" id="12_jydqv"]
 [ext_resource type="PackedScene" path="res://entities/world/scisor.tscn" id="12_q7s3l"]
 [ext_resource type="PackedScene" path="res://entities/world/coffee.tscn" id="13_rkwb8"]
-[ext_resource type="PackedScene" path="res://entities/world/sofa.tscn" id="14_8m676"]
-[ext_resource type="PackedScene" path="res://entities/world/table.tscn" id="14_inmqt"]
+[ext_resource type="PackedScene" uid="uid://dt0p2miqc41kk" path="res://entities/world/sofa.tscn" id="14_8m676"]
+[ext_resource type="PackedScene" uid="uid://csr0sm5uliltb" path="res://entities/world/table.tscn" id="14_inmqt"]
 [ext_resource type="PackedScene" path="res://entities/world/locker.tscn" id="15_06e6n"]
 [ext_resource type="PackedScene" path="res://entities/world/cigarrate.tscn" id="15_wfji5"]
-[ext_resource type="PackedScene" path="res://entities/world/board.tscn" id="16_063hm"]
-[ext_resource type="PackedScene" path="res://entities/world/armchair.tscn" id="16_737fr"]
+[ext_resource type="PackedScene" uid="uid://cj6rhx8d4y7sq" path="res://entities/world/board.tscn" id="16_063hm"]
+[ext_resource type="PackedScene" uid="uid://33qy6cyruin7" path="res://entities/world/armchair.tscn" id="16_737fr"]
 [ext_resource type="PackedScene" path="res://entities/world/magazine.tscn" id="16_menx0"]
+[ext_resource type="PackedScene" uid="uid://b6gyn2y4ryokb" path="res://entities/Zombie/variants/FastZombie.tscn" id="25_l7pgk"]
 [ext_resource type="AudioStream" uid="uid://mrj310bj2vei" path="res://sounds/foley.ogg" id="28_n61a1"]
 
 [sub_resource type="Gradient" id="Gradient_vg1fq"]
@@ -338,11 +339,6 @@ metadata/_edit_lock_ = true
 position = Vector2(972, -304)
 metadata/_edit_lock_ = true
 
-[node name="FastZombie" parent="Enemies" instance=ExtResource("8_o2v3o")]
-position = Vector2(964, -1606)
-SPEED = 75.0
-metadata/_edit_lock_ = true
-
 [node name="Zombie3" parent="Enemies" instance=ExtResource("8_o2v3o")]
 position = Vector2(1036, -1756)
 metadata/_edit_lock_ = true
@@ -351,19 +347,27 @@ metadata/_edit_lock_ = true
 position = Vector2(884, -1702)
 metadata/_edit_lock_ = true
 
-[node name="FastZombie1" parent="Enemies" instance=ExtResource("8_o2v3o")]
-position = Vector2(854, -1434)
-SPEED = 75.0
-metadata/_edit_lock_ = true
-
-[node name="FastZombie2" parent="Enemies" instance=ExtResource("8_o2v3o")]
-position = Vector2(1030, -1420)
-SPEED = 75.0
-metadata/_edit_lock_ = true
-
 [node name="Zombie7" parent="Enemies" instance=ExtResource("8_o2v3o")]
 position = Vector2(940, -1336)
 metadata/_edit_lock_ = true
+
+[node name="FastZombie" parent="Enemies" instance=ExtResource("25_l7pgk")]
+position = Vector2(901, -771)
+rotation = 1.41142
+collision_layer = 1
+collision_mask = 1
+
+[node name="FastZombie2" parent="Enemies" instance=ExtResource("25_l7pgk")]
+position = Vector2(957, -635)
+rotation = 1.41142
+collision_layer = 1
+collision_mask = 1
+
+[node name="FastZombie3" parent="Enemies" instance=ExtResource("25_l7pgk")]
+position = Vector2(976, -882)
+rotation = 0.426704
+collision_layer = 1
+collision_mask = 1
 
 [node name="Player" parent="." instance=ExtResource("3_6sdbt")]
 position = Vector2(262, 212)

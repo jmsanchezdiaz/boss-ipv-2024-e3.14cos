@@ -11,6 +11,8 @@ var target: Node2D
 
 func _ready():
 	shader = spr.material
+	if target == null:
+		spr.material = null;
 
 func _process(delta):
 	if player_in_collecting_area and Input.is_action_just_pressed("collect"):

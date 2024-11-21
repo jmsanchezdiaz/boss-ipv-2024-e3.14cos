@@ -196,6 +196,9 @@ func _on_detection_area_body_exited(_body: Node2D) -> void:
 	target = null
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body is Zombie:
+		current_state = PLAYER_STATE.IDLE;
+
 	if body is Player:
 		target_in_attack_area = true
 		current_state = PLAYER_STATE.ATTACKING

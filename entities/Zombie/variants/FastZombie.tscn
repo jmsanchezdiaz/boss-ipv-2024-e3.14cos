@@ -4,7 +4,10 @@
 
 [node name="FastZombie" instance=ExtResource("1_2o1ao")]
 modulate = Color(0.521174, 0.855904, 0.724423, 1)
-SPEED = 150.0
+SPEED = 120.0
+idle_duration_max = 30.0
+walk_duration_min = 10.0
+walk_duration_max = 20.0
 
 [node name="AttackArea" parent="." index="6"]
 visible = false

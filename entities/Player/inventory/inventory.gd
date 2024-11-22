@@ -60,5 +60,11 @@ func has(item_name: String):
 	return !slots.filter(func(slot): return slot.item != null and item_name == slot.item.name).is_empty();
 
 
+func clean():
+	for i in range(slots.size()):
+		slots[i].item = null;
+		slots[i].amount = 0;
+	update.emit()
+
 func set_player(_player: Node2D):
 	player= _player

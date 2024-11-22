@@ -15,17 +15,17 @@
 [ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/Zombie/Zombie.tscn" id="8_o2v3o"]
 [ext_resource type="PackedScene" uid="uid://ohud0d3tbud3" path="res://entities/world/plant_3.tscn" id="9_de35t"]
 [ext_resource type="Texture2D" uid="uid://8ulx2k2lajms" path="res://assets/decoration/bloostain-v1.png" id="10_mv8n1"]
-[ext_resource type="PackedScene" path="res://entities/world/donut.tscn" id="11_2n11v"]
+[ext_resource type="PackedScene" uid="uid://qit2i2p81lwv" path="res://entities/world/donut.tscn" id="11_2n11v"]
 [ext_resource type="PackedScene" uid="uid://dpmtbbduioxrq" path="res://game_over_view.tscn" id="12_jydqv"]
-[ext_resource type="PackedScene" path="res://entities/world/scisor.tscn" id="12_q7s3l"]
-[ext_resource type="PackedScene" path="res://entities/world/coffee.tscn" id="13_rkwb8"]
+[ext_resource type="PackedScene" uid="uid://d22gjmfmytb4s" path="res://entities/world/scisor.tscn" id="12_q7s3l"]
+[ext_resource type="PackedScene" uid="uid://taujv4th8i57" path="res://entities/world/coffee.tscn" id="13_rkwb8"]
 [ext_resource type="PackedScene" uid="uid://dt0p2miqc41kk" path="res://entities/world/sofa.tscn" id="14_8m676"]
 [ext_resource type="PackedScene" uid="uid://csr0sm5uliltb" path="res://entities/world/table.tscn" id="14_inmqt"]
 [ext_resource type="PackedScene" uid="uid://bw6pdqjur6oao" path="res://entities/world/locker.tscn" id="15_06e6n"]
-[ext_resource type="PackedScene" path="res://entities/world/cigarrate.tscn" id="15_wfji5"]
+[ext_resource type="PackedScene" uid="uid://t6wmpkdnbksr" path="res://entities/world/cigarrate.tscn" id="15_wfji5"]
 [ext_resource type="PackedScene" uid="uid://cj6rhx8d4y7sq" path="res://entities/world/board.tscn" id="16_063hm"]
 [ext_resource type="PackedScene" uid="uid://33qy6cyruin7" path="res://entities/world/armchair.tscn" id="16_737fr"]
-[ext_resource type="PackedScene" path="res://entities/world/magazine.tscn" id="16_menx0"]
+[ext_resource type="PackedScene" uid="uid://bubfguoanpxgs" path="res://entities/world/magazine.tscn" id="16_menx0"]
 [ext_resource type="PackedScene" uid="uid://b6gyn2y4ryokb" path="res://entities/Zombie/variants/FastZombie.tscn" id="25_l7pgk"]
 [ext_resource type="AudioStream" uid="uid://mrj310bj2vei" path="res://sounds/foley.ogg" id="28_n61a1"]
 
@@ -219,6 +219,7 @@ metadata/_edit_lock_ = true
 [node name="Crowbar" parent="." instance=ExtResource("7_dtxje")]
 material = null
 position = Vector2(963, 338)
+collision_mask = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.125911, 0.125911, 0.125911, 1)
@@ -317,6 +318,7 @@ position = Vector2(1059, -980)
 [node name="Bandage" parent="Hall" instance=ExtResource("8_jrvjv")]
 material = null
 position = Vector2(1057, -977)
+collision_mask = 2
 
 [node name="Cigarrate" parent="Hall" instance=ExtResource("15_wfji5")]
 position = Vector2(1033, -504)
@@ -371,13 +373,6 @@ position = Vector2(940, -1336)
 [node name="Zombie8" parent="Enemies" instance=ExtResource("8_o2v3o")]
 position = Vector2(940, -1336)
 
-[node name="FastZombie2" parent="Enemies" instance=ExtResource("25_l7pgk")]
-position = Vector2(981, -798)
-
-[node name="FastZombie3" parent="Enemies" instance=ExtResource("25_l7pgk")]
-position = Vector2(928, -572)
-collision_mask = 5
-
 [node name="Player" parent="." instance=ExtResource("3_6sdbt")]
 position = Vector2(262, 212)
 rotation = -2.09439
@@ -387,5 +382,8 @@ rotation = -2.09439
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("28_n61a1")
 autoplay = true
+
+[node name="FastZombie" parent="." instance=ExtResource("25_l7pgk")]
+position = Vector2(660, 257)
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]

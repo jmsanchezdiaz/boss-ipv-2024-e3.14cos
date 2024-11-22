@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://b03m6mbug7ngg"]
+[gd_scene load_steps=23 format=3 uid="uid://b03m6mbug7ngg"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_4in8l"]
 [ext_resource type="Resource" uid="uid://wpifrwoc3fi1" path="res://entities/Player/inventory/inventory.tres" id="2_1lk3c"]
 [ext_resource type="Texture2D" uid="uid://cmcsh50axvbfm" path="res://assets/decoration/blood-spritesheet2.png" id="3_ld6fc"]
 [ext_resource type="Texture2D" uid="uid://dihpolxqe115j" path="res://assets/player/player-spritesheet-v4.png" id="3_mkkae"]
+[ext_resource type="AudioStream" uid="uid://cf7hm0vxhq73r" path="res://sounds/player/player-idle.ogg" id="5_o1h55"]
 [ext_resource type="AudioStream" uid="uid://smsrheqjx01d" path="res://sounds/player/player-heartbeat-calm.ogg" id="5_t2ecw"]
 [ext_resource type="PackedScene" uid="uid://b6ynng6353xjr" path="res://entities/Player/inventory/inventory_ui.tscn" id="6_504in"]
 [ext_resource type="Script" path="res://entities/Player/camera_2d.gd" id="6_us7rm"]
@@ -183,10 +184,11 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+light_mask = 2
 z_index = 1
 scale = Vector2(0.06, 0.06)
-collision_layer = 3
-collision_mask = 7
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_4in8l")
 MAX_SPEED = 150
 inventory = ExtResource("2_1lk3c")
@@ -198,8 +200,8 @@ shape = SubResource("CapsuleShape2D_w6qcd")
 
 [node name="AttackArea" type="Area2D" parent="."]
 visible = false
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_0rk6p")
@@ -228,7 +230,11 @@ libraries = {
 }
 
 [node name="MovingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_o1h55")
 bus = &"PlayerMove"
+
+[node name="Breathing" type="AudioStreamPlayer2D" parent="."]
+bus = &"Player Breathing"
 
 [node name="Attacking" type="AudioStreamPlayer2D" parent="."]
 bus = &"PlayerAttack"

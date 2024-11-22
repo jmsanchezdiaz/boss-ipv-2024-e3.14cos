@@ -8,7 +8,7 @@ size = Vector2(529.412, 640)
 [node name="Desk" type="StaticBody2D"]
 scale = Vector2(0.3, 0.17)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 0.75)

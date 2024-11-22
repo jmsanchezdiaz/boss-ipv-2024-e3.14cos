@@ -18,10 +18,12 @@ signal hit
 @onready var moving_audio = $MovingSound
 @onready var heart_audio = $Heartbeat
 @onready var attack_audio = $Attacking
+@onready var breathing_audio = $Breathing
 @onready var camera = $Camera2D
 
 var idle_sound = preload("res://sounds/player/player-idle.ogg")
 var tired_idle_sound = preload("res://sounds/player/player-tired-idle.ogg")
+
 var walking_sound = preload("res://sounds/player/player-walking.ogg")
 var running_sound = preload("res://sounds/player/player-running.ogg")
 
@@ -80,12 +82,18 @@ func _physics_process(delta: float) -> void:
 	rotation = position.angle_to_point(smoothed_mouse_pos)
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
+		
+	if current_stamina > 30:
+		_play_stream(idle_sound, breathing_audio)
+	else:
+		_play_stream(tired_idle_sound, breathing_audio)
+	
 	handle_heartbeat()
+
 		
 	match current_state:
 		STATE.IDLE:
 			bodyAnimation.play("RESET")
-			_play_stream(idle_sound, moving_audio)
 			regenerate_stamina(1, delta)
 			if input_vector != Vector2.ZERO:
 				if Input.is_action_pressed("run") and current_stamina > 10:
@@ -222,6 +230,7 @@ func take_damage(amount):
 		bloodAnimation.play("ReceiveDamage")
 	else:
 		# bloodAnimation.play("Die")
+		inventory.clean()
 		queue_free()
 		hit.emit()
 	health = max(0, health - amount) 

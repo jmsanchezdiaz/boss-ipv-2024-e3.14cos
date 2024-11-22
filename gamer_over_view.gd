@@ -17,10 +17,8 @@ func show_game_over():
 func _on_reset_button_pressed() -> void:
 	hide()
 	# Obtén la ruta de la escena actual
-	#var current_scene_path = get_tree().reload_current_scene()
-
 	# Cambia la escena a sí misma
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://levels/level_0.tscn")
 
 
 func _on_back_to_menu_pressed():

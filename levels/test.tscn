@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://b87ewgvm43na"]
+
+[ext_resource type="PackedScene" uid="uid://b6gyn2y4ryokb" path="res://entities/Zombie/variants/FastZombie.tscn" id="1_xl1cp"]
+[ext_resource type="PackedScene" uid="uid://djba5um6gbc7k" path="res://entities/Zombie/Zombie.tscn" id="2_d8vm0"]
+[ext_resource type="PackedScene" uid="uid://dpmtbbduioxrq" path="res://game_over_view.tscn" id="3_3b8tv"]
+[ext_resource type="PackedScene" uid="uid://b03m6mbug7ngg" path="res://entities/Player/Player.tscn" id="4_al0ii"]
+
+[node name="Test" type="Node"]
+
+[node name="FastZombie" parent="." instance=ExtResource("1_xl1cp")]
+z_index = 0
+collision_layer = 2
+
+[node name="Zombie" parent="." instance=ExtResource("2_d8vm0")]
+position = Vector2(392, 137)
+
+[node name="GameOverView" parent="." instance=ExtResource("3_3b8tv")]
+
+[node name="Player" parent="." instance=ExtResource("4_al0ii")]

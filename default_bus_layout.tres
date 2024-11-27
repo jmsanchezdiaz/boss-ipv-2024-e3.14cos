@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://b7eeowm2qtap4"]
+[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://di014sukrlvrw"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_yqyqd"]
 resource_name = "Compressor"
@@ -32,7 +32,7 @@ resource_name = "LowPassFilter"
 resonance = 0.27
 
 [resource]
-bus/0/volume_db = 0.464998
+bus/0/volume_db = -80.0
 bus/1/name = &"Zombie"
 bus/1/solo = false
 bus/1/mute = false

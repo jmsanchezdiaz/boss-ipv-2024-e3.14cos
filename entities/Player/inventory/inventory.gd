@@ -24,6 +24,8 @@ func insert(item: InventoryItem):
 func drop(item: InventoryItem):
 	var item_slots = slots.filter(func(slot): return slot.item == item)
 	
+	print(item_slots[0].amount, item_slots[0].item.texture)
+	
 	if item_slots[0].amount == 1:
 		item_slots[0].item = null
 		item_slots[0].amount = 0
@@ -37,7 +39,7 @@ func use(item: InventoryItem, one_time: bool = true):
 	
 	if item_slots[0].amount == 1:
 		item_slots[0].item = null if one_time else item_slots[0].item
-		item_slots[0].amount = 0
+		item_slots[0].amount = 0 if one_time else item_slots[0].amount
 	else:
 		item_slots[0].amount -= 1
 	

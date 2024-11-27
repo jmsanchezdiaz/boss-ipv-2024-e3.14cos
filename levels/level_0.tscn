@@ -219,7 +219,6 @@ metadata/_edit_lock_ = true
 [node name="Crowbar" parent="." instance=ExtResource("7_dtxje")]
 material = null
 position = Vector2(963, 338)
-collision_mask = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.125911, 0.125911, 0.125911, 1)
@@ -318,7 +317,6 @@ position = Vector2(1059, -980)
 [node name="Bandage" parent="Hall" instance=ExtResource("8_jrvjv")]
 material = null
 position = Vector2(1057, -977)
-collision_mask = 2
 
 [node name="Cigarrate" parent="Hall" instance=ExtResource("15_wfji5")]
 position = Vector2(1033, -504)

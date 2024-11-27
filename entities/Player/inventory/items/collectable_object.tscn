@@ -20,6 +20,7 @@ shader_parameter/line_thickness = 2.0
 
 [node name="CollectableObject" type="Area2D"]
 material = SubResource("ShaderMaterial_l3nln")
+collision_mask = 3
 script = ExtResource("1_jlpkj")
 
 [node name="InteractableArea" type="CollisionShape2D" parent="."]

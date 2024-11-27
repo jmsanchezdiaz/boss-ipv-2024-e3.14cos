@@ -47,6 +47,8 @@ var FIST_DAMAGE = 10.0
 var attacking = false;
 var paused = false;
 var lastFistUsed = 0;
+var blood_spawn_durations = [3.0, 2.0, 1.0]
+var blood_timer: Timer = Timer.new()
 
 enum STATE {
 	IDLE,
@@ -58,6 +60,13 @@ enum STATE {
 
 func _ready():
 	inventory.set_player(self)
+	setup_blood_missing_timer()
+
+func setup_blood_missing_timer():
+	blood_timer.wait_time = blood_spawn_durations[0]
+	blood_timer.one_shot = false
+	blood_timer.connect("timeout", Callable(self, "_on_blood_timer_timeout"))
+	add_child(blood_timer)
 
 func pause():
 	moving_audio.stop()
@@ -89,7 +98,7 @@ func _physics_process(delta: float) -> void:
 		_play_stream(tired_idle_sound, breathing_audio)
 	
 	handle_heartbeat()
-
+	vary_bleeding()
 		
 	match current_state:
 		STATE.IDLE:
@@ -187,6 +196,7 @@ func recover_health(hp: float):
 	current_state = STATE.HEALING
 	health = min(MAX_HEALTH, health + hp)
 	bloodAnimation.stop()
+	if !blood_timer.is_stopped(): blood_timer.stop()
 
 
 func handle_move(delta):
@@ -211,6 +221,13 @@ func regenerate_stamina(regen_speed: float, delta: float) -> void:
 	if current_stamina < MAX_STAMINA:
 		current_stamina = min(current_stamina + STAMINA_REGEN * regen_speed * delta, MAX_STAMINA)
 
+func vary_bleeding():
+	if health > 80: 
+		blood_timer.wait_time = blood_spawn_durations[0]
+	elif health > 50:
+		blood_timer.wait_time = blood_spawn_durations[1]
+	else: 
+		blood_timer.wait_time = blood_spawn_durations[2]
 
 func apply_friction(amount):
 	if velocity.length() > amount:
@@ -224,8 +241,17 @@ func apply_movement(accel):
 	velocity = velocity.limit_length(MAX_SPEED*running_multiplier)
 
 
+func _on_blood_timer_timeout():
+	var scene: PackedScene = load("res://entities/Player/blood_spatter.tscn")
+	var object = scene.instantiate()
+	object.position = global_position
+	get_tree().root.add_child(object)
+	
+
 func take_damage(amount):
 	camera.start_shake()
+	if blood_timer.is_stopped(): 
+		blood_timer.start()
 	if health-amount > 0:
 		bloodAnimation.play("ReceiveDamage")
 	else:

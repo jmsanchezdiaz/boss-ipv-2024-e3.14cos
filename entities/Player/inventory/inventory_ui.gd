@@ -30,8 +30,11 @@ func connect_slots():
 		slots[i].use.connect(_use_item)
 		
 func _drop_item(inv_item: InventoryItem):
+	if inv_item.name == inv.player.selected_weapon:
+		inv.player.selected_weapon = null;
 	inv.drop(inv_item)
-	
+		
+		
 func _drop_items(inv_item: InventoryItem):
 	inv.drop_all(inv_item)
 

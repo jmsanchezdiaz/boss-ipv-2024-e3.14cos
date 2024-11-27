@@ -224,12 +224,12 @@ func regenerate_stamina(regen_speed: float, delta: float) -> void:
 		current_stamina = min(current_stamina + STAMINA_REGEN * regen_speed * delta, MAX_STAMINA)
 
 func vary_bleeding():
-	if health < 100: 
-		blood_timer.wait_time = blood_spawn_durations[0]
-	elif health < 60:
+	if health < 40 : 
+		blood_timer.wait_time = blood_spawn_durations[2]
+	elif health < 70:
 		blood_timer.wait_time = blood_spawn_durations[1]
 	else: 
-		blood_timer.wait_time = blood_spawn_durations[2]
+		blood_timer.wait_time = blood_spawn_durations[0]
 
 func apply_friction(amount):
 	if velocity.length() > amount:

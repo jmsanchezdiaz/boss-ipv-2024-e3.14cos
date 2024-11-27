@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dejh1qvgygu7b"]
+
+[ext_resource type="Script" path="res://entities/world/blink_light.gd" id="1_8hjrh"]
+[ext_resource type="AudioStream" uid="uid://bqfter6vehm5e" path="res://sounds/bulb-flickering.ogg" id="2_syu5x"]
+
+[sub_resource type="Gradient" id="Gradient_5ho5w"]
+offsets = PackedFloat32Array(0, 0.649351)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uv2qe"]
+gradient = SubResource("Gradient_5ho5w")
+fill = 1
+fill_from = Vector2(0.490826, 0.504587)
+
+[node name="BlinkingLight" type="PointLight2D"]
+energy = 0.54
+texture = SubResource("GradientTexture2D_uv2qe")
+script = ExtResource("1_8hjrh")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_syu5x")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

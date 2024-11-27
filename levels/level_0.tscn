@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://co7ybm0ubahbq"]
+[gd_scene load_steps=33 format=4 uid="uid://co7ybm0ubahbq"]
 
 [ext_resource type="Script" path="res://levels/level_0.gd" id="1_sebl3"]
 [ext_resource type="Texture2D" uid="uid://le82j60fbkgi" path="res://assets/floor/floor-v7.png" id="2_nmvk6"]
@@ -30,12 +30,17 @@
 [ext_resource type="PackedScene" uid="uid://b6gyn2y4ryokb" path="res://entities/Zombie/variants/FastZombie.tscn" id="25_l7pgk"]
 [ext_resource type="AudioStream" uid="uid://mrj310bj2vei" path="res://sounds/foley.ogg" id="28_n61a1"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d7nqo"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47tw2"]
 texture = ExtResource("6_f0qly")
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_d7nqo")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, 8, 8, 8)
 
 [sub_resource type="TileSet" id="TileSet_2qh5w"]
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_47tw2")
 
@@ -350,18 +355,18 @@ scale = Vector2(12.6328, 12.6328)
 energy = 1.0
 
 [node name="PointLight2D3" parent="." instance=ExtResource("19_j4pok")]
-position = Vector2(953, 307)
-scale = Vector2(5.31641, 12.6328)
+position = Vector2(957.063, 307)
+scale = Vector2(5.18945, 12.6328)
 energy = 1.0
 
 [node name="PointLight2D4" parent="." instance=ExtResource("19_j4pok")]
-position = Vector2(960, -541.5)
-scale = Vector2(5.31641, 16.4844)
+position = Vector2(961.5, -377.75)
+scale = Vector2(6.82813, 11.8828)
 energy = 1.0
 
 [node name="PointLight2D5" parent="." instance=ExtResource("19_j4pok")]
-position = Vector2(964, -1470.38)
-scale = Vector2(5.31641, 15.6758)
+position = Vector2(953, -1231)
+scale = Vector2(8.4082, 21.4688)
 energy = 1.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

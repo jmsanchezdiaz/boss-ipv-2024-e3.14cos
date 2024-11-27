@@ -89,7 +89,7 @@ func handle_heartbeat():
 	if !heart_audio.playing : heart_audio.play()
 
 func _physics_process(delta: float) -> void:
-	if blood_timer.is_stopped(): blood_timer.start()
+	if health < 100 and blood_timer.is_stopped(): blood_timer.start()
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -224,9 +224,9 @@ func regenerate_stamina(regen_speed: float, delta: float) -> void:
 		current_stamina = min(current_stamina + STAMINA_REGEN * regen_speed * delta, MAX_STAMINA)
 
 func vary_bleeding():
-	if health > 80: 
+	if health < 100: 
 		blood_timer.wait_time = blood_spawn_durations[0]
-	elif health > 50:
+	elif health < 60:
 		blood_timer.wait_time = blood_spawn_durations[1]
 	else: 
 		blood_timer.wait_time = blood_spawn_durations[2]

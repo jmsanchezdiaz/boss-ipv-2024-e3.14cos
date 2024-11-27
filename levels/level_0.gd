@@ -12,4 +12,4 @@ func _process(delta: float) -> void:
 
 
 func _on_player_hit() -> void:
-	$Hud.show()
+	$GameHud.show()

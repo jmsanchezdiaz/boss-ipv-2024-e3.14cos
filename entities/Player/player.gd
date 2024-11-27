@@ -48,7 +48,7 @@ var attacking = false;
 var paused = false;
 var lastFistUsed = 0;
 var blood_spawn_durations = [3.0, 2.0, 1.0]
-var blood_timer: Timer = Timer.new()
+var blood_timer: Timer
 
 enum STATE {
 	IDLE,
@@ -63,10 +63,12 @@ func _ready():
 	setup_blood_missing_timer()
 
 func setup_blood_missing_timer():
+	blood_timer = Timer.new()
 	blood_timer.wait_time = blood_spawn_durations[0]
 	blood_timer.one_shot = false
 	blood_timer.connect("timeout", Callable(self, "_on_blood_timer_timeout"))
 	add_child(blood_timer)
+
 
 func pause():
 	moving_audio.stop()
@@ -87,10 +89,10 @@ func handle_heartbeat():
 	if !heart_audio.playing : heart_audio.play()
 
 func _physics_process(delta: float) -> void:
+	if blood_timer.is_stopped(): blood_timer.start()
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
 	rotation = position.angle_to_point(smoothed_mouse_pos)
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
 		
 	if current_stamina > 30:
 		_play_stream(idle_sound, breathing_audio)

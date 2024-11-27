@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ohud0d3tbud3" path="res://entities/world/plant_3.tscn" id="9_de35t"]
 [ext_resource type="Texture2D" uid="uid://8ulx2k2lajms" path="res://assets/decoration/bloostain-v1.png" id="10_mv8n1"]
 [ext_resource type="PackedScene" uid="uid://qit2i2p81lwv" path="res://entities/world/donut.tscn" id="11_2n11v"]
-[ext_resource type="PackedScene" uid="uid://dpmtbbduioxrq" path="res://game_over_view.tscn" id="12_jydqv"]
+[ext_resource type="PackedScene" uid="uid://dpmtbbduioxrq" path="res://game_hud.tscn" id="12_jydqv"]
 [ext_resource type="PackedScene" uid="uid://d22gjmfmytb4s" path="res://entities/world/scisor.tscn" id="12_q7s3l"]
 [ext_resource type="PackedScene" uid="uid://taujv4th8i57" path="res://entities/world/coffee.tscn" id="13_rkwb8"]
 [ext_resource type="PackedScene" uid="uid://dt0p2miqc41kk" path="res://entities/world/sofa.tscn" id="14_8m676"]
@@ -375,13 +375,14 @@ position = Vector2(940, -1336)
 position = Vector2(262, 212)
 rotation = -2.09439
 
-[node name="Hud" parent="." instance=ExtResource("12_jydqv")]
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("28_n61a1")
 autoplay = true
 
 [node name="FastZombie" parent="." instance=ExtResource("25_l7pgk")]
+process_mode = 0
 position = Vector2(660, 257)
+
+[node name="GameHud" parent="." instance=ExtResource("12_jydqv")]
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]

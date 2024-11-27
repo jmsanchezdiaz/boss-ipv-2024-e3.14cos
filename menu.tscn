@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmyaegou28jxp"]
+[gd_scene load_steps=9 format=3 uid="uid://dmyaegou28jxp"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_c6840"]
 [ext_resource type="Texture2D" uid="uid://cdwet80eq6855" path="res://bsas-noche-eterna.webp" id="1_yxe7r"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://gxmbr3xcsrre" path="res://assets/Deadfall-Regular.ttf" id="3_vj7u7"]
 [ext_resource type="Texture2D" uid="uid://tta5jdsirrg5" path="res://assets/ui/Keyboard Extras.png" id="4_tn41y"]
 [ext_resource type="Texture2D" uid="uid://bor5stunx12a2" path="res://assets/ui/mouse.png" id="5_vh1ot"]
+[ext_resource type="PackedScene" uid="uid://cfwut0cwovhpv" path="res://options.tscn" id="7_3qh0w"]
 [ext_resource type="AudioStream" uid="uid://dewoxdgfuyfju" path="res://sounds/musica-menu.ogg" id="7_16r3y"]
 
 [node name="Menu" type="Node2D"]
@@ -78,17 +79,32 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -105.0
-offset_top = 76.0
+offset_top = 69.0
 offset_right = 101.0
-offset_bottom = 165.0
+offset_bottom = 158.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
 theme_override_font_sizes/font_size = 38
 text = "Controls"
 
+[node name="OptionsBtn" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 181.0
+offset_right = 101.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 38
+text = "Options"
+
 [node name="Controls" type="Panel" parent="CanvasLayer"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -287,11 +303,16 @@ position = Vector2(179.5, 419)
 scale = Vector2(3.07813, 3.07813)
 texture = ExtResource("5_vh1ot")
 
+[node name="Options" parent="CanvasLayer" instance=ExtResource("7_3qh0w")]
+visibility_layer = 2
+
 [node name="Musica" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("7_16r3y")
 pitch_scale = 0.8
 bus = &"Musica"
 
 [connection signal="pressed" from="CanvasLayer/StartBtn" to="." method="_on_start_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/ControlsBtn" to="." method="_on_controls_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/OptionsBtn" to="." method="_on_options_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controls/Button" to="." method="_on_close_controls_button_pressed"]

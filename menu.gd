@@ -1,7 +1,10 @@
 extends Node2D
 
 @onready var controls = $CanvasLayer/Controls
+@onready var options = $CanvasLayer/Options
 @onready var music = $Musica
+@onready var optionsBtn = $CanvasLayer/OptionsBtn
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,3 +27,8 @@ func _on_controls_btn_pressed():
 
 func _on_close_controls_button_pressed():
 	controls.hide()
+
+
+func _on_options_btn_pressed() -> void:
+	optionsBtn.release_focus()
+	options.show()

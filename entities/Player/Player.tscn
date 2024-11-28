@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b03m6mbug7ngg"]
+[gd_scene load_steps=24 format=3 uid="uid://b03m6mbug7ngg"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_4in8l"]
 [ext_resource type="Resource" uid="uid://wpifrwoc3fi1" path="res://entities/Player/inventory/inventory.tres" id="2_1lk3c"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://smsrheqjx01d" path="res://sounds/player/player-heartbeat-calm.ogg" id="5_t2ecw"]
 [ext_resource type="PackedScene" uid="uid://b6ynng6353xjr" path="res://entities/Player/inventory/inventory_ui.tscn" id="6_504in"]
 [ext_resource type="Script" path="res://entities/Player/camera_2d.gd" id="6_us7rm"]
+[ext_resource type="Texture2D" uid="uid://0u405scbo6gn" path="res://assets/LightCone.png" id="9_2w1cf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w6qcd"]
 radius = 283.333
@@ -197,11 +198,13 @@ inventory = ExtResource("2_1lk3c")
 visible = false
 position = Vector2(16.6667, -1.90735e-06)
 shape = SubResource("CapsuleShape2D_w6qcd")
+metadata/_edit_lock_ = true
 
 [node name="AttackArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
 collision_mask = 8
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_0rk6p")
@@ -211,6 +214,7 @@ position = Vector2(-166.667, -50)
 scale = Vector2(19.4444, 20)
 texture = ExtResource("3_mkkae")
 hframes = 69
+metadata/_edit_lock_ = true
 
 [node name="Blood" type="Sprite2D" parent="."]
 position = Vector2(-255.612, -0.229689)
@@ -218,6 +222,7 @@ rotation = 3.14159
 scale = Vector2(10.1593, 10.5501)
 texture = ExtResource("3_ld6fc")
 hframes = 10
+metadata/_edit_lock_ = true
 
 [node name="BloodAnimation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -232,26 +237,41 @@ libraries = {
 [node name="MovingSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_o1h55")
 bus = &"PlayerMove"
+metadata/_edit_lock_ = true
 
 [node name="Breathing" type="AudioStreamPlayer2D" parent="."]
 bus = &"Player Breathing"
+metadata/_edit_lock_ = true
 
 [node name="Attacking" type="AudioStreamPlayer2D" parent="."]
 bus = &"PlayerAttack"
+metadata/_edit_lock_ = true
 
 [node name="Heartbeat" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_t2ecw")
 autoplay = true
 bus = &"Heart"
 parameters/looping = true
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("6_us7rm")
+metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="InventoryUI" parent="Camera2D/CanvasLayer" instance=ExtResource("6_504in")]
 visible = false
+
+[node name="Flashlight" type="PointLight2D" parent="."]
+position = Vector2(2766.67, 7.62939e-06)
+scale = Vector2(5.8762, 5.8762)
+color = Color(1, 0.952959, 0.869624, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter_smooth = 29.2
+texture = ExtResource("9_2w1cf")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_crowbar_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_crowbar_area_body_exited"]

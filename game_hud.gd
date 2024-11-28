@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 
 
 func show_game_over():
-	show()
+	gameOverView.show()
 
 
 func _on_reset_button_pressed() -> void:

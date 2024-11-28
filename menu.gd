@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var controls = $CanvasLayer/Controls
+@onready var controlsBg = $CanvasLayer/ControlsBG
 @onready var options = $CanvasLayer/Options
 @onready var music = $Musica
 @onready var optionsBtn = $CanvasLayer/OptionsBtn
@@ -10,6 +11,7 @@ extends Node2D
 func _ready():
 	music.play(10.0)
 	controls.hide()
+	controlsBg.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,10 +25,12 @@ func _on_start_btn_pressed():
 
 func _on_controls_btn_pressed():
 	controls.show()
+	controlsBg.show()
 
 
 func _on_close_controls_button_pressed():
 	controls.hide()
+	controlsBg.hide()
 
 
 func _on_options_btn_pressed() -> void:

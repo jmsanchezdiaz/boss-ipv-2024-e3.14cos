@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://co7ybm0ubahbq"]
+[gd_scene load_steps=34 format=4 uid="uid://co7ybm0ubahbq"]
 
 [ext_resource type="Script" path="res://levels/level_0.gd" id="1_sebl3"]
 [ext_resource type="Texture2D" uid="uid://le82j60fbkgi" path="res://assets/floor/floor-v7.png" id="2_nmvk6"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://dejh1qvgygu7b" path="res://entities/world/blink_light.tscn" id="19_j4pok"]
 [ext_resource type="PackedScene" uid="uid://b6gyn2y4ryokb" path="res://entities/Zombie/variants/FastZombie.tscn" id="25_l7pgk"]
 [ext_resource type="AudioStream" uid="uid://mrj310bj2vei" path="res://sounds/foley.ogg" id="28_n61a1"]
+[ext_resource type="PackedScene" uid="uid://bl5n2hpdg0v7t" path="res://entities/Player/inventory/items/flashlight.tscn" id="30_auqo5"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d7nqo"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -347,7 +348,6 @@ rotation = -1.57079
 metadata/_edit_lock_ = true
 
 [node name="GameHud" parent="." instance=ExtResource("12_jydqv")]
-visible = false
 
 [node name="PointLight2D2" parent="." instance=ExtResource("19_j4pok")]
 position = Vector2(381, 359)
@@ -355,11 +355,13 @@ scale = Vector2(12.6328, 12.6328)
 energy = 1.0
 
 [node name="PointLight2D3" parent="." instance=ExtResource("19_j4pok")]
+visible = false
 position = Vector2(957.063, 307)
 scale = Vector2(5.18945, 12.6328)
 energy = 1.0
 
 [node name="PointLight2D4" parent="." instance=ExtResource("19_j4pok")]
+visible = false
 position = Vector2(961.5, -377.75)
 scale = Vector2(6.82813, 11.8828)
 energy = 1.0
@@ -372,5 +374,8 @@ energy = 1.0
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 scale = Vector2(16.6667, 16.6667)
 color = Color(0.176419, 0.176419, 0.176419, 1)
+
+[node name="Flashlight" parent="." instance=ExtResource("30_auqo5")]
+position = Vector2(982, -58)
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]

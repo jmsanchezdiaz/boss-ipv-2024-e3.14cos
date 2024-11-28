@@ -50,6 +50,9 @@ var lastFistUsed = 0;
 var blood_spawn_durations = [3.0, 2.0, 1.0]
 var blood_timer: Timer
 
+var has_flashlight: bool = false
+@onready var flashlight: PointLight2D = $Flashlight
+
 enum STATE {
 	IDLE,
 	WALKING,
@@ -59,6 +62,7 @@ enum STATE {
 }
 
 func _ready():
+	flashlight.hide()
 	inventory.set_player(self)
 	setup_blood_missing_timer()
 
@@ -101,6 +105,9 @@ func _physics_process(delta: float) -> void:
 	
 	handle_heartbeat()
 	vary_bleeding()
+		
+	if Input.is_action_just_pressed("flashlight") and has_flashlight:
+		toggle_flashlight()
 		
 	match current_state:
 		STATE.IDLE:
@@ -149,6 +156,9 @@ func _physics_process(delta: float) -> void:
 func _play_stream(stream, audio):
 	if stream != audio.stream: audio.stream = stream
 	if !audio.playing: audio.play()
+
+func toggle_flashlight():
+	flashlight.visible = !flashlight.visible
 
 
 func attack(inputs):

@@ -104,7 +104,16 @@ theme_override_fonts/font = ExtResource("3_vj7u7")
 theme_override_font_sizes/font_size = 38
 text = "Options"
 
-[node name="Controls" type="Panel" parent="CanvasLayer"]
+[node name="ControlsBG" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.811765)
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -117,19 +126,6 @@ offset_bottom = 321.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 60.5
-offset_top = 38.0
-offset_right = -39.5
-offset_bottom = -43.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.811765)
-
 [node name="Label2" type="Label" parent="CanvasLayer/Controls"]
 layout_mode = 1
 anchors_preset = 8
@@ -137,10 +133,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 105.392
-offset_top = -247.0
-offset_right = 278.392
-offset_bottom = -193.0
+offset_left = 89.176
+offset_top = -254.0
+offset_right = 262.176
+offset_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
@@ -156,10 +152,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 105.392
-offset_top = -177.0
-offset_right = 278.392
-offset_bottom = -123.0
+offset_left = 89.176
+offset_top = -184.0
+offset_right = 262.176
+offset_bottom = -130.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
@@ -175,10 +171,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 34.0
-offset_top = -111.0
-offset_right = 338.0
-offset_bottom = -57.0
+offset_left = 17.784
+offset_top = -118.0
+offset_right = 321.784
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
@@ -194,15 +190,53 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 60.392
-offset_top = -41.0
-offset_right = 312.392
-offset_bottom = 13.0
+offset_left = 44.176
+offset_top = -48.0
+offset_right = 296.176
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
 theme_override_font_sizes/font_size = 28
 text = "Agarrar Items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="Label" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.892
+offset_top = 16.0
+offset_right = 305.892
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 28
+text = "Alternar linterna"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="Label" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 56.392
+offset_top = 86.0
+offset_right = 308.392
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_vj7u7")
+theme_override_font_sizes/font_size = 28
+text = "Opciones"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -213,10 +247,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 39.0
-offset_top = 38.0
-offset_right = 334.0
-offset_bottom = 92.0
+offset_left = 27.392
+offset_top = 151.0
+offset_right = 322.392
+offset_bottom = 205.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_vj7u7")
@@ -226,7 +260,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="a" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(185.588, 98)
+position = Vector2(169.372, 91)
 scale = Vector2(5.087, 4)
 texture = ExtResource("3_05d8a")
 hframes = 8
@@ -234,7 +268,7 @@ vframes = 14
 frame = 16
 
 [node name="s" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(339.588, 99)
+position = Vector2(323.372, 92)
 scale = Vector2(5.087, 4)
 texture = ExtResource("3_05d8a")
 hframes = 8
@@ -242,7 +276,7 @@ vframes = 14
 frame = 34
 
 [node name="d" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(419.588, 100)
+position = Vector2(403.372, 93)
 scale = Vector2(5.087, 4)
 texture = ExtResource("3_05d8a")
 hframes = 8
@@ -250,15 +284,23 @@ vframes = 14
 frame = 19
 
 [node name="d3" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(183.5, 315)
+position = Vector2(178.892, 301)
 scale = Vector2(5.087, 4)
 texture = ExtResource("3_05d8a")
 hframes = 8
 vframes = 14
 frame = 20
 
+[node name="d4" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(177.892, 367)
+scale = Vector2(5.087, 4)
+texture = ExtResource("3_05d8a")
+hframes = 8
+vframes = 14
+frame = 21
+
 [node name="d2" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(339.892, 245)
+position = Vector2(323.676, 238)
 scale = Vector2(5.087, 4)
 texture = ExtResource("3_05d8a")
 hframes = 8
@@ -266,7 +308,7 @@ vframes = 14
 frame = 24
 
 [node name="w" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(263.588, 100)
+position = Vector2(247.372, 93)
 scale = Vector2(5.087, 4)
 texture = ExtResource("3_05d8a")
 hframes = 8
@@ -274,7 +316,7 @@ vframes = 14
 frame = 38
 
 [node name="shift" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(223.892, 176)
+position = Vector2(207.676, 169)
 scale = Vector2(5.087, 4)
 texture = ExtResource("4_tn41y")
 hframes = 4
@@ -282,28 +324,37 @@ vframes = 8
 frame = 4
 
 [node name="shift2" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(211.5, 245)
+position = Vector2(195.284, 238)
 scale = Vector2(5.087, 4)
 texture = ExtResource("4_tn41y")
 hframes = 4
 vframes = 8
 
+[node name="shift3" type="Sprite2D" parent="CanvasLayer/Controls"]
+position = Vector2(182.892, 431)
+scale = Vector2(5.087, 4)
+texture = ExtResource("4_tn41y")
+hframes = 4
+vframes = 8
+frame = 1
+
 [node name="Button" type="Button" parent="CanvasLayer/Controls"]
 layout_mode = 0
-offset_left = 329.0
-offset_top = 502.0
-offset_right = 486.0
-offset_bottom = 563.0
+offset_left = 328.5
+offset_top = 549.0
+offset_right = 485.5
+offset_bottom = 610.0
 theme_override_fonts/font = ExtResource("3_vj7u7")
 theme_override_font_sizes/font_size = 24
 text = "Cerrar"
 
 [node name="Mouise" type="Sprite2D" parent="CanvasLayer/Controls"]
-position = Vector2(179.5, 419)
-scale = Vector2(3.07813, 3.07813)
+position = Vector2(175.892, 503)
+scale = Vector2(1.70898, 1.70898)
 texture = ExtResource("5_vh1ot")
 
 [node name="Options" parent="CanvasLayer" instance=ExtResource("7_3qh0w")]
+visible = false
 visibility_layer = 2
 
 [node name="Musica" type="AudioStreamPlayer2D" parent="."]

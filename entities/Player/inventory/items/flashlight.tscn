@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl5n2hpdg0v7t"]
+
+[ext_resource type="PackedScene" uid="uid://dsftjcrk265at" path="res://entities/Player/inventory/items/collectable_object.tscn" id="1_d2g6y"]
+[ext_resource type="Script" path="res://entities/Player/inventory/items/flashlight-action.gd" id="2_trs6p"]
+[ext_resource type="Script" path="res://entities/Player/inventory/inventory_item.gd" id="3_j5oqd"]
+[ext_resource type="Texture2D" uid="uid://ckgoir1ub30lc" path="res://assets/flashlight.png" id="4_ecp1v"]
+
+[sub_resource type="Resource" id="Resource_nlloe"]
+script = ExtResource("3_j5oqd")
+name = "flashlight"
+texture = ExtResource("4_ecp1v")
+action = ExtResource("2_trs6p")
+one_time = false
+
+[node name="Flashlight" instance=ExtResource("1_d2g6y")]
+item = SubResource("Resource_nlloe")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("4_ecp1v")

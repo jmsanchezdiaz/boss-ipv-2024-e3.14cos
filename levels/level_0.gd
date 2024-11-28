@@ -1,5 +1,7 @@
 extends Node
 
+@onready var gamehud = $GameHud
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,4 +14,5 @@ func _process(delta: float) -> void:
 
 
 func _on_player_hit() -> void:
-	$GameHud.show()
+	print("Hitazo!")
+	gamehud.show_game_over()

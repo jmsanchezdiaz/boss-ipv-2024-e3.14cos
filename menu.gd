@@ -20,7 +20,7 @@ func _process(delta):
 
 
 func _on_start_btn_pressed():
-	get_tree().change_scene_to_file("res://levels/level_0.tscn")
+	get_tree().change_scene_to_file("res://Intro.tscn")
 
 
 func _on_controls_btn_pressed():

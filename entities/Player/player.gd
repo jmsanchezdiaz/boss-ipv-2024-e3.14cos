@@ -97,6 +97,9 @@ func handle_heartbeat():
 	if !heart_audio.playing : heart_audio.play()
 
 
+func alive(): 
+	return current_state != STATE.DEAD
+
 func _physics_process(delta: float) -> void:
 	if current_state != STATE.DEAD:
 		if health < 100 and blood_timer.is_stopped(): blood_timer.start()
@@ -114,7 +117,7 @@ func _physics_process(delta: float) -> void:
 			
 		if Input.is_action_just_pressed("flashlight") and has_flashlight:
 			toggle_flashlight()
-			
+		
 		match current_state:
 			STATE.IDLE:
 				bodyAnimation.play("RESET")
@@ -123,7 +126,6 @@ func _physics_process(delta: float) -> void:
 					if Input.is_action_pressed("run") and current_stamina > 10:
 						current_state = STATE.RUNNING
 					else: current_state = STATE.WALKING
-				
 			STATE.WALKING:
 				bodyAnimation.play("Walk")
 				_play_stream(walking_sound, moving_audio)
@@ -150,8 +152,10 @@ func _physics_process(delta: float) -> void:
 			
 			STATE.ATTAKING:
 				running_multiplier = 1
-				handle_move(delta)
 				attack(input_vector)
+				handle_move(delta)
+				if input_vector == Vector2.ZERO and !attacking:
+					current_state = STATE.IDLE
 			
 			STATE.HEALING:
 				bodyAnimation.play("Heal")
@@ -209,8 +213,8 @@ func collect(item):
 	inventory.insert(item)
 
 
-func _input(event):
-	if current_state != STATE.DEAD and !paused and event.is_action_pressed("attack"):
+func _input(event: InputEvent) -> void:
+	if current_state != STATE.DEAD and !paused and current_stamina > 10 and event.is_action_pressed("attack"):
 		current_state = STATE.ATTAKING
 
 
@@ -223,7 +227,7 @@ func recover_health(hp: float):
 
 func handle_move(delta):
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if input_vector == Vector2.ZERO:
+	if input_vector == Vector2.ZERO and current_state != STATE.IDLE:
 		apply_friction(FRICTION * delta)
 	else:
 		apply_movement((input_vector * ACCELERATION * delta))
@@ -237,7 +241,6 @@ func handle_run(delta: float) -> void:
 		current_stamina = max(current_stamina - RUNNING_STAMINA_COST * delta, 0)
 	else:
 		running_multiplier = 1
-
 
 func regenerate_stamina(regen_speed: float, delta: float) -> void:
 	if current_stamina < MAX_STAMINA:

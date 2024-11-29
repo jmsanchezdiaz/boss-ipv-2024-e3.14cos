@@ -227,7 +227,6 @@ texture = ExtResource("3_hw1py")
 expand_mode = 2
 
 [node name="Alarm2" type="TextureRect" parent="."]
-visible = false
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -239,7 +238,6 @@ texture = ExtResource("4_78y24")
 expand_mode = 2
 
 [node name="Alarm3" type="TextureRect" parent="."]
-visible = false
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,7 +249,6 @@ texture = ExtResource("5_3bqjw")
 expand_mode = 2
 
 [node name="Alarm4" type="TextureRect" parent="."]
-visible = false
 z_index = 1
 anchors_preset = 15
 anchor_right = 1.0

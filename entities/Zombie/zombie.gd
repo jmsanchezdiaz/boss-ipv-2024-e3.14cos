@@ -164,7 +164,7 @@ func take_damage(amount: float, attacker: Node2D) -> void:
 
 
 func attack(enemy):
-	if enemy is Player:
+	if enemy is Player and enemy.alive():
 		enemy.take_damage(ATTACK_DAMAGE)
 
 

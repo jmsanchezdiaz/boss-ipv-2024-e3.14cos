@@ -98,7 +98,6 @@ func handle_heartbeat():
 
 
 func _physics_process(delta: float) -> void:
-	print(current_state)
 	if current_state != STATE.DEAD:
 		if health < 100 and blood_timer.is_stopped(): blood_timer.start()
 		smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)

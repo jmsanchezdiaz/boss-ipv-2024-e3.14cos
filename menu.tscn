@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://tta5jdsirrg5" path="res://assets/ui/Keyboard Extras.png" id="4_tn41y"]
 [ext_resource type="Texture2D" uid="uid://bor5stunx12a2" path="res://assets/ui/mouse.png" id="5_vh1ot"]
 [ext_resource type="PackedScene" uid="uid://cfwut0cwovhpv" path="res://options.tscn" id="7_3qh0w"]
-[ext_resource type="AudioStream" uid="uid://dewoxdgfuyfju" path="res://sounds/musica-menu.ogg" id="7_16r3y"]
+[ext_resource type="AudioStream" uid="uid://n31wou7l7qf2" path="res://sounds/menu-v3.ogg" id="8_8krdc"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_c6840")
@@ -359,7 +359,7 @@ visibility_layer = 2
 
 [node name="Musica" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
-stream = ExtResource("7_16r3y")
+stream = ExtResource("8_8krdc")
 pitch_scale = 0.8
 bus = &"Musica"
 

@@ -58,13 +58,15 @@ enum STATE {
 	WALKING,
 	RUNNING,
 	ATTAKING,
-	HEALING
+	HEALING,
+	DEAD
 }
 
 func _ready():
 	flashlight.hide()
 	inventory.set_player(self)
 	setup_blood_missing_timer()
+
 
 func setup_blood_missing_timer():
 	blood_timer = Timer.new()
@@ -79,10 +81,12 @@ func pause():
 	attack_audio.stop()
 	set_physics_process(false)
 	paused=true;
-	
+
+
 func unpause():
 	set_physics_process(true)
 	paused=false
+
 
 func handle_heartbeat():
 	if health < 60:
@@ -92,77 +96,84 @@ func handle_heartbeat():
 		heart_audio.stream = heartbeat_calm
 	if !heart_audio.playing : heart_audio.play()
 
+
 func _physics_process(delta: float) -> void:
-	if health < 100 and blood_timer.is_stopped(): blood_timer.start()
-	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
-	rotation = position.angle_to_point(smoothed_mouse_pos)
-	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	print(current_state)
+	if current_state != STATE.DEAD:
+		if health < 100 and blood_timer.is_stopped(): blood_timer.start()
+		smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.6)
+		rotation = position.angle_to_point(smoothed_mouse_pos)
+		var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+			
+		if current_stamina > 30:
+			_play_stream(idle_sound, breathing_audio)
+		else:
+			_play_stream(tired_idle_sound, breathing_audio)
 		
-	if current_stamina > 30:
-		_play_stream(idle_sound, breathing_audio)
-	else:
-		_play_stream(tired_idle_sound, breathing_audio)
-	
-	handle_heartbeat()
-	vary_bleeding()
-		
-	if Input.is_action_just_pressed("flashlight") and has_flashlight:
-		toggle_flashlight()
-		
-	match current_state:
-		STATE.IDLE:
-			bodyAnimation.play("RESET")
-			regenerate_stamina(1, delta)
-			if input_vector != Vector2.ZERO:
+		handle_heartbeat()
+		vary_bleeding()
+			
+		if Input.is_action_just_pressed("flashlight") and has_flashlight:
+			toggle_flashlight()
+			
+		match current_state:
+			STATE.IDLE:
+				bodyAnimation.play("RESET")
+				regenerate_stamina(1, delta)
+				if input_vector != Vector2.ZERO:
+					if Input.is_action_pressed("run") and current_stamina > 10:
+						current_state = STATE.RUNNING
+					else: current_state = STATE.WALKING
+				
+			STATE.WALKING:
+				bodyAnimation.play("Walk")
+				_play_stream(walking_sound, moving_audio)
+				regenerate_stamina(0.5, delta)
+				handle_move(delta)
+				if input_vector == Vector2.ZERO:
+					moving_audio.stop()
+					current_state = STATE.IDLE
 				if Input.is_action_pressed("run") and current_stamina > 10:
 					current_state = STATE.RUNNING
-				else: current_state = STATE.WALKING
 			
-		STATE.WALKING:
-			bodyAnimation.play("Walk")
-			_play_stream(walking_sound, moving_audio)
-			regenerate_stamina(0.5, delta)
-			handle_move(delta)
-			if input_vector == Vector2.ZERO:
-				moving_audio.stop()
-				current_state = STATE.IDLE
-			if Input.is_action_pressed("run") and current_stamina > 10:
-				current_state = STATE.RUNNING
-		
-		STATE.RUNNING:
-			bodyAnimation.play("Run")
-			_play_stream(running_sound, moving_audio)
-			handle_move(delta)
-			handle_run(delta)
-			if input_vector == Vector2.ZERO:
-				moving_audio.stop()
-				current_state = STATE.IDLE
+			STATE.RUNNING:
+				bodyAnimation.play("Run")
+				_play_stream(running_sound, moving_audio)
+				handle_move(delta)
+				handle_run(delta)
+				if input_vector == Vector2.ZERO:
+					moving_audio.stop()
+					current_state = STATE.IDLE
+					running_multiplier = 1
+				if current_stamina == 0 or (!Input.is_action_pressed("run") and input_vector != Vector2.ZERO):
+					current_state = STATE.WALKING
+					running_multiplier = 1
+			
+			STATE.ATTAKING:
 				running_multiplier = 1
-			if current_stamina == 0 or (!Input.is_action_pressed("run") and input_vector != Vector2.ZERO):
-				current_state = STATE.WALKING
-				running_multiplier = 1
-		
-		STATE.ATTAKING:
-			running_multiplier = 1
-			handle_move(delta)
-			attack(input_vector)
-		
-		STATE.HEALING:
-			bodyAnimation.play("Heal")
-			await get_tree().create_timer(0.9).timeout
-			current_state = STATE.WALKING if input_vector != Vector2.ZERO else STATE.IDLE
+				handle_move(delta)
+				attack(input_vector)
+			
+			STATE.HEALING:
+				bodyAnimation.play("Heal")
+				await get_tree().create_timer(0.9).timeout
+				current_state = STATE.WALKING if input_vector != Vector2.ZERO else STATE.IDLE
+			
+			STATE.DEAD:
+				pass
 
 
 func _play_stream(stream, audio):
 	if stream != audio.stream: audio.stream = stream
 	if !audio.playing: audio.play()
 
+
 func toggle_flashlight():
 	flashlight.visible = !flashlight.visible
 
 
 func attack(inputs):
-	if !attacking and current_stamina > 0:
+	if !attacking and current_stamina > 10:
 		attacking = true
 		if selected_weapon == null:
 			punch()
@@ -200,7 +211,7 @@ func collect(item):
 
 
 func _input(event):
-	if !paused and event.is_action_pressed("attack"):
+	if current_state != STATE.DEAD and !paused and event.is_action_pressed("attack"):
 		current_state = STATE.ATTAKING
 
 
@@ -233,6 +244,7 @@ func regenerate_stamina(regen_speed: float, delta: float) -> void:
 	if current_stamina < MAX_STAMINA:
 		current_stamina = min(current_stamina + STAMINA_REGEN * regen_speed * delta, MAX_STAMINA)
 
+
 func vary_bleeding():
 	if health < 40 : 
 		blood_timer.wait_time = blood_spawn_durations[2]
@@ -240,6 +252,7 @@ func vary_bleeding():
 		blood_timer.wait_time = blood_spawn_durations[1]
 	else: 
 		blood_timer.wait_time = blood_spawn_durations[0]
+
 
 func apply_friction(amount):
 	if velocity.length() > amount:
@@ -258,20 +271,20 @@ func _on_blood_timer_timeout():
 	var object = scene.instantiate()
 	object.position = global_position
 	get_tree().root.add_child(object)
-	
+
 
 func take_damage(amount):
 	camera.start_shake()
-	if blood_timer.is_stopped(): 
+	if blood_timer.is_stopped():
 		blood_timer.start()
 	if health-amount > 0:
 		bloodAnimation.play("ReceiveDamage")
-	else:
-		# bloodAnimation.play("Die")
+	elif current_state != STATE.DEAD:
+		bodyAnimation.play("Death")
 		inventory.clean()
-		queue_free()
 		hit.emit()
-	health = max(0, health - amount) 
+		current_state = STATE.DEAD
+	health = max(0, health - amount)
 
 
 func _on_crowbar_area_body_entered(body: Node2D) -> void:

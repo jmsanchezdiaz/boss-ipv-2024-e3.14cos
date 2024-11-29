@@ -8,6 +8,93 @@
 [ext_resource type="Texture2D" uid="uid://bdl1c40ljthgn" path="res://assets/cinematic/alarm-v3.png" id="5_3bqjw"]
 [ext_resource type="Texture2D" uid="uid://bh5q60p0vptge" path="res://assets/cinematic/alarm-v4.png" id="6_jjqll"]
 
+[sub_resource type="Animation" id="Animation_3owtt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Train:z_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Office:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Alarm:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Alarm2:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Alarm3:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Alarm4:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="Animation" id="Animation_hg1fs"]
 resource_name = "intro"
 length = 12.0
@@ -96,93 +183,6 @@ tracks/6/keys = {
 "values": [1, 2, 1, 2, 1]
 }
 
-[sub_resource type="Animation" id="Animation_3owtt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Train:z_index")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Office:z_index")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Alarm:z_index")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Alarm2:z_index")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Alarm3:z_index")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Alarm4:z_index")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6le4s"]
 _data = {
 "RESET": SubResource("Animation_3owtt"),
@@ -197,17 +197,6 @@ libraries = {
 "": SubResource("AnimationLibrary_6le4s")
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
-
 [node name="Office" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -215,7 +204,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_8cu2t")
-stretch_mode = 2
+expand_mode = 2
 
 [node name="Train" type="TextureRect" parent="."]
 z_index = 4
@@ -225,7 +214,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_inq54")
-stretch_mode = 2
+expand_mode = 2
 
 [node name="Alarm" type="TextureRect" parent="."]
 z_index = 2
@@ -235,6 +224,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_hw1py")
+expand_mode = 2
 
 [node name="Alarm2" type="TextureRect" parent="."]
 visible = false
@@ -246,6 +236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.001)
 texture = ExtResource("4_78y24")
+expand_mode = 2
 
 [node name="Alarm3" type="TextureRect" parent="."]
 visible = false
@@ -257,6 +248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.001)
 texture = ExtResource("5_3bqjw")
+expand_mode = 2
 
 [node name="Alarm4" type="TextureRect" parent="."]
 visible = false
@@ -268,5 +260,15 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.001)
 texture = ExtResource("6_jjqll")
+expand_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

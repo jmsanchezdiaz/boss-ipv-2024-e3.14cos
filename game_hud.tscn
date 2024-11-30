@@ -8,7 +8,6 @@
 script = ExtResource("1_s7av8")
 
 [node name="Options" parent="." instance=ExtResource("3_o855o")]
-visible = false
 
 [node name="GameOver" type="Control" parent="."]
 layout_mode = 3
@@ -78,9 +77,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -103.0
+offset_left = -227.0
 offset_top = 98.0
-offset_right = 103.0
+offset_right = -21.0
 offset_bottom = 187.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -88,6 +87,24 @@ theme_override_fonts/font = ExtResource("2_akpgk")
 theme_override_font_sizes/font_size = 38
 text = "Options"
 
+[node name="Exit" type="Button" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 27.0
+offset_top = 98.0
+offset_right = 217.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_akpgk")
+theme_override_font_sizes/font_size = 45
+text = "Exit"
+
 [connection signal="pressed" from="GameOver/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="GameOver/BackToMenu" to="." method="_on_back_to_menu_pressed"]
 [connection signal="pressed" from="GameOver/OptionsBtn" to="." method="_on_options_btn_pressed"]
+[connection signal="pressed" from="GameOver/Exit" to="." method="_on_exit_pressed"]

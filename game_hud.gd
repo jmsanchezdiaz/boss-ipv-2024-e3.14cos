@@ -33,3 +33,7 @@ func _on_options_btn_pressed() -> void:
 	optionsBtn.release_focus()
 	options.show()
 	
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

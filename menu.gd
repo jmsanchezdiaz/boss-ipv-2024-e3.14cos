@@ -36,3 +36,7 @@ func _on_close_controls_button_pressed():
 func _on_options_btn_pressed() -> void:
 	optionsBtn.release_focus()
 	options.show()
+
+
+func _on_e_xit_pressed() -> void:
+	get_tree().quit()

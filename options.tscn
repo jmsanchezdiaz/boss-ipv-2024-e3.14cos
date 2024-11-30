@@ -238,18 +238,36 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -78.0
-offset_top = -103.0
-offset_right = 74.0
-offset_bottom = -34.0
+offset_left = 78.0
+offset_top = -120.0
+offset_right = 230.0
+offset_bottom = -51.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_3jngf")
 theme_override_font_sizes/font_size = 32
 text = "Close"
 
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -120.0
+offset_right = -31.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_3jngf")
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+
 [connection signal="value_changed" from="Player/PlayerSlider" to="." method="_on_player_slider_changed"]
 [connection signal="value_changed" from="Zombies/ZombiesSlider" to="." method="_on_zombie_slider_changed"]
 [connection signal="value_changed" from="Music/MusicSlider" to="." method="_on_music_slider_changed"]
 [connection signal="value_changed" from="Master/MasterSlider" to="." method="_on_master_slider_changed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

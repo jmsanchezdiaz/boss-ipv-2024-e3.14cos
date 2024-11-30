@@ -42,3 +42,7 @@ func _on_player_slider_changed(value: float) -> void:
 	
 func _on_zombie_slider_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Zombie"), linear_to_db(value))
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://covxbdnbs105"]
+[gd_scene load_steps=14 format=3 uid="uid://covxbdnbs105"]
 
 [ext_resource type="Texture2D" uid="uid://b1ah5dggtl552" path="res://assets/cinematic/Office.webp" id="1_8cu2t"]
 [ext_resource type="Script" path="res://intro.gd" id="1_c5ylp"]
+[ext_resource type="AudioStream" uid="uid://b41t1mx8pfe7l" path="res://sounds/alarm.mp3" id="2_hhh6n"]
 [ext_resource type="Texture2D" uid="uid://daivvn1shavl" path="res://assets/cinematic/train-v2.png" id="2_inq54"]
 [ext_resource type="Texture2D" uid="uid://cy4232skv2kyi" path="res://assets/cinematic/alarm.webp" id="3_hw1py"]
 [ext_resource type="Texture2D" uid="uid://0vojym6j55dv" path="res://assets/cinematic/alarm-v2.png" id="4_78y24"]
 [ext_resource type="Texture2D" uid="uid://bdl1c40ljthgn" path="res://assets/cinematic/alarm-v3.png" id="5_3bqjw"]
 [ext_resource type="Texture2D" uid="uid://bh5q60p0vptge" path="res://assets/cinematic/alarm-v4.png" id="6_jjqll"]
+[ext_resource type="AudioStream" uid="uid://bnu4yjvulcr3w" path="res://sounds/street.mp3" id="9_1bykl"]
+[ext_resource type="AudioStream" uid="uid://cp7am0lep0kli" path="res://sounds/roca.mp3" id="10_evsqn"]
 
 [sub_resource type="Animation" id="Animation_3owtt"]
 length = 0.001
@@ -93,6 +96,54 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("alarm:stream")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_hhh6n")]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("alarm:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("roca:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("street:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_hg1fs"]
@@ -182,6 +233,42 @@ tracks/6/keys = {
 "update": 1,
 "values": [1, 2, 1, 2, 1]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("alarm:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2, 4.43333),
+"transitions": PackedFloat32Array(1.00001, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("roca:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(4.5, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("street:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6le4s"]
 _data = {
@@ -267,5 +354,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="street" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_1bykl")
+
+[node name="roca" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_evsqn")
+
+[node name="alarm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hhh6n")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

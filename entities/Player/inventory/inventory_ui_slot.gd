@@ -26,7 +26,7 @@ func _ready():
 
 func _on_item_selected(id: int):
 	if !slot.item: return;
-	audio.play()
+	audio.play(0.0)
 	match id:
 		OPTIONS.USE:
 			use.emit(slot.item)

@@ -4,15 +4,18 @@ extends PointLight2D
 @onready var audio = $AudioStreamPlayer2D
 @onready var initial_energy = self.energy;
 
-@export var min_energy = 0.01
-@export var min_wait_time = 4
-@export var max_wait_time = 8
+@export var min_wait_time = 1.0
+@export var max_wait_time = 2.0
 
 func _ready() -> void:
 	timer.start()
 
 func _on_timer_timeout() -> void:
-	energy = randf_range(min_energy, initial_energy) 
+	audio.stop()
+	if energy == initial_energy:
+		energy = 0;
+	else:
+		energy = initial_energy
 	audio.play(4)
 	timer.wait_time = randf_range(min_wait_time, max_wait_time) 
 	timer.start()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl5n2hpdg0v7t"]
+[gd_scene load_steps=7 format=3 uid="uid://bl5n2hpdg0v7t"]
 
 [ext_resource type="PackedScene" uid="uid://dsftjcrk265at" path="res://entities/Player/inventory/items/collectable_object.tscn" id="1_d2g6y"]
 [ext_resource type="Script" path="res://entities/Player/inventory/items/flashlight-action.gd" id="2_trs6p"]
@@ -12,8 +12,11 @@ texture = ExtResource("4_ecp1v")
 action = ExtResource("2_trs6p")
 one_time = false
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w7vo8"]
+load_path = "res://.godot/imported/flashlight.png-50b4953a7b90a11dc7f02488b081336e.ctex"
+
 [node name="Flashlight" instance=ExtResource("1_d2g6y")]
 item = SubResource("Resource_nlloe")
 
 [node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("4_ecp1v")
+texture = SubResource("CompressedTexture2D_w7vo8")

@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjlmfp3f6abfo"]
+
+[ext_resource type="Script" path="res://elevator.gd" id="1_jf63d"]
+[ext_resource type="Texture2D" uid="uid://bwcnrpc5e2qba" path="res://assets/elevator floor.png" id="1_umlh1"]
+[ext_resource type="AudioStream" uid="uid://bkeeio7lqt7iq" path="res://sounds/elevator.ogg" id="3_6g7i3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_su6q4"]
+size = Vector2(127, 128)
+
+[sub_resource type="Gradient" id="Gradient_fqbyg"]
+offsets = PackedFloat32Array(0.0735294, 0.742647, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.198413, 0.198413, 0.198413, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xoelq"]
+gradient = SubResource("Gradient_fqbyg")
+fill = 1
+fill_from = Vector2(0.474359, 0.491453)
+
+[node name="Elevator" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_jf63d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_umlh1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_su6q4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6g7i3")
+max_distance = 128.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.4
+texture = SubResource("GradientTexture2D_xoelq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

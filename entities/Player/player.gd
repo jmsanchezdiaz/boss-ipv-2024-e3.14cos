@@ -51,7 +51,7 @@ var blood_spawn_durations = [3.0, 2.0, 1.0]
 var blood_timer: Timer
 
 var has_flashlight: bool = false
-@onready var flashlight: PointLight2D = $Flashlight
+@onready var flashlight = $Flashlight
 
 enum STATE {
 	IDLE,
@@ -118,8 +118,11 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("flashlight") and has_flashlight:
 			toggle_flashlight()
 		
+		print_debug(STATE.keys()[current_state])
+		
 		match current_state:
 			STATE.IDLE:
+			
 				bodyAnimation.play("RESET")
 				regenerate_stamina(1, delta)
 				if input_vector != Vector2.ZERO:
@@ -154,7 +157,9 @@ func _physics_process(delta: float) -> void:
 				running_multiplier = 1
 				attack(input_vector)
 				handle_move(delta)
-				if input_vector == Vector2.ZERO and !attacking:
+				if health <= 0:
+					current_state = STATE.DEAD
+				elif input_vector == Vector2.ZERO and !attacking:
 					current_state = STATE.IDLE
 			
 			STATE.HEALING:
@@ -176,7 +181,7 @@ func toggle_flashlight():
 
 
 func attack(inputs):
-	if !attacking and current_stamina > 10:
+	if health > 0 and !attacking and current_stamina > 10:
 		attacking = true
 		if selected_weapon == null:
 			punch()
@@ -197,7 +202,10 @@ func attack(inputs):
 		await get_tree().create_timer(1).timeout
 		
 		attack_audio.stop()
-		current_state = STATE.WALKING if inputs != Vector2.ZERO else STATE.IDLE
+		if health > 0:
+			current_state = STATE.WALKING if inputs != Vector2.ZERO else STATE.IDLE
+		else: 
+			current_state = STATE.DEAD
 		attacking=false
 
 
@@ -214,7 +222,7 @@ func collect(item):
 
 
 func _input(event: InputEvent) -> void:
-	if current_state != STATE.DEAD and !paused and current_stamina > 10 and event.is_action_pressed("attack"):
+	if health > 0 and !paused and current_stamina > 10 and event.is_action_pressed("attack"):
 		current_state = STATE.ATTAKING
 
 
@@ -282,11 +290,12 @@ func take_damage(amount):
 	if health-amount > 0:
 		bloodAnimation.play("ReceiveDamage")
 	elif current_state != STATE.DEAD:
+		current_state = STATE.DEAD
 		bodyAnimation.play("Death")
 		inventory.clean()
 		hit.emit()
-		current_state = STATE.DEAD
 	health = max(0, health - amount)
+		
 
 
 func _on_crowbar_area_body_entered(body: Node2D) -> void:

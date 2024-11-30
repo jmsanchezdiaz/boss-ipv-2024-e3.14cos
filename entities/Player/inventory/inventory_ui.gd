@@ -39,8 +39,8 @@ func _drop_items(inv_item: InventoryItem):
 	inv.drop_all(inv_item)
 
 func _use_item(inv_item: InventoryItem):
-	inv.use(inv_item, inv_item.one_time)
 	inv_item.action.call("select", inv.player)
+	inv.use(inv_item, inv_item.one_time)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("inventory"):

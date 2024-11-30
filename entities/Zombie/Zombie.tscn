@@ -142,6 +142,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-3, 0)
 shape = SubResource("CircleShape2D_k0xce")
 
@@ -156,6 +157,7 @@ target_position = Vector2(53, 0)
 collision_mask = 3
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
@@ -168,6 +170,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+visible = false
 position = Vector2(9, 0)
 shape = SubResource("RectangleShape2D_y5j0p")
 
